@@ -8,7 +8,7 @@ mp_hands = mp.solutions.hands #gives accesss to MediaPipe's hand-detection model
 mp_drawings =  mp.solutions.drawing_utils #gives helper fctns to draw landmarks on image
 hands = mp_hands.Hands(
     static_image_mode=False, #expects live video stream and not single photos
-    max_num_hands =3, #only detect one hand per frame
+    max_num_hands =1, #only detect one hand per frame
     min_detection_confidence = .5
 )
 #create video capturing object, acts like a connection to your camera
