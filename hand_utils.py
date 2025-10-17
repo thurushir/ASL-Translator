@@ -47,7 +47,8 @@ def start_video(hands, frame_callback):
         frame = cv2.flip(frame,1) #flip the frame horizantally like a mirror
         frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)# OpenCV captures in BGR; convert to RGB so MediaPipe reads colors correctly
         res = hands.process(frame_rgb) #asks Mediapipe to process the frame and look for hands
-        frame_callback(frame, res)
+        
+        frame_callback(frame, res) #do the work on each frame
         cv2.imshow("ASL Hand Detection", frame)
 
         #cv2.waitKey: waits 1 msec for a key presss, if key is pressed returns int code
