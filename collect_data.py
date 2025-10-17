@@ -27,7 +27,7 @@ SAVE_INTERVAL = 0.1  # seconds between saved frames
 counter = 0          # track number of images saved
 last_save_time = 0   # keeps track of time since last save
 metadata = [] #will store frame info (timestamp, filename
-)
+
 #Countdown 3,2,1
 cap = cv2.VideoCapture(0)
 for i in range(3, 0, -1):
@@ -60,8 +60,6 @@ def handle_frame(frame, results):
             "file": file_name,
             "timestamp": current_time
         })
-
-        print(f"Saved {path}")
         counter += 1
         last_save_time = current_time
 
@@ -70,7 +68,7 @@ def handle_frame(frame, results):
         with open(os.path.join(save_path, "metadata.json"), "w") as f:
             json.dump(metadata, f, indent=2)
         cv2.destroyAllWindows()
-        os._exit(0)  # end cleanly      
+        os._exit(0)     
 h.start_video(hands, handle_frame)
   
 
