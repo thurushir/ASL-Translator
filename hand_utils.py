@@ -4,7 +4,7 @@ import cv2
 mp_hands = mp.solutions.hands #gives accesss to MediaPipe's hand-detection model
 mp_drawings =  mp.solutions.drawing_utils #gives helper fctns to draw landmarks on image
 
-def init_hands(static_mode = False, max_hands =1, detection_conf = 0.3):
+def init_hands(static_mode = False, max_hands =1, detection_conf = 0.2):
      """
     Initializes and returns a MediaPipe Hands object.
     

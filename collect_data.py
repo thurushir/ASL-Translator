@@ -38,7 +38,7 @@ for i in range(3, 0, -1):
     cv2.putText(frame, f"Starting in {i}...", (200, 250),
                 cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 255), 4)
     cv2.imshow("ASL Hand Detection", frame)
-    cv2.waitKey(1000)
+    cv2.waitKey(1000) #wait one second before each countdown frame
 cv2.destroyAllWindows()
 cap.release()
 

@@ -58,7 +58,7 @@ print(f"Standard Deviation: {np.std(cv_scores)*100:.2f}%")
 # Off-diagonal cells → misclassifications (e.g., model confused one letter for another).
 # The color bar shows how many samples fall into each cell.
 cm = confusion_matrix(y_test, predictions, labels=sorted(set(y_test)))
-disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=sorted(set(y_test)))
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=sorted(set(y_test))) #visualize
 disp.plot(xticks_rotation='vertical')
 plt.title("ASL Letter Classification Confusion Matrix")
 plt.tight_layout()
