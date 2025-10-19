@@ -21,6 +21,7 @@ After training, the Random Forest classifier achieved a single-split test accura
 To further evaluate consistency, five-fold cross-validation was performed, resulting in an average accuracy of *92.22%* with a standard deviation of* 0.76%*, indicating that the model performs reliably across different data splits.
 
 ## Project Structure
+```
 ASL-Translator/
 ├── data/ # Labeled landmark data (by letter)
 ├── hand_utils.py # Helper functions for Mediapipe setup
@@ -33,22 +34,29 @@ ASL-Translator/
 ├── data.pickle # Processed dataset
 ├── demo.gif # Demo GIF (embedded above)
 └── README.md
+```
 
 ##  How to Run the ASL Translator
 Follow these steps to get the ASL Translator working on your machine.
 
 ### Clone the Repository
+```
 git clone https://github.com/<thurushir>/ASL-Translator.git
-cd ASL-Translator
+cd ASL-Translator 
+```
+
 ### Create a virtual environment and activate it 
+```
 python -m venv venv
-On macOS/Linux:
+# On macOS/Linux:
 source venv/bin/activate
-On Windows:
+# On Windows:
 venv\Scripts\activate
-### Install Dependenceies
+#Install Dependenceies
 pip install opencv-python mediapipe numpy scikit-learn matplotlib
+```
 ### Ensure these files exist in your project folder:
+```
 ASL-Translator/
 ├── model.pickle          # Trained Random Forest model
 ├── data.pickle           # Processed dataset (landmarks + labels)
@@ -56,11 +64,16 @@ ASL-Translator/
 ├── predict_live.py       # Live ASL recognition script
 ├── process_data.py       # Converts hand landmarks into feature data
 ├── train_model.py        # Trains a new Random Forest model
+```
 If model.pickle or data.pickle are missing, generate them by running:
+```
 python process_data.py
 python train_model.py
+```
 ### Run it !
+```
 python predict_live.py
+```
 
 ## Author
 Thurushi Rajapakse
