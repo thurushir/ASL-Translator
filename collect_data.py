@@ -26,9 +26,9 @@ DATASET_SIZE = 100   # how many images to save automatically
 SAVE_INTERVAL = 0.1  # seconds between saved frames 
 counter = 0          # track number of images saved
 last_save_time = 0   # keeps track of time since last save
-metadata = [] #will store frame info (timestamp, filename
+metadata = [] # will store frame info (timestamp, filename
 
-#Countdown 3,2,1
+# Countdown 3,2,1
 cap = cv2.VideoCapture(0)
 for i in range(3, 0, -1):
     ret, frame = cap.read()
@@ -38,7 +38,7 @@ for i in range(3, 0, -1):
     cv2.putText(frame, f"Starting in {i}...", (200, 250),
                 cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 255), 4)
     cv2.imshow("ASL Hand Detection", frame)
-    cv2.waitKey(1000) #wait one second before each countdown frame
+    cv2.waitKey(1000) # wait one second before each countdown frame
 cv2.destroyAllWindows()
 cap.release()
 
@@ -46,7 +46,7 @@ def handle_frame(frame, results):
     global counter, last_save_time
     h.draw_hand_landmarks(frame, results)
 
-    #Displpays Letter 
+    #Displays Letter 
     cv2.putText(frame, f'Letter: {letter} | Saved: {counter}/{DATASET_SIZE}', (10, 30),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
 

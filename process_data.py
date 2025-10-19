@@ -6,7 +6,7 @@ import numpy as np
 import random
 
 def augment_image(img):
-    h, w = img.shape[:2] #img.shape returnd (heights, width, channels)
+    h, w = img.shape[:2] #img.shape returns (heights, width, channels)
 
     # Random rotation (±5°)
     angle = random.uniform(-5, 5)

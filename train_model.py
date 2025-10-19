@@ -10,7 +10,7 @@ data = data_dict['data']
 letters = data_dict['letters']
 print(f"Loaded {len(data)} sampels from data.pickle")
 
-#split data, x being the laandmark patterns and y being the corresponding letters
+#split data, x being the landmark patterns and y being the corresponding letters
 #we set aside 20 percent for testing 
 #stratify=letters ensure all letters are represented equally in both sets
 x_train, x_test, y_train, y_test = train_test_split(data, letters, test_size = .2, shuffle= True, stratify=letters)

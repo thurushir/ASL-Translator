@@ -10,7 +10,7 @@ with open('model.pickle', 'rb') as f:
 
 with open('data.pickle', 'rb') as f:
     data_dict = pickle.load(f)
-letters = sorted(list(set(data_dict['letters']))) #removes duplicates and alphabetically orders it to have a clean lits of letters
+letters = sorted(list(set(data_dict['letters']))) #removes duplicates and alphabetically orders it to have a clean list of letters
 
 
 #landmark normalizatoin: ensures real-time inputs are in the same scale/format as training samples.
@@ -29,7 +29,7 @@ def extract_normalized_landmarks(results):
         if scale == 0:
             return None
 
-        norm_hand = [] #flatted list of 63 values x,y,z for each of 21 landmarks
+        norm_hand = [] #flattened list of 63 values x,y,z for each of 21 landmarks
         #Normalizes each landmark into a [0,1] bounding box, independent of hand position and distance from the camera.
         for lm in h_landmark.landmark:
             norm_x = (lm.x - min_x) / scale
@@ -54,12 +54,13 @@ def get_confidence_color(conf):
     """
     # Color stops (confidence %, RGB)
     gradient = [
-        (25, (203, 24, 219)),
-        (50, (219, 24, 213)),
-        (85, (219, 24, 134)),
-        (90, (219, 24, 89)),
-        (97, (219, 24, 60)),
-        (100, (219, 24, 24))
+        (0,  (0, 255, 255)), 
+        (25, (240, 255, 77)),
+        (50, (250, 204, 0)),
+        (85, (254, 182, 0)),
+        (90, (255, 146, 0)),
+        (97, (255, 90, 0)),
+        (100, (255, 49, 0))
     ]
 
     # Clamp between 0–100
@@ -72,16 +73,16 @@ def get_confidence_color(conf):
         if c1 <= conf <= c2:
             # Calculates how far between c1 and c2 our confidence is and then perform linear interpolation
             ratio = (conf - c1) / (c2 - c1)
-            r = int(col1[0] + (col2[0] - col1[0]) * ratio) #start with c1 and mosve slightly towards c2
+            r = int(col1[0] + (col2[0] - col1[0]) * ratio) #start with c1 and move slightly towards c2
             g = int(col1[1] + (col2[1] - col1[1]) * ratio)
             b = int(col1[2] + (col2[2] - col1[2]) * ratio)
-            return (r, g, b)
+            return (b, g, r)
 
     return gradient[-1][1]  # if exactly 100
 
 pred_letter = "..."
 confidence = 0.0
-recent_preds = [] #store lasst few predictions for smoothing and stability
+recent_preds = [] #store last few predictions for smoothing and stability
 
  
 def process_frame(frame, results):
