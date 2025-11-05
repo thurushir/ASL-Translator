@@ -4,7 +4,7 @@ A computer vision project that recognizes American Sign Language (ASL) letters i
 
 ## 🎥 Demo
 
-![ASL Translator Demo](DEMO.gif)
+![ASL Translator Demo](FINAL_DEMO.gif)
 *The system performs real-time letter classification with confidence overlay.*
 
 ##  Features
@@ -32,6 +32,7 @@ ASL-Translator/
 ├── confusion_matrix.png #Confusion matrix of trained model
 ├── model.pickle # Saved trained model
 ├── data.pickle # Processed dataset
+├── requirements.txt # Python dependencies with version constraints
 ├── demo.gif # Demo GIF (embedded above)
 └── README.md
 ```
@@ -52,8 +53,16 @@ python -m venv venv
 source venv/bin/activate
 # On Windows:
 venv\Scripts\activate
-#Install Dependenceies
-pip install opencv-python mediapipe numpy scikit-learn matplotlib
+```
+
+### Install Dependencies
+Install packages with version constraints to avoid compatibility issues between NumPy 2.0 and scikit-learn:
+```
+pip install -r requirements.txt
+```
+Alternatively, install manually:
+```
+pip install "numpy<2.0" "opencv-python<4.9" "scikit-learn>=1.3.0,<1.4" "mediapipe>=0.10.0" "matplotlib"
 ```
 ### Ensure these files exist in your project folder:
 ```
