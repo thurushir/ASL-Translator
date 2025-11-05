@@ -4,7 +4,7 @@ A computer vision project that recognizes American Sign Language (ASL) letters i
 
 ## 🎥 Demo
 
-<img src="FINAL_DEMO.gif" width="800" alt="ASL Translator Demo">
+<img src="FINAL_DEMO.gif" width="600" alt="ASL Translator Demo">
 *The system performs real-time letter classification with confidence overlay.*
 
 ##  Features
