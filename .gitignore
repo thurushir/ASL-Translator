@@ -24,6 +24,9 @@ data/
 *.mp4
 *.json
 !confusion_matrix.png
+*.gif
+!FINAL_DEMO.gif
+!DEMO.gif
 
 # Notebooks & autosaves
 *.ipynb_checkpoints/
