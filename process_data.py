@@ -22,8 +22,10 @@ def augment_image(img):
     img = np.clip(img * brightness, 0, 255).astype(np.uint8)
     return img
 
-#initalize Mediapipe hands in static image mode (one image at a time) since we will be working with saved photos **
-hands = h.init_hands(static_mode=True)
+#initalize Mediapipe hands in video mode (static_mode=False). This matches how the original baseline was built:
+#images in a letter folder are similar, so tracking carries over between them and finds ~40% more hands than
+#static_mode=True (which dropped samples 4449 -> 3080 and accuracy 92% -> 87%). Keep False to reproduce the baseline.
+hands = h.init_hands(static_mode=False)
 
 DIR = "./data"
 data = [] #stores flattened landmark coordinates (21 hand landmarks with (x,y,z) turns into one tuple. Random Forests exepect each trianing sample to be a flat vector)
