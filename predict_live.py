@@ -7,13 +7,9 @@ import features as F
 from transcript import Transcript
 
 
-#load data
+#load trained model (only model.pickle is needed; the letter list lives in model.classes_)
 with open('model.pickle', 'rb') as f:
     model = pickle.load(f)['model']
-
-with open('data.pickle', 'rb') as f:
-    data_dict = pickle.load(f)
-letters = sorted(list(set(data_dict['letters']))) #removes duplicates and alphabetically orders it to have a clean list of letters
 
 
 #Confidence Gradient for display
