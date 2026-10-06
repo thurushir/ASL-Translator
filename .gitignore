@@ -37,3 +37,4 @@ Notebooks/.ipynb_checkpoints/
 # Logs / temp
 *.log
 *.tmp
+!model.pickle
