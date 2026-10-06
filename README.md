@@ -33,6 +33,7 @@ ASL-Translator/
 ├── transcript.py # Keeps predicted letters on screen as text
 ├── collect_sequences.py # Records fingerspelled words as landmark sequences
 ├── check_sequences.py # Summarizes recorded sequence clips
+├── word_list.txt # Words to record for the sequence dataset
 ├── check_features.py # Verifies feature extraction matches the original
 ├── test_transcript.py # Tests the on-screen text rules
 ├── baseline_results.json # Static model accuracy (reference baseline)
