@@ -12,6 +12,7 @@ venv/
 
 # Data & generated assets
 data/
+data_seq/
 *.pickle
 *.pkl
 *.npy
@@ -23,6 +24,7 @@ data/
 *.jpeg
 *.mp4
 *.json
+!baseline_results.json
 !confusion_matrix.png
 *.gif
 !FINAL_DEMO.gif

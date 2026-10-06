@@ -13,7 +13,8 @@ print(f"Loaded {len(data)} sampels from data.pickle")
 #split data, x being the landmark patterns and y being the corresponding letters
 #we set aside 20 percent for testing 
 #stratify=letters ensure all letters are represented equally in both sets
-x_train, x_test, y_train, y_test = train_test_split(data, letters, test_size = .2, shuffle= True, stratify=letters)
+#random_state=42 makes the split the same every run so results are comparable
+x_train, x_test, y_train, y_test = train_test_split(data, letters, test_size = .2, shuffle= True, stratify=letters, random_state=42)
 
 print(f"Training samples: {len(x_train)} | Testing samples: {len(x_test)}")
 
@@ -50,6 +51,22 @@ cv_scores = cross_val_score(model, data, letters, cv=cv, n_jobs=-1)
 print(f"Cross-Validation Accuracies: {cv_scores}")
 print(f"Mean Cross-Validation Accuracy: {np.mean(cv_scores)*100:.2f}%")
 print(f"Standard Deviation: {np.std(cv_scores)*100:.2f}%")
+
+#save results as the reference baseline that future (temporal) models are compared against
+import json, datetime
+with open("baseline_results.json", "w") as f:
+    json.dump({
+        "model": "RandomForest (static, per-frame)",
+        "date": datetime.date.today().isoformat(),
+        "total_samples": len(data),
+        "train_samples": len(x_train),
+        "test_samples": len(x_test),
+        "single_split_accuracy": round(single_acc, 4),
+        "cv_mean_accuracy": round(float(np.mean(cv_scores)), 4),
+        "cv_std": round(float(np.std(cv_scores)), 4),
+        "cv_scores": [round(float(c), 4) for c in cv_scores],
+    }, f, indent=2)
+print("Saved baseline numbers to 'baseline_results.json'")
 
 
 # Confusion Matrix: Visualizes how well the model predicts each ASL letter.
