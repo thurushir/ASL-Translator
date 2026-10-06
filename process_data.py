@@ -2,6 +2,7 @@ import os
 import pickle
 import cv2
 import hand_utils as h
+import features as F
 import numpy as np
 import random
 
@@ -45,39 +46,11 @@ for folder in os.listdir(DIR): #os.listdir list every item in data/ dir
             img_rgb = cv2.cvtColor(current_img, cv2.COLOR_BGR2RGB) #OpenCV reafs as BGR, MediaPipe expects RGB so need to reorder
             res= hands.process(img_rgb) #send image through MP hands model, and detects landmarks
         
-            #if hands detected, extract landmark data
-            if res.multi_hand_landmarks:
-                for h_landmark in res.multi_hand_landmarks:
-                    x = [lm.x for lm in h_landmark.landmark]
-                    y = [lm.y for lm in h_landmark.landmark]
-                    z = [lm.z for lm in h_landmark.landmark]
-
-                    # Translation normalization (position)
-                    min_x, min_y, min_z = min(x), min(y), h_landmark.landmark[0].z
-                    max_x, max_y = max(x), max(y)
-                    
-                    # Compute scale factor — hand width/height
-                    scale = max(max_x - min_x, max_y - min_y)
-                    if scale == 0:
-                        continue  # skip invalid detections
-                    
-                    #normalize and scale to make gesture independent of hand's screen position and camera distance all hands fit in a 1×1 bounding box.
-                    #normalize the hand's position, x,y to top-left and z relative to wrist and storing it back in a flattened array [norm_hand]          
-                    norm_hand = []
-                    for lm in h_landmark.landmark:
-                        norm_x = (lm.x - min_x) / scale
-                        norm_y = (lm.y - min_y) / scale
-                        norm_z = (lm.z - min_z) / scale  #for depth normalization
-                        norm_hand.extend([norm_x, norm_y, norm_z])
-                    #to help distinguish between similar closed fists like m and s we can add thumb distance as a feature
-                    thumb_tip = h_landmark.landmark[4] #thumb tip landmark
-                    thumb_joint = h_landmark.landmark[2] #thumb joint landmark near base of plam, dist between 2 and 4 tells us how extended or tucked the thumb is
-                    #calc thumbs "openness" Euclidean distance between the thumb tip and the thumb joint in 3D space (x, y, z) and bounds in 1-1 bounding box
-                    thumb_dist = (((thumb_tip.x - thumb_joint.x)**2 + (thumb_tip.y - thumb_joint.y)**2 + (thumb_tip.z - thumb_joint.z)**2)**0.5) / scale
-                    norm_hand.append(thumb_dist) #append as an extra feature 
-                    
-                    data.append(norm_hand)
-                    letters.append(folder)
+            #if hands detected, extract normalized landmark features (see features.py for details)
+            norm_hand = F.frame_features(res)
+            if norm_hand is not None:
+                data.append(norm_hand.tolist())
+                letters.append(folder)
 # cv2.destroyAllWindows()
 
 

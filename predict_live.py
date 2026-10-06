@@ -2,6 +2,7 @@ import cv2
 import pickle
 import numpy as np
 import hand_utils as h
+import features as F
 
 
 #load data
@@ -11,39 +12,6 @@ with open('model.pickle', 'rb') as f:
 with open('data.pickle', 'rb') as f:
     data_dict = pickle.load(f)
 letters = sorted(list(set(data_dict['letters']))) #removes duplicates and alphabetically orders it to have a clean list of letters
-
-
-#landmark normalizatoin: ensures real-time inputs are in the same scale/format as training samples.
-def extract_normalized_landmarks(results):
-    """Extracts normalized (x, y, z) landmarks from Mediapipe results."""
-    if not results.multi_hand_landmarks:
-        return None
-    for h_landmark in results.multi_hand_landmarks:
-        x = [lm.x for lm in h_landmark.landmark]
-        y = [lm.y for lm in h_landmark.landmark]
-        z = [lm.z for lm in h_landmark.landmark]
-
-        min_x, min_y, min_z = min(x), min(y), h_landmark.landmark[0].z
-        max_x, max_y = max(x), max(y)
-        scale = max(max_x - min_x, max_y - min_y)
-        if scale == 0:
-            return None
-
-        norm_hand = [] #flattened list of 63 values x,y,z for each of 21 landmarks
-        #Normalizes each landmark into a [0,1] bounding box, independent of hand position and distance from the camera.
-        for lm in h_landmark.landmark:
-            norm_x = (lm.x - min_x) / scale
-            norm_y = (lm.y - min_y) / scale
-            norm_z = (lm.z - min_z) / scale
-            norm_hand.extend([norm_x, norm_y, norm_z]) #add all three values at once to the array
-        #thumb distance calc
-        thumb_tip = h_landmark.landmark[4]
-        thumb_joint = h_landmark.landmark[2]
-        thumb_dist = (((thumb_tip.x - thumb_joint.x)**2 + (thumb_tip.y - thumb_joint.y)**2 + (thumb_tip.z - thumb_joint.z)**2) ** 0.5) / scale
-        norm_hand.append(thumb_dist)           
-            #Converts to a NumPy array shaped (1, 21*3=63) a single sample ready for prediction by scikit-learn. [[]]
-        return np.array(norm_hand).reshape(1, -1)
-    return None
 
 
 #Confidence Gradient for display
@@ -92,10 +60,10 @@ def process_frame(frame, results):
     # Draw detected hand
     h.draw_hand_landmarks(frame, results)
 
-    # Extract landmarks of one frame
-    features = extract_normalized_landmarks(results)
+    # Extract normalized features of one frame (see features.py)
+    features = F.frame_features(results)
     if features is not None:
-        probs = model.predict_proba(features)[0] # returns a list of probailities one per class [[]], and extracts the first and only sample
+        probs = model.predict_proba(features.reshape(1, -1))[0] # returns a list of probailities one per class [[]], and extracts the first and only sample
         top_idx = np.argmax(probs) #identifies largest probability, the most likely class
         confidence = probs[top_idx] * 100
         pred = model.classes_[top_idx]
