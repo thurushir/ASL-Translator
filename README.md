@@ -15,6 +15,8 @@ A computer vision project that recognizes American Sign Language (ASL) letters i
 - **Smooth color-coded confidence gradient** display  
 -  Modular code for easy model retraining or feature expansion  
 
+> **Branch `temporalwip`:** work in progress on continuous fingerspelling. See [docs/TEMPORAL.md](docs/TEMPORAL.md).
+
 ## Training Summary
 During training, the dataset contained a total of 4,449 labeled samples of ASL hand gestures. Out of these, 3,559 samples were used for training the model and 890 samples were reserved for testing.
 After training, the Random Forest classifier achieved a single-split test accuracy of *93.15%*, showing strong performance on unseen data.
@@ -24,7 +26,16 @@ To further evaluate consistency, five-fold cross-validation was performed, resul
 ```
 ASL-Translator/
 ├── data/ # Labeled landmark data (by letter)
+├── data_seq/ # Fingerspelling clips as landmark sequences (temporal work)
+├── docs/TEMPORAL.md # Notes on the temporal (continuous fingerspelling) work
 ├── hand_utils.py # Helper functions for Mediapipe setup
+├── features.py # Shared landmark feature extraction (frames and sequences)
+├── transcript.py # Keeps predicted letters on screen as text
+├── collect_sequences.py # Records fingerspelled words as landmark sequences
+├── check_sequences.py # Summarizes recorded sequence clips
+├── check_features.py # Verifies feature extraction matches the original
+├── test_transcript.py # Tests the on-screen text rules
+├── baseline_results.json # Static model accuracy (reference baseline)
 ├── process_data.py # Converts landmarks to training features
 ├── check_processed.py #Enumerates processed images per letter
 ├── train_model.py # Trains the Random Forest classifier
