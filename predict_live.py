@@ -1,8 +1,10 @@
 import cv2
+import time
 import pickle
 import numpy as np
 import hand_utils as h
 import features as F
+from transcript import Transcript
 
 
 #load data
@@ -51,6 +53,7 @@ def get_confidence_color(conf):
 pred_letter = "..."
 confidence = 0.0
 recent_preds = [] #store last few predictions for smoothing and stability
+transcript = Transcript() #keeps spelled letters on screen (rules in transcript.py)
 
  
 def process_frame(frame, results):
@@ -73,6 +76,9 @@ def process_frame(frame, results):
         if len(recent_preds) > 5:
             recent_preds.pop(0)
             pred_letter = max(set(recent_preds), key=recent_preds.count) #finds the letter most freq in recents
+        transcript.update(pred, confidence, time.time()) #raw per-frame prediction; transcript does its own stability check
+    else:
+        transcript.update(None, 0, time.time()) #no hand: counts toward a word break
 
     #display overlay
     font = cv2.FONT_HERSHEY_TRIPLEX
@@ -84,8 +90,27 @@ def process_frame(frame, results):
         cv2.putText(frame, f"Confidence: {confidence:.1f}%", (20, 90),
                     font, 0.9, conf_color, 2, cv2.LINE_AA)
 
+    #spelled text bar along the bottom (shows the last 30 characters)
+    height, width = frame.shape[:2]
+    cv2.rectangle(frame, (0, height - 60), (width, height), (0, 0, 0), -1)
+    cv2.putText(frame, transcript.text[-30:] + "_", (20, height - 20),
+                font, 1.1, (255, 255, 255), 2, cv2.LINE_AA)
+
+
+def handle_key(key):
+    """space = word break, backspace = delete last character, c = clear all."""
+    if key == ord(' '):
+        transcript.add_space()
+    elif key in (8, 127): #backspace is 8 on Windows, 127 on macOS
+        transcript.backspace()
+    elif key == ord('c'):
+        transcript.clear()
+    return False
+
 #main exectution
 hands = h.init_hands(static_mode=False)
-print("Starting live ASL prediction. Press 'q' to quit.\n")
-h.start_video(hands, process_frame)
+print("Starting live ASL prediction. Keys: space = space, backspace = delete, c = clear, q = quit.\n")
+h.start_video(hands, process_frame, handle_key)
+if transcript.text.strip():
+    print(f"Final text: {transcript.text.strip()}")
 print("Exiting ASL live prediction.")
