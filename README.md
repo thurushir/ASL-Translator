@@ -34,6 +34,11 @@ ASL-Translator/
 ├── collect_sequences.py # Records fingerspelled words as landmark sequences
 ├── check_sequences.py # Summarizes recorded sequence clips
 ├── word_list.txt # Words to record for the sequence dataset
+├── dataset.py # Loads clips for models; held-out-signer splits
+├── metrics.py # CER, word accuracy, per-letter error reports
+├── eval_baseline.py # Scores the static model on the clips
+├── results/ # Baseline scores (baseline.md / baseline.json)
+├── test_dataset.py, test_metrics.py, test_eval_baseline.py # Tests for the above
 ├── check_features.py # Verifies feature extraction matches the original
 ├── test_transcript.py # Tests the on-screen text rules
 ├── baseline_results.json # Static model accuracy (reference baseline)
