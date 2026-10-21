@@ -5,11 +5,12 @@ Every model and evaluation script should read clips through here so they all see
   load_clips()        -> list of Clip: per-frame features (T, 64), hand mask, letter labels, signer, fps
   signer_splits(clips) -> one Fold per signer: train on the other signers, test on that one
   encode / decode     -> "HELLO" <-> [8, 5, 12, 12, 15]  (A=1 ... Z=26; 0 is the CTC blank)
+  resample(clip, 15)  -> same clip at 15 fps (nearest frame), so every signer's letters last as many frames
 
 Run: python dataset.py   (prints a summary of the real data and the folds)
 """
 import os
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 import numpy as np
 import features as F
 
@@ -74,6 +75,22 @@ def load_clips(root=DIR):
         if os.path.isdir(folder):
             clips += [load_clip(os.path.join(folder, f)) for f in sorted(os.listdir(folder)) if f.endswith(".npz")]
     return clips
+
+
+def resample(clip, fps=15.0):
+    """
+    Same clip at one frame rate, so a letter lasts the same number of frames for every signer
+    (anna records at ~29 fps, the others at ~15). Each new frame is the nearest original frame:
+    averaging two hand shapes (or a hand with a no-hand frame) would make shapes nobody signed.
+    """
+    ts = clip.timestamps
+    if len(ts) < 2 or ts[-1] <= ts[0]:
+        return clip
+    new_ts = np.arange(ts[0], ts[-1] + 1e-9, 1 / fps)
+    right = np.clip(np.searchsorted(ts, new_ts), 1, len(ts) - 1)
+    left = right - 1
+    idx = np.where(new_ts - ts[left] <= ts[right] - new_ts, left, right)
+    return replace(clip, features=clip.features[idx], mask=clip.mask[idx], timestamps=new_ts, fps=fps)
 
 
 def signers(clips):

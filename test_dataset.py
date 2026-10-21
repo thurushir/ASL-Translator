@@ -76,4 +76,31 @@ with tempfile.TemporaryDirectory() as root:
     results.append(check("every clip is test data exactly once",
                          test_paths == sorted(c.path for c in clips), True))
 
+    # --- resampling to one frame rate (anna records at ~29 fps, the others at ~15) ---
+    write_clip(root, "HI", "anna", 0, frames=61, secs=2.0)        # 30 fps for 2 s
+    fast = D.load_clip(os.path.join(root, "HI", "anna_0.npz"))
+    slow = D.resample(fast, fps=15)
+    results.append(check("30 fps clip resampled to 15 fps has about half the frames", len(slow.mask), 31))
+    results.append(check("resampled fps is 15", slow.fps, 15))
+    results.append(check("resampled timestamps are 1/15 s apart",
+                         bool(np.allclose(np.diff(slow.timestamps), 1 / 15)), True))
+    results.append(check("each resampled frame is a real original frame (nearest, not averaged)",
+                         all(any(np.array_equal(f, g) for g in fast.features) for f in slow.features), True))
+    results.append(check("word, signer and labels unchanged", (slow.word, slow.signer, slow.labels),
+                         (fast.word, fast.signer, fast.labels)))
+    results.append(check("original clip not changed", len(fast.mask), 61))
+
+    write_clip(root, "HI", "saaya", 0, frames=31, secs=2.0)       # already 15 fps
+    same = D.load_clip(os.path.join(root, "HI", "saaya_0.npz"))
+    results.append(check("15 fps clip is unchanged by resampling to 15 fps",
+                         bool(np.array_equal(D.resample(same, fps=15).features, same.features)), True))
+
+    write_clip(root, "HI", "thurushi", 0, frames=61, missing=range(20, 40), secs=2.0)
+    gappy = D.resample(D.load_clip(os.path.join(root, "HI", "thurushi_0.npz")), fps=15)
+    results.append(check("mask follows the frames: hand missing from 0.67 s to 1.3 s",
+                         [round(t, 2) for t in gappy.timestamps[~gappy.mask]],
+                         [0.67, 0.73, 0.8, 0.87, 0.93, 1.0, 1.07, 1.13, 1.2, 1.27]))
+    results.append(check("missing frames are still all zeros after resampling",
+                         bool(gappy.features[~gappy.mask].any()), False))
+
 print("\nPASS: all dataset tests passed" if all(results) else "\nFAIL: some dataset tests failed")

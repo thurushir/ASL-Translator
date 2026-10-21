@@ -37,8 +37,12 @@ ASL-Translator/
 ├── dataset.py # Loads clips for models; held-out-signer splits
 ├── metrics.py # CER, word accuracy, per-letter error reports
 ├── eval_baseline.py # Scores the static model on the clips
-├── results/ # Baseline scores (baseline.md / baseline.json)
+├── model_ctc.py # LSTM + CTC model and greedy decoder
+├── train_ctc.py # Trains and scores the LSTM per held-out signer
+├── compare_runs.py # Averages several training runs (seeds) into one table
+├── results/ # Baseline and LSTM scores (baseline.md, lstm_ctc*.md, .json)
 ├── test_dataset.py, test_metrics.py, test_eval_baseline.py # Tests for the above
+├── test_model_ctc.py, test_train_ctc.py, test_compare_runs.py # Tests for the LSTM code
 ├── check_features.py # Verifies feature extraction matches the original
 ├── test_transcript.py # Tests the on-screen text rules
 ├── baseline_results.json # Static model accuracy (reference baseline)
