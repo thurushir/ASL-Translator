@@ -96,4 +96,21 @@ results.append(check("same seed, same speeds",
                      [len(c.mask) for c in aug]))
 results.append(check("originals untouched", {len(c.mask) for c in long_clips}, {60}))
 
+# --- Step 5: --model transformer, with its own defaults fixed before any results ---
+lstm_cfg = T.parse_args([])
+results.append(check("LSTM defaults unchanged", (lstm_cfg.model, lstm_cfg.layers, lstm_cfg.dropout, lstm_cfg.lr),
+                     ("lstm", 2, 0.3, 1e-3)))
+tf_cfg = T.parse_args(["--model", "transformer"])
+results.append(check("Transformer defaults: 3 layers, dropout 0.1, lr 0.0005",
+                     (tf_cfg.model, tf_cfg.layers, tf_cfg.dropout, tf_cfg.lr), ("transformer", 3, 0.1, 5e-4)))
+results.append(check("settings typed on the command line win",
+                     T.parse_args(["--model", "transformer", "--dropout", "0.2"]).dropout, 0.2))
+torch.manual_seed(0)
+tf_model = MC.make_model("transformer", MC.INPUT_SIZE, hidden=32, layers=2, dropout=0.0)
+tf_opt = torch.optim.Adam(tf_model.parameters(), lr=1e-3)
+tf_first = T.train_step(tf_model, tf_opt, x, lengths, targets, target_lengths)
+for _ in range(30):
+    tf_last = T.train_step(tf_model, tf_opt, x, lengths, targets, target_lengths)
+results.append(check("transformer: CTC loss goes down after 30 steps on one batch", tf_last < tf_first, True))
+
 print("\nPASS: all train_ctc tests passed" if all(results) else "\nFAIL: some train_ctc tests failed")

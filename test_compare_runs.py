@@ -35,6 +35,18 @@ results.append(check("table has a row per signer plus all", sum(line.startswith(
 results.append(check("table shows the mean CER for anna", "| LSTM+CTC | anna | 30.0% / 20.0% / 40.0% | **30.0%** |" in table, True))
 results.append(check("baseline B row is included", "| Baseline B | all |" in table, True))
 
+# --- Step 5: rows are labelled with the model each run used (LSTM unless the run says otherwise) ---
+tf_runs = [dict(r, config={"model": "transformer"}) for r in runs]
+tf_table = C.markdown(tf_runs, ["a", "b", "c"])
+results.append(check("Transformer runs are labelled Transformer+CTC",
+                     "| Transformer+CTC | anna |" in tf_table and "| LSTM+CTC |" not in tf_table, True))
+results.append(check("old runs without a model setting are labelled LSTM+CTC", C.model_label(runs[0]), "LSTM+CTC"))
+try:
+    C.markdown([runs[0], tf_runs[1]], ["lstm", "tf"])
+    results.append(check("mixing LSTM and Transformer runs is refused", "no error", "ValueError"))
+except ValueError:
+    results.append(check("mixing LSTM and Transformer runs is refused", "ValueError", "ValueError"))
+
 try:
     C.stats([fake_run({"anna": 0.3, "all": 0.3}), fake_run({"saaya": 0.3, "all": 0.3})], "anna", "cer")
     results.append(check("runs with different signers are refused", "no error", "ValueError"))

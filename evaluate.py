@@ -160,7 +160,7 @@ def write_markdown(name, res, records, path, image_name):
               f"| {t['mean_ms']:.1f} ms | {t['median_ms']:.1f} ms | {t['p95_ms']:.1f} ms | {t['max_ms']:.1f} ms "
               f"| {t['realtime_factor']:.4f} |", "",
               "Real-time factor = compute time / video length; below 1 means faster than real time. "
-              "The LSTM is bidirectional, so it needs the whole word before it can answer: in the live app the "
+              "Both models read the whole clip, so they need the whole word before it can answer: in the live app the "
               "delay is the time to the end of the word plus this inference time."]
     with open(path, "w") as f:
         f.write("\n".join(L) + "\n")

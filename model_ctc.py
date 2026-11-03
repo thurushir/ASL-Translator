@@ -6,6 +6,8 @@ Trained with CTC loss (train_ctc.py), so it learns where letters start and end f
   clip_inputs(clip, mean, std) -> (T, 65): standardized features + a "hand present" flag (0 where no hand)
                                  (T, 79) with motion stats: + 14 motion features (motion.py, Step 5)
   CTCModel                    -> 2-layer bidirectional LSTM -> 27 log-probabilities per frame
+  TransformerCTCModel         -> small Transformer encoder, same inputs and outputs (Step 5 comparison)
+  make_model(kind, ...)       -> 'lstm' or 'transformer'
   greedy_decode / decode_batch -> best output per frame -> merge repeats -> drop blanks -> word
   save_model / load_model     -> weights + standardization numbers + settings in one .pt file (Step 5)
 
@@ -63,6 +65,50 @@ class CTCModel(nn.Module):
         return self.out(h).log_softmax(dim=-1)
 
 
+class TransformerCTCModel(nn.Module):
+    """
+    Step 5 comparison model: a small Transformer encoder in place of the LSTM, with the same inputs, the same
+    27 log-probabilities per frame and the same decoder. Every frame attends to every other frame of the clip
+    (like the bidirectional LSTM, it sees the whole word). Frame order comes from sine/cosine position codes.
+    """
+
+    def __init__(self, input_size=INPUT_SIZE, hidden=128, layers=3, dropout=0.1, heads=4, max_frames=2000):
+        super().__init__()
+        self.inp = nn.Linear(input_size, hidden)
+        pos = torch.arange(max_frames).unsqueeze(1)
+        freq = torch.exp(torch.arange(0, hidden, 2) * (-np.log(10000.0) / hidden))
+        pe = torch.zeros(max_frames, hidden)
+        pe[:, 0::2], pe[:, 1::2] = torch.sin(pos * freq), torch.cos(pos * freq)
+        self.register_buffer("pe", pe, persistent=False)  # fixed, so not stored in saved models
+        self.drop = nn.Dropout(dropout)
+        layer = nn.TransformerEncoderLayer(hidden, heads, dim_feedforward=2 * hidden, dropout=dropout,
+                                           batch_first=True, norm_first=True)  # norm first: steadier training
+        self.encoder = nn.TransformerEncoder(layer, layers, enable_nested_tensor=False)
+        self.norm = nn.LayerNorm(hidden)
+        self.out = nn.Linear(hidden, D.NUM_CLASSES)
+
+    def forward(self, x, lengths):
+        """x (batch, frames, inputs) padded with zeros, lengths (batch,) -> log-probs (batch, frames, 27)."""
+        frames = x.shape[1]
+        padding = torch.arange(frames, device=x.device)[None, :] >= lengths.to(x.device)[:, None]  # True = padding
+        h = self.drop(self.inp(x) + self.pe[:frames])
+        h = self.encoder(h, src_key_padding_mask=padding)  # real frames never attend to padding
+        return self.out(self.norm(h)).log_softmax(dim=-1)
+
+
+def make_model(kind, input_size, hidden=128, layers=2, dropout=0.3):
+    """'lstm' -> CTCModel, 'transformer' -> TransformerCTCModel."""
+    if kind == "lstm":
+        return CTCModel(input_size=input_size, hidden=hidden, layers=layers, dropout=dropout)
+    if kind == "transformer":
+        return TransformerCTCModel(input_size=input_size, hidden=hidden, layers=layers, dropout=dropout)
+    raise ValueError(f"unknown model {kind!r}: use 'lstm' or 'transformer'")
+
+
+def count_params(model):
+    return sum(p.numel() for p in model.parameters())
+
+
 def greedy_decode(log_probs):
     """(frames, 27) -> word. Most likely output per frame, merge runs of the same output, drop blanks."""
     best = log_probs.argmax(dim=-1).tolist()
@@ -94,8 +140,8 @@ def load_model(path):
     """-> (model in eval mode, (mean, std) as numpy arrays, the saved dict without the weights)."""
     saved = torch.load(path, map_location="cpu", weights_only=True)
     cfg = saved["config"]
-    model = CTCModel(input_size=cfg.get("input_size", INPUT_SIZE), hidden=cfg["hidden"], layers=cfg["layers"],
-                     dropout=cfg["dropout"])
+    model = make_model(cfg.get("model", "lstm"), cfg.get("input_size", INPUT_SIZE), hidden=cfg["hidden"],
+                       layers=cfg["layers"], dropout=cfg["dropout"])
     model.load_state_dict(saved["state_dict"])
     model.eval()
     info = {k: v for k, v in saved.items() if k not in ("state_dict", "mean", "std")}

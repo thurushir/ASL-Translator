@@ -26,13 +26,22 @@ def stats(runs, signer, key):
             "spread": max(values) - min(values)}
 
 
+def model_label(run):
+    """'LSTM+CTC' or 'Transformer+CTC', from the run's settings (runs from before Step 5 are LSTM)."""
+    return "Transformer+CTC" if run.get("config", {}).get("model") == "transformer" else "LSTM+CTC"
+
+
 def pct(x):
     return f"{100 * x:.1f}%"
 
 
 def markdown(runs, names):
+    labels = {model_label(r) for r in runs}
+    if len(labels) > 1:
+        raise ValueError(f"runs use different models {sorted(labels)}; average each model's runs separately")
+    label = labels.pop()
     signers = runs[0]["signers"] + ["all"]
-    L = [f"# LSTM + CTC averaged over {len(runs)} runs", "",
+    L = [f"# {label.replace('+', ' + ')} averaged over {len(runs)} runs", "",
          f"Runs: {', '.join(f'`results/{n}.json`' for n in names)}. Held-out signer scores; lower CER is better.",
          "Compare a change by its **mean** over seeds; a gain smaller than the CER range between seeds may be noise.", "",
          f"| Model | Signer | CER per run ({' / '.join(names)}) | CER mean | CER range | Word acc mean "
@@ -40,7 +49,7 @@ def markdown(runs, names):
          "|---|---|---|---|---|---|---|---|"]
     for s in signers:
         c = stats(runs, s, "cer")
-        L.append(f"| LSTM+CTC | {s} | {' / '.join(pct(v) for v in c['values'])} | **{pct(c['mean'])}** "
+        L.append(f"| {label} | {s} | {' / '.join(pct(v) for v in c['values'])} | **{pct(c['mean'])}** "
                  f"| {pct(c['min'])}-{pct(c['max'])} | {pct(stats(runs, s, 'word_acc')['mean'])} "
                  f"| {pct(stats(runs, s, 'letter_recall')['mean'])} | {pct(stats(runs, s, 'cer_no_jz')['mean'])} |")
     for s in signers:

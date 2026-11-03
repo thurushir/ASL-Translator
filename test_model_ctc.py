@@ -130,6 +130,37 @@ with torch.no_grad():
     same = torch.equal(mmodel(torch.from_numpy(xm).unsqueeze(0), torch.tensor([8])),
                        mloaded(torch.from_numpy(MC.clip_inputs(mclip, *mstats)).unsqueeze(0), torch.tensor([8])))
 results.append(check("saved motion model loads with the right input size and same outputs", same, True))
+# --- Transformer encoder (Step 5): same inputs, outputs and decoder as the LSTM ---
+torch.manual_seed(0)
+tf = MC.make_model("transformer", MC.INPUT_SIZE, hidden=32, layers=2, dropout=0.1).eval()
+xb = torch.randn(2, 12, MC.INPUT_SIZE)
+with torch.no_grad():
+    out = tf(xb, torch.tensor([12, 7]))
+results.append(check("transformer outputs (batch, frames, 27)", tuple(out.shape), (2, 12, D.NUM_CLASSES)))
+results.append(check("transformer outputs are log-probabilities",
+                     bool(torch.allclose(out.exp().sum(-1), torch.ones(2, 12), atol=1e-5)), True))
+with torch.no_grad():
+    alone = tf(xb[1:, :7], torch.tensor([7]))
+results.append(check("transformer ignores padding (clip alone = clip padded in a batch)",
+                     bool(torch.allclose(alone[0], out[1, :7], atol=1e-5)), True))
+results.append(check("make_model('lstm') is the LSTM", type(MC.make_model("lstm", MC.INPUT_SIZE)).__name__, "CTCModel"))
+try:
+    MC.make_model("gru", MC.INPUT_SIZE)
+    results.append(check("unknown model name refused", "no error", "ValueError"))
+except ValueError:
+    results.append(check("unknown model name refused", "ValueError", "ValueError"))
+n_lstm = MC.count_params(MC.make_model("lstm", MC.INPUT_SIZE, hidden=128, layers=2))
+n_tf = MC.count_params(MC.make_model("transformer", MC.INPUT_SIZE, hidden=128, layers=3))
+results.append(check(f"default sizes are comparable (LSTM {n_lstm:,} vs Transformer {n_tf:,} parameters)",
+                     0.5 < n_tf / n_lstm < 1.5, True))
+with tempfile.TemporaryDirectory() as tmp:
+    path = os.path.join(tmp, "tf.pt")
+    MC.save_model(path, tf, stats, {"model": "transformer", "hidden": 32, "layers": 2, "dropout": 0.1, "fps": 15.0})
+    tf_loaded, _, _ = MC.load_model(path)
+with torch.no_grad():
+    same = torch.equal(tf(xb, torch.tensor([12, 7])), tf_loaded(xb, torch.tensor([12, 7])))
+results.append(check("saved transformer loads with identical outputs", same, True))
+
 try:
     MC.clip_inputs(D.Clip(path="old", word="HI", signer="anna", labels=[8, 9], features=feats8, mask=mask8,
                           timestamps=np.arange(8) / 15, fps=15.0), *motion_stats)
