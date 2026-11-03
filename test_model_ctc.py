@@ -76,4 +76,65 @@ padded = torch.stack([frames_for([H, I, B, B]), frames_for([O, B, LL, LL])])
 results.append(check("batch decode stops at each clip's length",
                      MC.decode_batch(padded, torch.tensor([2, 4])), ["HI", "OL"]))
 
+# --- save and load (Step 5): a saved model must give exactly the same outputs after loading ---
+import os
+import tempfile
+torch.manual_seed(0)
+small = MC.CTCModel(hidden=16, layers=2, dropout=0.3).eval()
+stats = (rng.random(64), rng.random(64) + 0.5)
+with tempfile.TemporaryDirectory() as tmp:
+    path = os.path.join(tmp, "m.pt")
+    MC.save_model(path, small, stats, {"hidden": 16, "layers": 2, "dropout": 0.3, "fps": 15.0},
+                  test_signer="anna", seed=3)
+    loaded, loaded_stats, info = MC.load_model(path)
+xin = torch.from_numpy(MC.clip_inputs(clip, *stats)).unsqueeze(0)
+n = torch.tensor([xin.shape[1]])
+with torch.no_grad():
+    same = torch.equal(small(xin, n), loaded(xin, n))
+results.append(check("loaded model gives identical outputs", same, True))
+results.append(check("loaded model is ready to predict (eval mode)", loaded.training, False))
+results.append(check("standardization numbers come back",
+                     bool(np.allclose(loaded_stats[0], stats[0]) and np.allclose(loaded_stats[1], stats[1])), True))
+results.append(check("settings come back", (info["config"]["hidden"], info["test_signer"], info["seed"]),
+                     (16, "anna", 3)))
+
+# --- motion features as extra inputs (Step 5, --motion) ---
+import features as F
+import motion as MO
+lm = rng.random((8, 21, 3))
+lm[[2, 5]] = np.nan  # two frames without a hand
+feats8, mask8 = F.sequence_features(lm)
+mclip = D.Clip(path="m", word="ZOO", signer="anna", labels=D.encode("ZOO"), features=feats8, mask=mask8,
+               timestamps=np.arange(8) / 15, fps=15.0, landmarks=lm)
+plain_stats = MC.feature_stats([mclip])
+motion_stats = MC.feature_stats([mclip], motion=True)
+results.append(check("motion stats cover 64 + 14 numbers", len(motion_stats[0]), F.FEATURE_SIZE + MO.NUM_MOTION))
+xm = MC.clip_inputs(mclip, *motion_stats)
+xp = MC.clip_inputs(mclip, *plain_stats)
+results.append(check("motion inputs are (frames, 79)", xm.shape, (8, F.FEATURE_SIZE + MO.NUM_MOTION + 1)))
+results.append(check("without --motion inputs are still (frames, 65)", xp.shape, (8, MC.INPUT_SIZE)))
+results.append(check("the 64 shape columns are the same with or without motion",
+                     bool(np.allclose(xm[:, :F.FEATURE_SIZE], xp[:, :F.FEATURE_SIZE])), True))
+results.append(check("hand flag is still the last column", xm[:, -1].tolist(), mask8.astype(float).tolist()))
+results.append(check("no-hand frames are all zeros", bool(xm[~mask8].any()), False))
+mmodel = MC.CTCModel(input_size=xm.shape[1], hidden=16).eval()
+with torch.no_grad():
+    out = mmodel(torch.from_numpy(xm).unsqueeze(0), torch.tensor([8]))
+results.append(check("motion model outputs (1, frames, 27)", tuple(out.shape), (1, 8, D.NUM_CLASSES)))
+with tempfile.TemporaryDirectory() as tmp:
+    path = os.path.join(tmp, "m.pt")
+    MC.save_model(path, mmodel, motion_stats, {"hidden": 16, "layers": 2, "dropout": 0.3, "fps": 15.0,
+                                               "input_size": xm.shape[1], "motion": True})
+    mloaded, mstats, _ = MC.load_model(path)
+with torch.no_grad():
+    same = torch.equal(mmodel(torch.from_numpy(xm).unsqueeze(0), torch.tensor([8])),
+                       mloaded(torch.from_numpy(MC.clip_inputs(mclip, *mstats)).unsqueeze(0), torch.tensor([8])))
+results.append(check("saved motion model loads with the right input size and same outputs", same, True))
+try:
+    MC.clip_inputs(D.Clip(path="old", word="HI", signer="anna", labels=[8, 9], features=feats8, mask=mask8,
+                          timestamps=np.arange(8) / 15, fps=15.0), *motion_stats)
+    results.append(check("motion without raw landmarks gives a clear error", "no error", "ValueError"))
+except ValueError:
+    results.append(check("motion without raw landmarks gives a clear error", "ValueError", "ValueError"))
+
 print("\nPASS: all model_ctc tests passed" if all(results) else "\nFAIL: some model_ctc tests failed")

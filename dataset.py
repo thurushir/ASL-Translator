@@ -44,6 +44,7 @@ class Clip:
     mask: np.ndarray        # (T,) True where a hand was found
     timestamps: np.ndarray  # (T,) seconds since the clip started
     fps: float
+    landmarks: np.ndarray = None  # (T, 21, 3) raw x, y, z; NaN where no hand (Step 5: motion.py needs these)
 
     def hand_only(self):
         """Features for just the frames where a hand was found."""
@@ -64,7 +65,8 @@ def load_clip(path):
     ts = data["timestamps"]
     fps = (len(ts) - 1) / ts[-1] if len(ts) > 1 and ts[-1] > 0 else 0.0
     return Clip(path=path, word=word, signer=str(data["signer"]), labels=encode(word),
-                features=feats, mask=mask, timestamps=ts, fps=float(fps))
+                features=feats, mask=mask, timestamps=ts, fps=float(fps),
+                landmarks=np.asarray(data["landmarks"], dtype=np.float64))
 
 
 def load_clips(root=DIR):
@@ -90,7 +92,8 @@ def resample(clip, fps=15.0):
     right = np.clip(np.searchsorted(ts, new_ts), 1, len(ts) - 1)
     left = right - 1
     idx = np.where(new_ts - ts[left] <= ts[right] - new_ts, left, right)
-    return replace(clip, features=clip.features[idx], mask=clip.mask[idx], timestamps=new_ts, fps=fps)
+    return replace(clip, features=clip.features[idx], mask=clip.mask[idx], timestamps=new_ts, fps=fps,
+                   landmarks=None if clip.landmarks is None else clip.landmarks[idx])
 
 
 def signers(clips):

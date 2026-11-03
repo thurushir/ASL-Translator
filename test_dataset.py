@@ -6,6 +6,7 @@ import os
 import tempfile
 import numpy as np
 import dataset as D
+import features as F
 
 
 def check(name, got, want):
@@ -102,5 +103,13 @@ with tempfile.TemporaryDirectory() as root:
                          [0.67, 0.73, 0.8, 0.87, 0.93, 1.0, 1.07, 1.13, 1.2, 1.27]))
     results.append(check("missing frames are still all zeros after resampling",
                          bool(gappy.features[~gappy.mask].any()), False))
+
+    # --- Step 5: raw hand points are kept (motion.py needs them) and follow resampling ---
+    results.append(check("raw landmarks kept: (frames, 21, 3)", fast.landmarks.shape, (61, 21, 3)))
+    results.append(check("raw landmarks resampled with the frames", slow.landmarks.shape, (31, 21, 3)))
+    results.append(check("each resampled frame's landmarks give that frame's features",
+                         all(np.allclose(F.landmarks_to_features(slow.landmarks[t]), slow.features[t])
+                             for t in range(len(slow.mask)) if slow.mask[t]), True))
+    results.append(check("no-hand frames keep NaN landmarks", bool(np.isnan(gappy.landmarks[~gappy.mask]).all()), True))
 
 print("\nPASS: all dataset tests passed" if all(results) else "\nFAIL: some dataset tests failed")

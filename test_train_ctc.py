@@ -64,4 +64,19 @@ for _ in range(20):
     last = T.train_step(model, opt, x, lengths, targets, target_lengths)
 results.append(check("CTC loss goes down after 20 steps on one batch", last < first, True))
 
+# --- Step 5: per-clip timing and records (what evaluate.py reads) ---
+stats = (mean, std)
+words, ms = T.time_inference(model, clips, stats)
+results.append(check("one timing per clip", len(ms), len(clips)))
+results.append(check("timings are positive milliseconds", all(m > 0 for m in ms), True))
+results.append(check("timed predictions match batch predictions", words, T.predict(model, clips, stats)))
+records = T.E.prediction_records(clips, words, ms)
+results.append(check("records carry word, signer and prediction",
+                     [(r["word"], r["signer"], r["pred"]) for r in records],
+                     [(c.word, c.signer, w) for c, w in zip(clips, words)]))
+results.append(check("--save is off by default", T.parse_args([]).save, False))
+results.append(check("--save can be turned on", T.parse_args(["--save", "--name", "x"]).save, True))
+results.append(check("--motion is off by default", T.parse_args([]).motion, False))
+results.append(check("--motion can be turned on", T.parse_args(["--motion"]).motion, True))
+
 print("\nPASS: all train_ctc tests passed" if all(results) else "\nFAIL: some train_ctc tests failed")

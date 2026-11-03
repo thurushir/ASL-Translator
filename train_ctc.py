@@ -7,6 +7,12 @@ validation set taken from those two signers only, then score the held-out signer
 
   python train_ctc.py               -> all 3 folds, writes results/lstm_ctc.md and results/lstm_ctc.json
   python train_ctc.py --overfit 10  -> first check: trains on 10 clips and should spell them almost perfectly
+  python train_ctc.py --save --name step5_lstm
+                                    -> also saves each fold's model to models/step5_lstm_<signer>.pt
+  python train_ctc.py --motion --name step5_motion
+                                    -> adds wrist and fingertip motion to the inputs (motion.py)
+Every run stores each held-out clip's prediction and inference time in the results JSON ("predictions");
+python evaluate.py <name> turns them into the proposal's evaluation (by word length, speed, confusions, timing).
 Tests: python test_train_ctc.py
 """
 import argparse
@@ -21,9 +27,11 @@ from torch import nn
 import dataset as D
 import metrics as M
 import model_ctc as MC
+import evaluate as E
 from eval_baseline import summarize, pct, has_motion_letter
 
 RESULTS_DIR = "./results"
+MODELS_DIR = "./models"  # ignored by git: model files are large and can be rebuilt with --save
 CTC_LOSS = nn.CTCLoss(blank=D.BLANK, zero_infinity=True)  # zero_infinity: an impossible clip adds 0, not inf
 
 
@@ -86,6 +94,23 @@ def predict(model, clips, stats, batch_size=64):
 
 
 @torch.no_grad()
+def time_inference(model, clips, stats):
+    """
+    (words, ms): each clip predicted on its own, as the live app would, timing input preparation + model +
+    decoding in milliseconds. The first clip is run once untimed first (PyTorch is slow on its very first call).
+    """
+    model.eval()
+    if clips:
+        predict(model, clips[:1], stats)  # warm-up
+    words, ms = [], []
+    for c in clips:
+        start = time.perf_counter()
+        words += predict(model, [c], stats)
+        ms.append((time.perf_counter() - start) * 1000)
+    return words, ms
+
+
+@torch.no_grad()
 def evaluate(model, clips, stats):
     """(CER, mean CTC loss) on clips."""
     model.eval()
@@ -103,8 +128,8 @@ def train(fit, val, cfg, log=print):
     """
     torch.manual_seed(cfg.seed)
     rng = np.random.default_rng(cfg.seed)
-    stats = MC.feature_stats(fit)  # standardize with the fitting clips only
-    model = MC.CTCModel(hidden=cfg.hidden, layers=cfg.layers, dropout=cfg.dropout)
+    stats = MC.feature_stats(fit, motion=getattr(cfg, "motion", False))  # standardize with the fitting clips only
+    model = MC.CTCModel(input_size=len(stats[0]) + 1, hidden=cfg.hidden, layers=cfg.layers, dropout=cfg.dropout)
     opt = torch.optim.Adam(model.parameters(), lr=cfg.lr)
     best, best_key, best_epoch, history = None, None, 0, []
     for epoch in range(1, cfg.max_epochs + 1):
@@ -154,7 +179,7 @@ def run_folds(clips, cfg):
     held_words = set(cfg.holdout_words)
     new_words = {"held_out_signer_new_words": ([], []), "held_out_signer_seen_words": ([], []),
                  "training_signers_new_words": ([], [])}  # group -> (clips, preds), all folds together
-    folds = {}
+    folds, records = {}, []
     for fold in D.signer_splits(clips):
         start = time.time()
         train_pool, train_new = split_words(fold.train, held_words)  # held-out words never trained on
@@ -163,9 +188,18 @@ def run_folds(clips, cfg):
               f"train on {len(fit)}, validate on {len(val)} from the other signers"
               + (f"; {len(held_words)} words left out of training" if held_words else ""))
         model, stats, info = train(fit, val, cfg)
-        test_preds = predict(model, fold.test, stats)
+        test_preds, test_ms = time_inference(model, fold.test, stats)  # same words as predict(), plus timing
         for c, p in zip(fold.test, test_preds):
             preds[index[c.path]] = p
+        records += E.prediction_records(fold.test, test_preds, test_ms)
+        if cfg.save:
+            os.makedirs(MODELS_DIR, exist_ok=True)
+            info["model_file"] = os.path.join(MODELS_DIR, f"{cfg.name}_{fold.test_signer}.pt")
+            MC.save_model(info["model_file"], model, stats,
+                          {"hidden": cfg.hidden, "layers": cfg.layers, "dropout": cfg.dropout, "fps": cfg.fps,
+                           "input_size": len(stats[0]) + 1, "motion": cfg.motion},
+                          test_signer=fold.test_signer, seed=cfg.seed,
+                          train_signers=[s for s in signers if s != fold.test_signer])
         train_scores = summarize(train_pool, predict(model, train_pool, stats))
         test_scores = summarize(fold.test, test_preds)
         if held_words:
@@ -192,7 +226,7 @@ def run_folds(clips, cfg):
               for s in signers}
     scores["all"] = summarize(clips, preds)
     new_words = {g: brief(cs, ps) for g, (cs, ps) in new_words.items()} if held_words else None
-    return preds, scores, folds, new_words
+    return preds, scores, folds, new_words, records
 
 
 def write_markdown(res, path):
@@ -200,6 +234,8 @@ def write_markdown(res, path):
     L = ["# LSTM + CTC on fingerspelling clips", "",
          f"Generated by `train_ctc.py` on {res['date']}. {res['n_clips']} clips, signers: {', '.join(res['signers'])}.", "",
          "- Every row is a **held-out signer**: the model never trained on that person's clips.",
+         "- Inputs per frame: 64 hand-shape features + hand-present flag"
+         + (" + 14 motion features (wrist position and speed, fingertip speeds; motion.py)." if res["config"].get("motion") else "."),
          f"- Clips resampled to {res['config']['fps']} fps. Model: 2-layer bidirectional LSTM ({res['config']['hidden']} units), "
          "greedy CTC decoding.",
          "- Early stopping on a validation set taken from the two training signers only.",
@@ -254,7 +290,7 @@ def write_markdown(res, path):
         f.write("\n".join(L) + "\n")
 
 
-def main():
+def parse_args(argv=None):
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--fps", type=float, default=15)
     p.add_argument("--hidden", type=int, default=128)
@@ -270,9 +306,17 @@ def main():
     p.add_argument("--holdout-words", default="",
                    help="comma-separated words to leave out of training (new-words check), e.g. CAT,DOG")
     p.add_argument("--name", default="lstm_ctc", help="results file name (results/<name>.md and .json)")
-    cfg = p.parse_args()
+    p.add_argument("--motion", action="store_true",
+                   help="add the 14 motion features from motion.py to every frame (Step 5)")
+    p.add_argument("--save", action="store_true",
+                   help="also save each fold's trained model to models/<name>_<signer>.pt")
+    cfg = p.parse_args(argv)
     cfg.holdout_words = [w.strip().upper() for w in cfg.holdout_words.split(",") if w.strip()]
+    return cfg
 
+
+def main():
+    cfg = parse_args()
     start = time.time()
     clips = [D.resample(c, cfg.fps) for c in D.load_clips()]
     print(f"Loaded {len(clips)} clips, resampled to {cfg.fps:g} fps")
@@ -283,13 +327,13 @@ def main():
     unknown = set(cfg.holdout_words) - {c.word for c in clips}
     if unknown:
         raise SystemExit(f"--holdout-words not in the data: {sorted(unknown)}")
-    preds, scores, folds, new_words = run_folds(clips, cfg)
+    preds, scores, folds, new_words, records = run_folds(clips, cfg)
     with open(os.path.join(RESULTS_DIR, "baseline.json")) as f:
         baseline_b = json.load(f)["methods"]["B"]
     res = {"date": datetime.date.today().isoformat(), "n_clips": len(clips), "signers": D.signers(clips),
            "config": vars(cfg), "scores": scores, "folds": folds, "new_words": new_words,
            "baseline_b": {s: {k: v for k, v in r.items() if k != "letters"} for s, r in baseline_b.items()},
-           "examples": {}}
+           "examples": {}, "predictions": records}
     for c, pr in zip(clips, preds):
         if c.path.endswith("_0.npz"):
             res["examples"].setdefault(c.word, {})[c.signer] = pr
@@ -307,6 +351,9 @@ def main():
     jz_score = M.score([clips[i].word for i in jz], [preds[i] for i in jz])
     print(f"\nWords with J/Z only: CER {pct(jz_score['cer'])}, word acc {pct(jz_score['word_acc'])}")
     print(f"Wrote results/{cfg.name}.md and .json ({time.time() - start:.0f}s)")
+    if cfg.save:
+        print(f"Saved models: {', '.join(f['model_file'] for f in folds.values())}")
+    print(f"Next: python evaluate.py {cfg.name}")
 
 
 if __name__ == "__main__":
