@@ -79,4 +79,21 @@ results.append(check("--save can be turned on", T.parse_args(["--save", "--name"
 results.append(check("--motion is off by default", T.parse_args([]).motion, False))
 results.append(check("--motion can be turned on", T.parse_args(["--motion"]).motion, True))
 
+# --- Step 5: speed augmentation, training clips only ---
+cfg = T.parse_args(["--speed-aug"])
+results.append(check("--speed-aug on, default range 0.7-1.4", (cfg.speed_aug, cfg.speed_min, cfg.speed_max),
+                     (True, 0.7, 1.4)))
+results.append(check("--speed-aug is off by default", T.parse_args([]).speed_aug, False))
+long_clips = [fake_clip("HELLO", "anna", 60, n) for n in range(20)]  # 4 s each
+rng = np.random.default_rng(0)
+aug = T.augment(long_clips, rng, 0.7, 1.4)
+results.append(check("augmenting keeps every clip and its word", [c.word for c in aug], [c.word for c in long_clips]))
+results.append(check("lengths land between 60/1.4 and 60/0.7 frames",
+                     all(round(59 / 1.4) + 1 <= len(c.mask) <= round(59 / 0.7) + 1 for c in aug), True))
+results.append(check("speeds actually vary", len({len(c.mask) for c in aug}) > 3, True))
+results.append(check("same seed, same speeds",
+                     [len(c.mask) for c in T.augment(long_clips, np.random.default_rng(0), 0.7, 1.4)],
+                     [len(c.mask) for c in aug]))
+results.append(check("originals untouched", {len(c.mask) for c in long_clips}, {60}))
+
 print("\nPASS: all train_ctc tests passed" if all(results) else "\nFAIL: some train_ctc tests failed")

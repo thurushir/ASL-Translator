@@ -11,6 +11,8 @@ validation set taken from those two signers only, then score the held-out signer
                                     -> also saves each fold's model to models/step5_lstm_<signer>.pt
   python train_ctc.py --motion --name step5_motion
                                     -> adds wrist and fingertip motion to the inputs (motion.py)
+  python train_ctc.py --speed-aug --name step5_speed
+                                    -> trains on each clip at a random 0.7x-1.4x speed every epoch
 Every run stores each held-out clip's prediction and inference time in the results JSON ("predictions");
 python evaluate.py <name> turns them into the proposal's evaluation (by word length, speed, confusions, timing).
 Tests: python test_train_ctc.py
@@ -57,6 +59,11 @@ def make_batch(clips, mean, std):
     targets = torch.tensor([k for c in clips for k in c.labels])
     target_lengths = torch.tensor([len(c.labels) for c in clips])
     return x, lengths, targets, target_lengths
+
+
+def augment(clips, rng, lo, hi):
+    """Training clips at random speeds between lo and hi (speed augmentation, Step 5). Never used on val/test."""
+    return [D.change_speed(c, rng.uniform(lo, hi)) for c in clips]
 
 
 def junk_start(truth, pred):
@@ -128,14 +135,18 @@ def train(fit, val, cfg, log=print):
     """
     torch.manual_seed(cfg.seed)
     rng = np.random.default_rng(cfg.seed)
+    aug_rng = np.random.default_rng(cfg.seed + 1)  # separate, so the clip order matches a run without augmentation
+    speed_aug = getattr(cfg, "speed_aug", False)
     stats = MC.feature_stats(fit, motion=getattr(cfg, "motion", False))  # standardize with the fitting clips only
     model = MC.CTCModel(input_size=len(stats[0]) + 1, hidden=cfg.hidden, layers=cfg.layers, dropout=cfg.dropout)
     opt = torch.optim.Adam(model.parameters(), lr=cfg.lr)
     best, best_key, best_epoch, history = None, None, 0, []
     for epoch in range(1, cfg.max_epochs + 1):
         order = rng.permutation(len(fit))
-        losses = [train_step(model, opt, *make_batch([fit[i] for i in order[b:b + cfg.batch]], *stats))
-                  for b in range(0, len(fit), cfg.batch)]
+        batches = [[fit[i] for i in order[b:b + cfg.batch]] for b in range(0, len(fit), cfg.batch)]
+        if speed_aug:
+            batches = [augment(bc, aug_rng, cfg.speed_min, cfg.speed_max) for bc in batches]
+        losses = [train_step(model, opt, *make_batch(bc, *stats)) for bc in batches]
         val_cer, val_loss = evaluate(model, val, stats)
         history.append({"epoch": epoch, "train_loss": round(float(np.mean(losses)), 4),
                         "val_loss": round(val_loss, 4), "val_cer": round(val_cer, 4)})
@@ -156,7 +167,7 @@ def overfit_check(clips, cfg):
     """Trains and scores on the same few clips, no dropout. A working loop should spell them ~perfectly."""
     picked = [clips[i] for i in np.linspace(0, len(clips) - 1, cfg.overfit).astype(int)]  # spread across words
     cfg = copy.copy(cfg)
-    cfg.dropout, cfg.patience = 0.0, cfg.max_epochs
+    cfg.dropout, cfg.patience, cfg.speed_aug = 0.0, cfg.max_epochs, False
     print(f"Overfit check: training and scoring on the same {len(picked)} clips (no dropout)")
     model, stats, info = train(picked, picked, cfg)
     preds = predict(model, picked, stats)
@@ -236,6 +247,9 @@ def write_markdown(res, path):
          "- Every row is a **held-out signer**: the model never trained on that person's clips.",
          "- Inputs per frame: 64 hand-shape features + hand-present flag"
          + (" + 14 motion features (wrist position and speed, fingertip speeds; motion.py)." if res["config"].get("motion") else "."),
+         (f"- Speed augmentation: each training clip played at a random {res['config']['speed_min']}x to "
+          f"{res['config']['speed_max']}x speed every epoch (never the validation or test clips)."
+          if res["config"].get("speed_aug") else "- No speed augmentation."),
          f"- Clips resampled to {res['config']['fps']} fps. Model: 2-layer bidirectional LSTM ({res['config']['hidden']} units), "
          "greedy CTC decoding.",
          "- Early stopping on a validation set taken from the two training signers only.",
@@ -306,6 +320,10 @@ def parse_args(argv=None):
     p.add_argument("--holdout-words", default="",
                    help="comma-separated words to leave out of training (new-words check), e.g. CAT,DOG")
     p.add_argument("--name", default="lstm_ctc", help="results file name (results/<name>.md and .json)")
+    p.add_argument("--speed-aug", action="store_true",
+                   help="speed augmentation: play each training clip at a random speed every epoch (Step 5)")
+    p.add_argument("--speed-min", type=float, default=0.7, help="slowest speed for --speed-aug (default 0.7x)")
+    p.add_argument("--speed-max", type=float, default=1.4, help="fastest speed for --speed-aug (default 1.4x)")
     p.add_argument("--motion", action="store_true",
                    help="add the 14 motion features from motion.py to every frame (Step 5)")
     p.add_argument("--save", action="store_true",

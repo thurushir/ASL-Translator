@@ -112,4 +112,28 @@ with tempfile.TemporaryDirectory() as root:
                              for t in range(len(slow.mask)) if slow.mask[t]), True))
     results.append(check("no-hand frames keep NaN landmarks", bool(np.isnan(gappy.landmarks[~gappy.mask]).all()), True))
 
+    # --- Step 5: speed augmentation (same clip signed faster or slower, still 15 fps) ---
+    quick = D.change_speed(same, 1.5)  # same: 31 frames, 2 s, 15 fps
+    results.append(check("1.5x faster: 2 s becomes 1.33 s = 21 frames", len(quick.mask), 21))
+    results.append(check("0.5x (twice as slow): 2 s becomes 4 s = 61 frames", len(D.change_speed(same, 0.5).mask), 61))
+    results.append(check("still 15 fps after a speed change",
+                         (quick.fps, bool(np.allclose(np.diff(quick.timestamps), 1 / 15))), (15.0, True)))
+    results.append(check("speed 1.0 changes nothing", bool(np.array_equal(D.change_speed(same, 1.0).features, same.features)), True))
+    results.append(check("sped-up frames are real original frames, in order",
+                         [next(i for i, g in enumerate(same.features) if np.array_equal(f, g)) for f in quick.features]
+                         == sorted(next(i for i, g in enumerate(same.features) if np.array_equal(f, g))
+                                   for f in quick.features), True))
+    results.append(check("word and letters unchanged", (quick.word, quick.labels), (same.word, same.labels)))
+    results.append(check("landmarks follow the frames",
+                         all(np.allclose(F.landmarks_to_features(quick.landmarks[t]), quick.features[t])
+                             for t in range(len(quick.mask)) if quick.mask[t]), True))
+    results.append(check("mask follows the frames",
+                         D.change_speed(gappy, 2.0).mask.tolist() == gappy.mask[::2].tolist(), True))
+    results.append(check("original clip not changed", len(same.mask), 31))
+    try:
+        D.change_speed(same, 0)
+        results.append(check("speed 0 raises an error", "no error", "ValueError"))
+    except ValueError:
+        results.append(check("speed 0 raises an error", "ValueError", "ValueError"))
+
 print("\nPASS: all dataset tests passed" if all(results) else "\nFAIL: some dataset tests failed")

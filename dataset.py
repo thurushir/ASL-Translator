@@ -6,6 +6,7 @@ Every model and evaluation script should read clips through here so they all see
   signer_splits(clips) -> one Fold per signer: train on the other signers, test on that one
   encode / decode     -> "HELLO" <-> [8, 5, 12, 12, 15]  (A=1 ... Z=26; 0 is the CTC blank)
   resample(clip, 15)  -> same clip at 15 fps (nearest frame), so every signer's letters last as many frames
+  change_speed(clip, 1.3) -> same clip signed 1.3x faster, same fps (speed augmentation, Step 5)
 
 Run: python dataset.py   (prints a summary of the real data and the folds)
 """
@@ -89,9 +90,33 @@ def resample(clip, fps=15.0):
     if len(ts) < 2 or ts[-1] <= ts[0]:
         return clip
     new_ts = np.arange(ts[0], ts[-1] + 1e-9, 1 / fps)
-    right = np.clip(np.searchsorted(ts, new_ts), 1, len(ts) - 1)
+    return _take_frames(clip, _nearest(ts, new_ts), new_ts, fps)
+
+
+def change_speed(clip, factor):
+    """
+    Speed augmentation (Step 5): the same clip as if signed `factor` times faster (1.5 = faster, 0.7 = slower),
+    at the same frame rate. Like resample(), every new frame is the nearest original frame. Labels unchanged.
+    Use on training clips only, after resample(), so the frame rate is already the same for everyone.
+    """
+    if factor <= 0:
+        raise ValueError(f"speed factor must be positive, got {factor}")
+    ts = clip.timestamps
+    if len(ts) < 2 or ts[-1] <= ts[0]:
+        return clip
+    n = int(round((ts[-1] - ts[0]) / factor * clip.fps)) + 1
+    steps = np.arange(n) / clip.fps
+    return _take_frames(clip, _nearest(ts, ts[0] + steps * factor), ts[0] + steps, clip.fps)
+
+
+def _nearest(ts, times):
+    """Index of the original frame nearest to each of times (ts sorted)."""
+    right = np.clip(np.searchsorted(ts, times), 1, len(ts) - 1)
     left = right - 1
-    idx = np.where(new_ts - ts[left] <= ts[right] - new_ts, left, right)
+    return np.where(times - ts[left] <= ts[right] - times, left, right)
+
+
+def _take_frames(clip, idx, new_ts, fps):
     return replace(clip, features=clip.features[idx], mask=clip.mask[idx], timestamps=new_ts, fps=fps,
                    landmarks=None if clip.landmarks is None else clip.landmarks[idx])
 
