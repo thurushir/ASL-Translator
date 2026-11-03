@@ -17,6 +17,8 @@ data_seq/
 *.pkl
 *.npy
 *.npz
+*.pt
+models/
 
 # Media / results
 *.png
@@ -27,6 +29,7 @@ data_seq/
 !baseline_results.json
 !results/*.json
 !confusion_matrix.png
+!results/*.png
 *.gif
 !FINAL_DEMO.gif
 !DEMO.gif
