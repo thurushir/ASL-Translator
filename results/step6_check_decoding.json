@@ -1,0 +1,350 @@
+{
+  "run": "step6_check",
+  "n_clips": 495,
+  "signers": [
+    "anna",
+    "saaya",
+    "thurushi"
+  ],
+  "beam_width": 10,
+  "scores": {
+    "greedy": {
+      "anna": {
+        "cer": 0.2765957446808511,
+        "word_acc": 0.20606060606060606,
+        "letter_recall": 0.8581560283687943,
+        "n": 165
+      },
+      "saaya": {
+        "cer": 0.09361702127659574,
+        "word_acc": 0.6606060606060606,
+        "letter_recall": 0.9219858156028369,
+        "n": 165
+      },
+      "thurushi": {
+        "cer": 0.24964539007092199,
+        "word_acc": 0.3393939393939394,
+        "letter_recall": 0.7574468085106383,
+        "n": 165
+      },
+      "all": {
+        "cer": 0.2066193853427896,
+        "word_acc": 0.402020202020202,
+        "letter_recall": 0.8458628841607565,
+        "n": 495
+      }
+    },
+    "beam (width 10)": {
+      "anna": {
+        "cer": 0.2851063829787234,
+        "word_acc": 0.19393939393939394,
+        "letter_recall": 0.8624113475177305,
+        "n": 165
+      },
+      "saaya": {
+        "cer": 0.09078014184397164,
+        "word_acc": 0.6666666666666666,
+        "letter_recall": 0.9361702127659575,
+        "n": 165
+      },
+      "thurushi": {
+        "cer": 0.24680851063829787,
+        "word_acc": 0.3333333333333333,
+        "letter_recall": 0.7631205673758865,
+        "n": 165
+      },
+      "all": {
+        "cer": 0.20756501182033096,
+        "word_acc": 0.397979797979798,
+        "letter_recall": 0.8539007092198582,
+        "n": 495
+      }
+    },
+    "word list (55 words)": {
+      "anna": {
+        "cer": 0.014184397163120567,
+        "word_acc": 0.9757575757575757,
+        "letter_recall": 0.9900709219858156,
+        "n": 165
+      },
+      "saaya": {
+        "cer": 0.005673758865248227,
+        "word_acc": 0.9939393939393939,
+        "letter_recall": 0.9957446808510638,
+        "n": 165
+      },
+      "thurushi": {
+        "cer": 0.06950354609929078,
+        "word_acc": 0.9030303030303031,
+        "letter_recall": 0.9304964539007092,
+        "n": 165
+      },
+      "all": {
+        "cer": 0.029787234042553193,
+        "word_acc": 0.9575757575757575,
+        "letter_recall": 0.9721040189125295,
+        "n": 495
+      }
+    }
+  },
+  "beam_changed": [
+    [
+      "saaya",
+      "APPLE",
+      "ALE",
+      "AHLE"
+    ],
+    [
+      "saaya",
+      "APPLE",
+      "ALE",
+      "APLE"
+    ],
+    [
+      "saaya",
+      "APPLE",
+      "APLEE",
+      "APPLEE"
+    ],
+    [
+      "anna",
+      "BOX",
+      "BOOX",
+      "BBOOX"
+    ],
+    [
+      "thurushi",
+      "COFFEE",
+      "COFE",
+      "COFFE"
+    ],
+    [
+      "thurushi",
+      "DOG",
+      "DEG",
+      "DDEG"
+    ],
+    [
+      "saaya",
+      "EGG",
+      "EG",
+      "EGG"
+    ],
+    [
+      "saaya",
+      "EGG",
+      "EG",
+      "EGG"
+    ],
+    [
+      "anna",
+      "EXTRA",
+      "FXTRA",
+      "FEXTRA"
+    ],
+    [
+      "saaya",
+      "EXTRA",
+      "EXARA",
+      "EXATRA"
+    ],
+    [
+      "saaya",
+      "GOOD",
+      "GOD",
+      "GOOD"
+    ],
+    [
+      "anna",
+      "HI",
+      "HI",
+      "HIZ"
+    ],
+    [
+      "anna",
+      "JAZZ",
+      "FIAZZZZZIL",
+      "FIAZZZZZII"
+    ],
+    [
+      "anna",
+      "JOB",
+      "FIOB",
+      "FJOB"
+    ],
+    [
+      "anna",
+      "JUICE",
+      "FIUICE",
+      "FIUICEE"
+    ],
+    [
+      "anna",
+      "LETTER",
+      "FLETTER",
+      "FLLETTER"
+    ],
+    [
+      "anna",
+      "LETTER",
+      "FLEER",
+      "FLETER"
+    ],
+    [
+      "saaya",
+      "LETTER",
+      "LETTERK",
+      "LEETTERK"
+    ],
+    [
+      "thurushi",
+      "LETTER",
+      "LENR",
+      "LENER"
+    ],
+    [
+      "thurushi",
+      "LETTER",
+      "LETR",
+      "LETRR"
+    ],
+    [
+      "thurushi",
+      "LOVE",
+      "LOVE",
+      "LORVE"
+    ],
+    [
+      "anna",
+      "MILK",
+      "FILK",
+      "FMILK"
+    ],
+    [
+      "saaya",
+      "NAME",
+      "NAME",
+      "TNAME"
+    ],
+    [
+      "saaya",
+      "PIZZA",
+      "IZZA",
+      "HIZZA"
+    ],
+    [
+      "saaya",
+      "PIZZA",
+      "PIZZZA",
+      "PIZZZZA"
+    ],
+    [
+      "saaya",
+      "PLEASE",
+      "PLEASE",
+      "PPLEASE"
+    ],
+    [
+      "saaya",
+      "PLEASE",
+      "PLEASE",
+      "PPLEASE"
+    ],
+    [
+      "thurushi",
+      "PLEASE",
+      "PLESE",
+      "PLESSE"
+    ],
+    [
+      "thurushi",
+      "PLEASE",
+      "PLES",
+      "PLESS"
+    ],
+    [
+      "thurushi",
+      "PLEASE",
+      "PLESE",
+      "PLESSE"
+    ],
+    [
+      "saaya",
+      "QUEEN",
+      "KEN",
+      "PKEN"
+    ],
+    [
+      "saaya",
+      "QUIET",
+      "QUIET",
+      "QUIETT"
+    ],
+    [
+      "anna",
+      "SCHOOL",
+      "SCHOOL",
+      "SSCHOOL"
+    ],
+    [
+      "saaya",
+      "SCHOOL",
+      "SCHOL",
+      "SCHOOL"
+    ],
+    [
+      "saaya",
+      "SQUARE",
+      "SGAE",
+      "SGHAE"
+    ],
+    [
+      "thurushi",
+      "TAXI",
+      "T",
+      "TI"
+    ],
+    [
+      "thurushi",
+      "WALK",
+      "WLX",
+      "WALX"
+    ],
+    [
+      "anna",
+      "WEB",
+      "FWEB",
+      "FEB"
+    ],
+    [
+      "anna",
+      "WEEKEND",
+      "WEEKENC",
+      "WEEKENCOO"
+    ],
+    [
+      "saaya",
+      "WEEKEND",
+      "WEKENK",
+      "WEEKENK"
+    ],
+    [
+      "thurushi",
+      "WEEKEND",
+      "WEED",
+      "WEXED"
+    ],
+    [
+      "anna",
+      "ZERO",
+      "FAZZERO",
+      "FAZZEROO"
+    ],
+    [
+      "saaya",
+      "ZOO",
+      "ZO",
+      "ZOO"
+    ]
+  ]
+}
