@@ -179,9 +179,65 @@ Full table: `results/lstm_ctc_3seeds.md`. Per-letter tables for each run: `resul
 
 **Watch for:** with only two training signers and 55 words, the model can memorize the words instead of learning letters. Compare training-signer scores with held-out scores.
 
+## Step 5: experiments and evaluation (done, Saaya)
+
+Full write-up in Saaya's *Step 5 Results*; numbers in `results/step5_*_3seeds.md` and `results/step5_*_eval.md`.
+
+| File / option | What it does |
+|---|---|
+| `train_ctc.py --save` | Saves each fold's model to `models/<name>_<signer>.pt` (ignored by git); every run stores each clip's prediction. |
+| `evaluate.py <name>` | CER by word length and signing speed, letter confusion matrix image, inference time, from saved predictions. |
+| `--speed-aug` (`dataset.change_speed`) | Plays each training clip at a random 0.7x to 1.4x speed every epoch. **Best model.** |
+| `--motion` (`motion.py`) | 14 motion features (wrist position and velocity, fingertip velocities). Worse; off by default. |
+| `--model transformer` | Transformer encoder instead of the LSTM. Worse; LSTM kept. |
+
+| Setup (held-out signer, mean of 3 runs) | CER | Word acc |
+|---|---|---|
+| Baseline B | 36.6% | 18.4% |
+| LSTM | 27.2% | 30.1% |
+| **LSTM + speed augmentation (best)** | **23.5%** | **35.0%** |
+| LSTM + motion features | 31.4% | |
+| Transformer + speed augmentation | 32.3% | |
+
+Speed augmentation helped most on thurushi's fold (35.9% -> 27.9%), the fastest signer. About 2 ms per word, so real time is realistic.
+
+## Step 6a: final model, live app, better decoding (done, Thurushi)
+
+| File / option | What it does |
+|---|---|
+| `train_ctc.py --final` | One model trained on **all three** signers (validation: 15% of each signer, for stopping only) -> `models/<name>_final.pt` + `results/<name>_final.json`. No held-out score: outside signers are its test. Refuses `--holdout-words` / `--overfit`. |
+| `live_ctc.py` | `WordBuilder`: webcam frames -> word clips (a word ends after 1 s without a hand; no-hand frames before/after the hand are trimmed). `Recognizer`: clip -> resample -> inputs exactly as in training -> per-frame log-probs. `python live_ctc.py --replay <run>` replays every recorded clip through the live path. |
+| `decode.py` | `beam_search` (CTC prefix beam search, width 10), `lexicon_decode` (most likely of a word list, exact CTC probability), `confidence`. `python decode.py --run <run>` compares greedy / beam / word list on held-out signers. |
+| `predict_live_ctc.py` | The live app for the temporal model: word, confidence, next 2 guesses, optional closest practice word (`w`), on-screen guide (`h`). `predict_live.py` (static) unchanged. |
+| `test_live_ctc.py`, `test_decode.py`, `test_predict_live_ctc.py` | New tests; `test_train_ctc.py` gained `--final` checks. |
+
+### How to verify
+```bash
+python test_live_ctc.py; python test_decode.py; python test_predict_live_ctc.py; python test_train_ctc.py   # PASS each
+python train_ctc.py --speed-aug --save --name step6_check   # seed 0: all signers CER 20.7% (= Saaya's), saves 3 fold models
+python live_ctc.py --replay step6_check                     # 484/495 clips exactly the offline prediction (the 11 others: anna clips with no hand at the start/end, trimmed live)
+python decode.py --run step6_check                          # greedy 20.7%, beam 20.8%, word list 3.0% CER
+python train_ctc.py --final --speed-aug --name step6        # also --seed 1/2 with --name step6_seed1 / step6_seed2
+python predict_live_ctc.py                                  # live, with models/step6_final.pt
+```
+
+### Results
+- **Motion + speed augmentation, 3 runs:** 26.7% CER vs 23.5% without motion, so worse again. Final model: speed augmentation only
+  (decision rule fixed in advance). `results/step6_motion_speed_3seeds.md`.
+- **New-words check with speed augmentation, 3 runs:** held-out signer 22.9% CER on words seen in training vs **32.1% on new
+  words** (Step 4: 27.9% vs 37.8%). Better, but the model still partly memorizes whole words. `results/step6_speed_new_words_3seeds.md`.
+- **Decoding** (`results/step6_check_decoding.md`): beam search = greedy (20.8% vs 20.7%); it fixes some double letters and adds
+  others. The 55-word list gives 3.0% CER, but only because every test word is on the list: it flatters the model and can't spell new words.
+- **Final models:** `models/step6_final.pt`, `step6_seed1_final.pt`, `step6_seed2_final.pt` (validation CER 0.3% to 1.9%, same signers, not a fair score).
+- **Live tests** (`results/live_test_thurushi.md`): live matches offline (about 29% CER on list words). Double letters, words not on the
+  list (0 fully right), K/X, Q/P, I/J, fast signing; confidence can be confidently wrong on new words.
+
 ## Decisions carried forward
 - **Baseline is frozen.** Do not tune the static model; B is the reference.
-- **S waits.** Check whether the temporal model fixes it first; then try thumb-position features (saaya's S→M).
-- **Kaggle data waits.** Add the Google ASL Fingerspelling dataset only if the LSTM scores much worse on the held-out signer than on its training signers.
-- **Step 5 options, chosen from Step 4's numbers:** Kaggle pretraining (held-out signer much worse), thumb features (S still poor), velocity features or augmentation (J, Z or double letters still poor).
+- **Best model:** LSTM + speed augmentation. Motion features and the Transformer stay in the code, off, as measured negative results.
+- **Every setting is fixed before it is tested**, chosen with validation data from the training signers, never with a held-out or outside signer's scores. Judge changes on 3 runs.
+- **Kaggle is now the top next step (Anna, Step 6b)**: new words and new signers are the biggest gaps. It must happen before the final models are frozen and scored on outside signers.
+- **Outside signers are scored once**, on the final models, after everything else.
+- **Word-list decoding is reported next to plain decoding, never instead of it.**
+- Words with J or Z are reported separately. Never commit `data_seq/`, outside clips, `data/`, `model.pickle` or `models/`; do commit `results/`.
 - **Reports are written by the team.** AI-generated code is fine but must be disclosed.

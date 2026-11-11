@@ -40,9 +40,16 @@ ASL-Translator/
 ├── model_ctc.py # LSTM + CTC model and greedy decoder
 ├── train_ctc.py # Trains and scores the LSTM per held-out signer
 ├── compare_runs.py # Averages several training runs (seeds) into one table
-├── results/ # Baseline and LSTM scores (baseline.md, lstm_ctc*.md, .json)
+├── motion.py # Optional motion features (Step 5; off by default)
+├── evaluate.py # CER by word length/speed, confusion matrix, timing
+├── live_ctc.py # Live word cutting + model prediction (no webcam code)
+├── decode.py # Beam search, word-list decoding, confidence
+├── predict_live_ctc.py # Live app for the temporal model (LSTM + CTC)
+├── results/ # All scores (baseline, lstm_ctc*, step5_*, step6_*, live tests)
 ├── test_dataset.py, test_metrics.py, test_eval_baseline.py # Tests for the above
 ├── test_model_ctc.py, test_train_ctc.py, test_compare_runs.py # Tests for the LSTM code
+├── test_motion.py, test_evaluate.py # Tests for Step 5
+├── test_live_ctc.py, test_decode.py, test_predict_live_ctc.py # Tests for the live app and decoding
 ├── check_features.py # Verifies feature extraction matches the original
 ├── test_transcript.py # Tests the on-screen text rules
 ├── baseline_results.json # Static model accuracy (reference baseline)
