@@ -15,6 +15,9 @@ validation set taken from those two signers only, then score the held-out signer
                                     -> trains on each clip at a random 0.7x-1.4x speed every epoch
   python train_ctc.py --model transformer --speed-aug --name step5_tf
                                     -> a Transformer encoder instead of the LSTM (same inputs, CTC and decoder)
+  python train_ctc.py --final --speed-aug --name step6
+                                    -> one model trained on ALL signers -> models/step6_final.pt (Step 6a: live app,
+                                       outside-signer test). No held-out score: the outside signers are its test.
 Every run stores each held-out clip's prediction and inference time in the results JSON ("predictions");
 python evaluate.py <name> turns them into the proposal's evaluation (by word length, speed, confusions, timing).
 Tests: python test_train_ctc.py
@@ -46,6 +49,15 @@ def split_validation(clips, frac=0.15, seed=0):
     order = np.random.default_rng(seed).permutation(len(clips))
     n_val = int(round(frac * len(clips)))
     return [clips[i] for i in order[n_val:]], [clips[i] for i in order[:n_val]]
+
+
+def final_split(clips, frac=0.15, seed=0):
+    """(fit, val) for --final: frac of EACH signer's clips for validation, so every signer is in it."""
+    fit, val = [], []
+    for s in D.signers(clips):
+        f, v = split_validation([c for c in clips if c.signer == s], frac, seed)
+        fit, val = fit + f, val + v
+    return fit, val
 
 
 def split_words(clips, words):
@@ -209,9 +221,7 @@ def run_folds(clips, cfg):
         if cfg.save:
             os.makedirs(MODELS_DIR, exist_ok=True)
             info["model_file"] = os.path.join(MODELS_DIR, f"{cfg.name}_{fold.test_signer}.pt")
-            MC.save_model(info["model_file"], model, stats,
-                          {"model": cfg.model, "hidden": cfg.hidden, "layers": cfg.layers, "dropout": cfg.dropout, "fps": cfg.fps,
-                           "input_size": len(stats[0]) + 1, "motion": cfg.motion},
+            MC.save_model(info["model_file"], model, stats, model_config(cfg, stats),
                           test_signer=fold.test_signer, seed=cfg.seed,
                           train_signers=[s for s in signers if s != fold.test_signer])
         train_scores = summarize(train_pool, predict(model, train_pool, stats))
@@ -241,6 +251,43 @@ def run_folds(clips, cfg):
     scores["all"] = summarize(clips, preds)
     new_words = {g: brief(cs, ps) for g, (cs, ps) in new_words.items()} if held_words else None
     return preds, scores, folds, new_words, records
+
+
+def model_config(cfg, stats):
+    """The settings saved with a model, so load_model() can rebuild it."""
+    return {"model": cfg.model, "hidden": cfg.hidden, "layers": cfg.layers, "dropout": cfg.dropout, "fps": cfg.fps,
+            "input_size": len(stats[0]) + 1, "motion": cfg.motion}
+
+
+def run_final(clips, cfg, log=print):
+    """
+    --final (Step 6a): one model trained on every signer, for the live app and the outside-signer test.
+    There is no held-out signer, so no fair score here: validation (frac of each signer) only decides when to
+    stop, and the training-clip scores below only show it learned. Outside signers are this model's test.
+    Always saves to models/<name>_final.pt and writes results/<name>_final.json.
+    """
+    start = time.time()
+    signers = D.signers(clips)
+    fit, val = final_split(clips, cfg.val_frac, cfg.seed)
+    log(f"Final model: train on {len(fit)} clips, validate on {len(val)} (all of {', '.join(signers)})")
+    model, stats, info = train(fit, val, cfg, log=log)
+    os.makedirs(MODELS_DIR, exist_ok=True)
+    info["model_file"] = os.path.join(MODELS_DIR, f"{cfg.name}_final.pt")
+    MC.save_model(info["model_file"], model, stats, model_config(cfg, stats),
+                  test_signer=None, seed=cfg.seed, train_signers=signers)
+    info["predictions"] = predict(model, clips, stats)
+    fit_scores = M.score([c.word for c in fit], predict(model, fit, stats))
+    info.update(seconds=round(time.time() - start), train_signers=signers,
+                fit_cer=fit_scores["cer"], fit_word_acc=fit_scores["word_acc"])
+    res = {"date": datetime.date.today().isoformat(), "n_clips": len(clips), "signers": signers,
+           "config": vars(cfg), "note": "No held-out score: trained on every signer. Outside signers are its test.",
+           "final": {k: v for k, v in info.items() if k not in ("history", "predictions")}, "history": info["history"]}
+    os.makedirs(RESULTS_DIR, exist_ok=True)
+    with open(os.path.join(RESULTS_DIR, f"{cfg.name}_final.json"), "w") as f:
+        json.dump(res, f, indent=2, default=str)
+    log(f"Saved {info['model_file']}  (best epoch {info['best_epoch']} of {info['epochs_run']}, "
+        f"validation CER {pct(info['best_val_cer'])}, training-clip CER {pct(info['fit_cer'])}; {info['seconds']}s)")
+    return info
 
 
 def model_label(config):
@@ -346,7 +393,11 @@ def parse_args(argv=None):
                    help="add the 14 motion features from motion.py to every frame (Step 5)")
     p.add_argument("--save", action="store_true",
                    help="also save each fold's trained model to models/<name>_<signer>.pt")
+    p.add_argument("--final", action="store_true",
+                   help="train one model on ALL signers and save models/<name>_final.pt (Step 6a; no held-out score)")
     cfg = p.parse_args(argv)
+    if cfg.final and (cfg.holdout_words or cfg.overfit):
+        p.error("--final trains on everything: it can't be combined with --holdout-words or --overfit")
     # Each model's usual settings, fixed before any results (never tuned on the held-out signer).
     defaults = {"lstm": {"layers": 2, "dropout": 0.3, "lr": 1e-3},
                 "transformer": {"layers": 3, "dropout": 0.1, "lr": 5e-4}}[cfg.model]
@@ -364,6 +415,9 @@ def main():
     print(f"Loaded {len(clips)} clips, resampled to {cfg.fps:g} fps")
     if cfg.overfit:
         overfit_check(clips, cfg)
+        return
+    if cfg.final:
+        run_final(clips, cfg)
         return
 
     unknown = set(cfg.holdout_words) - {c.word for c in clips}

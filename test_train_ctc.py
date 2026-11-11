@@ -113,4 +113,39 @@ for _ in range(30):
     tf_last = T.train_step(tf_model, tf_opt, x, lengths, targets, target_lengths)
 results.append(check("transformer: CTC loss goes down after 30 steps on one batch", tf_last < tf_first, True))
 
+# --- Step 6a: --final, one model trained on all three signers ---
+everyone = [fake_clip(w, s, 6, n) for w in ["CAT", "DOG", "HI", "NO", "YES"] for s in ["anna", "saaya", "thurushi"]
+            for n in range(3)]
+fit, val = T.final_split(everyone, frac=0.15, seed=0)
+results.append(check("final: fit and validation don't overlap", bool({c.path for c in fit} & {c.path for c in val}), False))
+results.append(check("final: fit + validation = every clip",
+                     sorted(c.path for c in fit + val) == sorted(c.path for c in everyone), True))
+results.append(check("final: validation has all three signers", sorted({c.signer for c in val}), ["anna", "saaya", "thurushi"]))
+results.append(check("final: about 15% of each signer is validation",
+                     [sum(c.signer == s for c in val) for s in ["anna", "saaya", "thurushi"]], [2, 2, 2]))
+fit2, val2 = T.final_split(everyone, frac=0.15, seed=0)
+results.append(check("final: same seed gives the same split", [c.path for c in val2], [c.path for c in val]))
+
+for bad in (["--final", "--holdout-words", "CAT"], ["--final", "--overfit", "10"]):
+    try:
+        T.parse_args(bad)
+        results.append(check(f"{' '.join(bad)} is refused", "accepted", "SystemExit"))
+    except SystemExit:
+        results.append(check(f"{' '.join(bad)} is refused", "SystemExit", "SystemExit"))
+
+import os
+import tempfile
+cfg = T.parse_args(["--final", "--max-epochs", "2", "--hidden", "8", "--name", "unit"])
+with tempfile.TemporaryDirectory() as tmp:
+    T.MODELS_DIR, T.RESULTS_DIR = tmp, tmp
+    info = T.run_final(everyone, cfg, log=lambda *a: None)
+    path = os.path.join(tmp, "unit_final.pt")
+    results.append(check("final: model saved to models/<name>_final.pt", os.path.exists(path), True))
+    model2, stats2, saved = MC.load_model(path)
+    results.append(check("final: saved as trained on all three signers, no test signer",
+                         (saved.get("train_signers"), saved.get("test_signer")), (["anna", "saaya", "thurushi"], None)))
+    results.append(check("final: reloaded model gives the same predictions",
+                         T.predict(model2, everyone, stats2) == info["predictions"], True))
+    results.append(check("final: results file written", os.path.exists(os.path.join(tmp, "unit_final.json")), True))
+
 print("\nPASS: all train_ctc tests passed" if all(results) else "\nFAIL: some train_ctc tests failed")
