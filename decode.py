@@ -1,5 +1,5 @@
 """
-Better decoding for the CTC model's output (Step 6a). Input everywhere: (frames, 27) log-probabilities,
+Better decoding for the CTC model's output (Step 6). Input everywhere: (frames, 27) log-probabilities,
 e.g. from live_ctc.Recognizer.log_probs(clip). Greedy decoding (model_ctc.greedy_decode) takes the single best
 output per frame; these consider whole words instead.
 

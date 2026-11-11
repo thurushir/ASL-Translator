@@ -113,7 +113,7 @@ for _ in range(30):
     tf_last = T.train_step(tf_model, tf_opt, x, lengths, targets, target_lengths)
 results.append(check("transformer: CTC loss goes down after 30 steps on one batch", tf_last < tf_first, True))
 
-# --- Step 6a: --final, one model trained on all three signers ---
+# --- Step 6: --final, one model trained on all three signers ---
 everyone = [fake_clip(w, s, 6, n) for w in ["CAT", "DOG", "HI", "NO", "YES"] for s in ["anna", "saaya", "thurushi"]
             for n in range(3)]
 fit, val = T.final_split(everyone, frac=0.15, seed=0)

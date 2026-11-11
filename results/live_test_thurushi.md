@@ -1,4 +1,4 @@
-# Live webcam tests (Thurushi, Step 6a, 2026-11-11)
+# Live webcam tests (Thurushi, Step 6, 2026-11-11)
 
 `predict_live_ctc.py` on a MacBook webcam, signed by Thurushi. Small, informal tests (one person, a few tries per
 word), so the numbers are rough; they show whether the live app behaves like the offline evaluation, and where it fails.

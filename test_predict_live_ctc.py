@@ -87,7 +87,7 @@ feed(s, "H" * 20 + "." * 40 + "H" * 12 + "." * 40)
 results.append(check("on_word is told each word and its frame count (for the terminal log)",
                      heard, [("HI", 20), ("YO", 12)]))
 
-# --- Step 6a Part 6: beam search, confidence, next guesses, optional word list ---
+# --- Step 6 Part 6: beam search, confidence, next guesses, optional word list ---
 s = LiveSession(FakeRecognizer(["CAT"]))
 feed(s, "H" * 20 + "." * 40)
 results.append(check("a clear word gets high confidence (> 0.9)", s.confidence > 0.9, True))

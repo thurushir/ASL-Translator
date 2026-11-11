@@ -201,7 +201,7 @@ Full write-up in Saaya's *Step 5 Results*; numbers in `results/step5_*_3seeds.md
 
 Speed augmentation helped most on thurushi's fold (35.9% -> 27.9%), the fastest signer. About 2 ms per word, so real time is realistic.
 
-## Step 6a: final model, live app, better decoding (done, Thurushi)
+## Step 6: final model, live app, better decoding (done, Thurushi)
 
 | File / option | What it does |
 |---|---|
@@ -236,7 +236,7 @@ python predict_live_ctc.py                                  # live, with models/
 - **Baseline is frozen.** Do not tune the static model; B is the reference.
 - **Best model:** LSTM + speed augmentation. Motion features and the Transformer stay in the code, off, as measured negative results.
 - **Every setting is fixed before it is tested**, chosen with validation data from the training signers, never with a held-out or outside signer's scores. Judge changes on 3 runs.
-- **Kaggle is now the top next step (Anna, Step 6b)**: new words and new signers are the biggest gaps. It must happen before the final models are frozen and scored on outside signers.
+- **Kaggle is now the top next step (Anna, Step 7)**: new words and new signers are the biggest gaps. It must happen before the final models are frozen and scored on outside signers.
 - **Outside signers are scored once**, on the final models, after everything else.
 - **Word-list decoding is reported next to plain decoding, never instead of it.**
 - Words with J or Z are reported separately. Never commit `data_seq/`, outside clips, `data/`, `model.pickle` or `models/`; do commit `results/`.

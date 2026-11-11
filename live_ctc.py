@@ -1,5 +1,5 @@
 """
-The live side of the temporal model (Step 6a): turns a stream of webcam frames into words, and predicts each
+The live side of the temporal model (Step 6): turns a stream of webcam frames into words, and predicts each
 word exactly the way recorded clips are predicted offline. No webcam code here, so it can be tested by replaying
 recorded clips (test_live_ctc.py); predict_live_ctc.py connects it to the camera.
 

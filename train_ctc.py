@@ -16,7 +16,7 @@ validation set taken from those two signers only, then score the held-out signer
   python train_ctc.py --model transformer --speed-aug --name step5_tf
                                     -> a Transformer encoder instead of the LSTM (same inputs, CTC and decoder)
   python train_ctc.py --final --speed-aug --name step6
-                                    -> one model trained on ALL signers -> models/step6_final.pt (Step 6a: live app,
+                                    -> one model trained on ALL signers -> models/step6_final.pt (Step 6: live app,
                                        outside-signer test). No held-out score: the outside signers are its test.
 Every run stores each held-out clip's prediction and inference time in the results JSON ("predictions");
 python evaluate.py <name> turns them into the proposal's evaluation (by word length, speed, confusions, timing).
@@ -261,7 +261,7 @@ def model_config(cfg, stats):
 
 def run_final(clips, cfg, log=print):
     """
-    --final (Step 6a): one model trained on every signer, for the live app and the outside-signer test.
+    --final (Step 6): one model trained on every signer, for the live app and the outside-signer test.
     There is no held-out signer, so no fair score here: validation (frac of each signer) only decides when to
     stop, and the training-clip scores below only show it learned. Outside signers are this model's test.
     Always saves to models/<name>_final.pt and writes results/<name>_final.json.
@@ -394,7 +394,7 @@ def parse_args(argv=None):
     p.add_argument("--save", action="store_true",
                    help="also save each fold's trained model to models/<name>_<signer>.pt")
     p.add_argument("--final", action="store_true",
-                   help="train one model on ALL signers and save models/<name>_final.pt (Step 6a; no held-out score)")
+                   help="train one model on ALL signers and save models/<name>_final.pt (Step 6; no held-out score)")
     cfg = p.parse_args(argv)
     if cfg.final and (cfg.holdout_words or cfg.overfit):
         p.error("--final trains on everything: it can't be combined with --holdout-words or --overfit")
