@@ -42,3 +42,6 @@ Notebooks/.ipynb_checkpoints/
 *.log
 *.tmp
 !model.pickle
+
+# Kaggle ASL fingerspelling data (large, downloaded separately; Step 7)
+data_kaggle/

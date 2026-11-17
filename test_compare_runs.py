@@ -53,4 +53,11 @@ try:
 except ValueError:
     results.append(check("runs with different signers are refused", "ValueError", "ValueError"))
 
+# --- Step 7: Kaggle unseen-signer runs have no baseline B rows ---
+kt = [{"signers": ["kaggle_unseen"], "scores": {s: {"cer": c, "word_acc": 0.1, "letter_recall": 0.7, "cer_no_jz": c}
+       for s in ("kaggle_unseen", "all")}} for c in (0.4, 0.5, 0.6)]
+kt_table = C.markdown(kt, ["a", "b", "c"])
+results.append(check("runs without baseline rows still average", "| LSTM+CTC | kaggle_unseen | 40.0% / 50.0% / 60.0% | **50.0%** |" in kt_table, True))
+results.append(check("no baseline rows invented", "Baseline B" in kt_table, False))
+
 print("\nPASS: all compare_runs tests passed" if all(results) else "\nFAIL: some compare_runs tests failed")

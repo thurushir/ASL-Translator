@@ -18,6 +18,12 @@ validation set taken from those two signers only, then score the held-out signer
   python train_ctc.py --final --speed-aug --name step6
                                     -> one model trained on ALL signers -> models/step6_final.pt (Step 6: live app,
                                        outside-signer test). No held-out score: the outside signers are its test.
+  python train_ctc.py --pretrain-kaggle --speed-aug --name step7_kaggle
+                                    -> each fold first trains on the Kaggle clips (kaggle_data.py), then on ours
+                                       (Step 7). With --overfit 10 it checks the Kaggle clips can be learned.
+  python train_ctc.py --kaggle-test --speed-aug --name step7_kt
+                                    -> one model on all our clips + 70% of the Kaggle signers, scored on the other
+                                       30% (never seen). --no-kaggle-train: same test, trained on ours only.
 Every run stores each held-out clip's prediction and inference time in the results JSON ("predictions");
 python evaluate.py <name> turns them into the proposal's evaluation (by word length, speed, confusions, timing).
 Tests: python test_train_ctc.py
@@ -140,20 +146,25 @@ def evaluate(model, clips, stats):
     return M.score([c.word for c in clips], predict(model, clips, stats))["cer"], loss
 
 
-def train(fit, val, cfg, log=print):
+def train(fit, val, cfg, log=print, init=None, stats=None):
     """
     Trains on fit; after every epoch scores val and keeps the best model.
     Better = lower val CER, or the same CER with lower val loss (early on CTC outputs only blanks, so CER
     stays at 100% for a while even though the model is learning; the loss still shows that progress).
     Stops after cfg.patience epochs without improvement.
+    init: starting weights (fine-tuning after pretraining); stats: standardization numbers to use instead of
+    computing them from fit (so pretraining and fine-tuning see inputs on the same scale).
     """
     torch.manual_seed(cfg.seed)
     rng = np.random.default_rng(cfg.seed)
     aug_rng = np.random.default_rng(cfg.seed + 1)  # separate, so the clip order matches a run without augmentation
     speed_aug = getattr(cfg, "speed_aug", False)
-    stats = MC.feature_stats(fit, motion=getattr(cfg, "motion", False))  # standardize with the fitting clips only
+    if stats is None:
+        stats = MC.feature_stats(fit, motion=getattr(cfg, "motion", False))  # standardize with the fitting clips only
     model = MC.make_model(getattr(cfg, "model", "lstm"), len(stats[0]) + 1, hidden=cfg.hidden, layers=cfg.layers,
                           dropout=cfg.dropout)
+    if init is not None:
+        model.load_state_dict(init)
     opt = torch.optim.Adam(model.parameters(), lr=cfg.lr)
     best, best_key, best_epoch, history = None, None, 0, []
     for epoch in range(1, cfg.max_epochs + 1):
@@ -174,6 +185,27 @@ def train(fit, val, cfg, log=print):
     model.load_state_dict(best)
     return model, stats, {"params": MC.count_params(model), "best_epoch": best_epoch, "epochs_run": epoch, "best_val_cer": best_key[0],
                           "history": history}
+
+
+def fit_model(fit, val, cfg, kaggle=None, log=print):
+    """
+    Without kaggle: exactly train(fit, val, cfg).
+    With kaggle clips (Step 7, --pretrain-kaggle): first train on them, stopping early on a validation split of
+    the Kaggle clips themselves; then fine-tune those weights on fit/val (our training signers) the usual way.
+    Both phases use the standardization numbers of fit (our clips), so the inputs mean the same thing in both
+    and the saved model works in the live app unchanged. Kaggle clips are never scored.
+    """
+    if not kaggle:
+        return train(fit, val, cfg, log=log)
+    stats = MC.feature_stats(fit, motion=getattr(cfg, "motion", False))
+    pre_fit, pre_val = split_validation(kaggle, cfg.val_frac, cfg.seed)
+    log(f"  pretraining on {len(pre_fit)} Kaggle clips (validate on {len(pre_val)}), then fine-tuning on ours")
+    pre_model, _, pre_info = train(pre_fit, pre_val, cfg, log=log, stats=stats)
+    model, stats, info = train(fit, val, cfg, log=log, init=pre_model.state_dict(), stats=stats)
+    info["pretrain"] = {"n_clips": len(kaggle), "n_signers": len(D.signers(kaggle)),
+                        "best_epoch": pre_info["best_epoch"], "epochs_run": pre_info["epochs_run"],
+                        "best_val_cer": pre_info["best_val_cer"]}
+    return model, stats, info
 
 
 # ---------- runs ----------
@@ -198,7 +230,7 @@ def brief(clips, preds):
     return {k: v for k, v in summarize(clips, preds).items() if k != "letters"}
 
 
-def run_folds(clips, cfg):
+def run_folds(clips, cfg, kaggle=None):
     signers = D.signers(clips)
     preds = [None] * len(clips)
     index = {c.path: i for i, c in enumerate(clips)}
@@ -213,7 +245,7 @@ def run_folds(clips, cfg):
         print(f"\nFold: test on {fold.test_signer} ({len(fold.test)} clips); "
               f"train on {len(fit)}, validate on {len(val)} from the other signers"
               + (f"; {len(held_words)} words left out of training" if held_words else ""))
-        model, stats, info = train(fit, val, cfg)
+        model, stats, info = fit_model(fit, val, cfg, kaggle=kaggle)
         test_preds, test_ms = time_inference(model, fold.test, stats)  # same words as predict(), plus timing
         for c, p in zip(fold.test, test_preds):
             preds[index[c.path]] = p
@@ -253,13 +285,70 @@ def run_folds(clips, cfg):
     return preds, scores, folds, new_words, records
 
 
+KAGGLE_TEST_FRAC = 0.3  # share of Kaggle signers kept out for testing (fixed before any results)
+KAGGLE_SPLIT_SEED = 0   # fixed, so every training seed is scored on the same unseen Kaggle signers
+
+
+def kaggle_signer_split(kaggle, test_frac=KAGGLE_TEST_FRAC, seed=KAGGLE_SPLIT_SEED):
+    """(train, test) Kaggle clips, split by signer: no signer has clips on both sides."""
+    signers = D.signers(kaggle)
+    order = np.random.default_rng(seed).permutation(len(signers))
+    test_who = {signers[i] for i in order[:max(1, int(round(test_frac * len(signers))))]}
+    return [c for c in kaggle if c.signer not in test_who], [c for c in kaggle if c.signer in test_who]
+
+
+def run_kaggle_test(clips, kaggle, cfg, log=print):
+    """
+    --kaggle-test (Step 7): one model trained on all of our clips plus the Kaggle training signers' clips (or ours
+    only, with --no-kaggle-train), scored on Kaggle signers it never saw: many new people and new words (names).
+    Validation (for stopping only) comes from the training people. Writes results/<name>.md and .json.
+    """
+    start = time.time()
+    k_train, k_test = kaggle_signer_split(kaggle)
+    fit, val = final_split(clips, cfg.val_frac, cfg.seed)
+    if not cfg.no_kaggle_train:
+        k_fit, k_val = split_validation(k_train, cfg.val_frac, cfg.seed)
+        fit, val = fit + k_fit, val + k_val
+    log(f"Kaggle unseen-signer test: train on {len(fit)} clips, validate on {len(val)} "
+        f"({'ours + ' + str(len(D.signers(k_train))) + ' Kaggle signers' if not cfg.no_kaggle_train else 'ours only'}); "
+        f"test on {len(k_test)} clips from {len(D.signers(k_test))} unseen Kaggle signers")
+    model, stats, info = train(fit, val, cfg, log=log)
+    preds, ms = time_inference(model, k_test, stats)
+    score = brief(k_test, preds)
+    res = {"date": datetime.date.today().isoformat(), "config": vars(cfg), "signers": ["kaggle_unseen"],
+           "scores": {"kaggle_unseen": score, "all": score},
+           "test_signers": D.signers(k_test), "train_signers": D.signers(fit + val), "n_train_clips": len(fit) + len(val),
+           "train": {k: v for k, v in info.items() if k != "history"}, "seconds": round(time.time() - start),
+           "predictions": E.prediction_records(k_test, preds, ms)}
+    os.makedirs(RESULTS_DIR, exist_ok=True)
+    with open(os.path.join(RESULTS_DIR, f"{cfg.name}.json"), "w") as f:
+        json.dump(res, f, indent=2, default=lambda o: list(o) if isinstance(o, tuple) else str(o))
+    trained_on = "our 3 signers only" if cfg.no_kaggle_train else f"our 3 signers + {len(D.signers(k_train))} Kaggle signers"
+    L = [f"# Unseen Kaggle signers ({cfg.name})", "",
+         f"Generated by `train_ctc.py --kaggle-test` on {res['date']}. One model trained on {trained_on} "
+         f"({res['n_train_clips']} clips), scored on **{len(k_test)} clips from {len(res['test_signers'])} Kaggle signers it never "
+         f"saw** ({int(KAGGLE_TEST_FRAC * 100)}% of the Kaggle signers, split by signer with seed {KAGGLE_SPLIT_SEED}).", "",
+         "- Kaggle phrases are mostly names (new words), filmed on phones; see kaggle_data.py for the conversion.",
+         "- Not comparable with the held-out-signer numbers on our clips: different people, words and cameras.", "",
+         "| Test set | Clips | CER | Word acc | Letter recall |", "|---|---|---|---|---|",
+         f"| Unseen Kaggle signers | {score['n']} | {pct(score['cer'])} | {pct(score['word_acc'])} | {pct(score['letter_recall'])} |",
+         "", "## Examples", "", "| Phrase | Prediction |", "|---|---|"]
+    L += [f"| {c.word} | {p or '∅'} |" for c, p in list(zip(k_test, preds))[:20]]
+    with open(os.path.join(RESULTS_DIR, f"{cfg.name}.md"), "w") as f:
+        f.write("\n".join(L) + "\n")
+    log(f"Unseen Kaggle signers: CER {pct(score['cer'])}, word acc {pct(score['word_acc'])}, letter recall "
+        f"{pct(score['letter_recall'])} on {len(k_test)} clips ({res['seconds']}s). Wrote results/{cfg.name}.md")
+    return res
+
+
 def model_config(cfg, stats):
     """The settings saved with a model, so load_model() can rebuild it."""
     return {"model": cfg.model, "hidden": cfg.hidden, "layers": cfg.layers, "dropout": cfg.dropout, "fps": cfg.fps,
-            "input_size": len(stats[0]) + 1, "motion": cfg.motion}
+            "input_size": len(stats[0]) + 1, "motion": cfg.motion,
+            "pretrain_kaggle": getattr(cfg, "pretrain_kaggle", False)}
 
 
-def run_final(clips, cfg, log=print):
+def run_final(clips, cfg, log=print, kaggle=None):
     """
     --final (Step 6): one model trained on every signer, for the live app and the outside-signer test.
     There is no held-out signer, so no fair score here: validation (frac of each signer) only decides when to
@@ -270,7 +359,7 @@ def run_final(clips, cfg, log=print):
     signers = D.signers(clips)
     fit, val = final_split(clips, cfg.val_frac, cfg.seed)
     log(f"Final model: train on {len(fit)} clips, validate on {len(val)} (all of {', '.join(signers)})")
-    model, stats, info = train(fit, val, cfg, log=log)
+    model, stats, info = fit_model(fit, val, cfg, kaggle=kaggle, log=log)
     os.makedirs(MODELS_DIR, exist_ok=True)
     info["model_file"] = os.path.join(MODELS_DIR, f"{cfg.name}_final.pt")
     MC.save_model(info["model_file"], model, stats, model_config(cfg, stats),
@@ -312,6 +401,9 @@ def write_markdown(res, path):
          (f"- Speed augmentation: each training clip played at a random {res['config']['speed_min']}x to "
           f"{res['config']['speed_max']}x speed every epoch (never the validation or test clips)."
           if res["config"].get("speed_aug") else "- No speed augmentation."),
+         (f"- Pretrained on {pre['n_clips']} Kaggle clips from {pre['n_signers']} signers (kaggle_data.py), then "
+          "fine-tuned on the two training signers; standardized with our training clips only."
+          if (pre := next(iter(res["folds"].values())).get("pretrain")) else "- No pretraining."),
          f"- Clips resampled to {res['config']['fps']} fps. Model: {model_description(res['config'])}"
          + (f" ({n:,} parameters)" if (n := next(iter(res["folds"].values())).get("params")) else "")
          + ", greedy CTC decoding.",
@@ -393,11 +485,21 @@ def parse_args(argv=None):
                    help="add the 14 motion features from motion.py to every frame (Step 5)")
     p.add_argument("--save", action="store_true",
                    help="also save each fold's trained model to models/<name>_<signer>.pt")
+    p.add_argument("--pretrain-kaggle", action="store_true",
+                   help="pretrain on the Kaggle clips in data_kaggle/ (kaggle_data.py), then fine-tune on ours (Step 7)")
+    p.add_argument("--kaggle-test", action="store_true",
+                   help="train on all our clips + some Kaggle signers, score unseen Kaggle signers (Step 7)")
+    p.add_argument("--no-kaggle-train", action="store_true",
+                   help="with --kaggle-test: train on our clips only (the comparison)")
     p.add_argument("--final", action="store_true",
                    help="train one model on ALL signers and save models/<name>_final.pt (Step 6; no held-out score)")
     cfg = p.parse_args(argv)
     if cfg.final and (cfg.holdout_words or cfg.overfit):
         p.error("--final trains on everything: it can't be combined with --holdout-words or --overfit")
+    if cfg.kaggle_test and (cfg.final or cfg.pretrain_kaggle or cfg.holdout_words or cfg.overfit):
+        p.error("--kaggle-test can't be combined with --final, --pretrain-kaggle, --holdout-words or --overfit")
+    if cfg.no_kaggle_train and not cfg.kaggle_test:
+        p.error("--no-kaggle-train only applies to --kaggle-test")
     # Each model's usual settings, fixed before any results (never tuned on the held-out signer).
     defaults = {"lstm": {"layers": 2, "dropout": 0.3, "lr": 1e-3},
                 "transformer": {"layers": 3, "dropout": 0.1, "lr": 5e-4}}[cfg.model]
@@ -413,17 +515,27 @@ def main():
     start = time.time()
     clips = [D.resample(c, cfg.fps) for c in D.load_clips()]
     print(f"Loaded {len(clips)} clips, resampled to {cfg.fps:g} fps")
+    kaggle = None
+    if cfg.pretrain_kaggle or cfg.kaggle_test:
+        import kaggle_data as KD  # needs pandas/pyarrow, so only imported when used
+        kaggle = [D.resample(c, cfg.fps) for c in KD.load_kaggle()]
+        if not kaggle:
+            raise SystemExit(f"--pretrain-kaggle: no usable clips in {KD.KAGGLE_DIR}/ (see kaggle_data.py)")
+        print(f"Loaded {len(kaggle)} Kaggle clips from {len(D.signers(kaggle))} signers")
+    if cfg.kaggle_test:
+        run_kaggle_test(clips, kaggle, cfg)
+        return
     if cfg.overfit:
-        overfit_check(clips, cfg)
+        overfit_check(kaggle or clips, cfg)  # with --pretrain-kaggle: checks the Kaggle clips can be learned
         return
     if cfg.final:
-        run_final(clips, cfg)
+        run_final(clips, cfg, kaggle=kaggle)
         return
 
     unknown = set(cfg.holdout_words) - {c.word for c in clips}
     if unknown:
         raise SystemExit(f"--holdout-words not in the data: {sorted(unknown)}")
-    preds, scores, folds, new_words, records = run_folds(clips, cfg)
+    preds, scores, folds, new_words, records = run_folds(clips, cfg, kaggle=kaggle)
     with open(os.path.join(RESULTS_DIR, "baseline.json")) as f:
         baseline_b = json.load(f)["methods"]["B"]
     res = {"date": datetime.date.today().isoformat(), "n_clips": len(clips), "signers": D.signers(clips),

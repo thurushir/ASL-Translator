@@ -148,4 +148,100 @@ with tempfile.TemporaryDirectory() as tmp:
                          T.predict(model2, everyone, stats2) == info["predictions"], True))
     results.append(check("final: results file written", os.path.exists(os.path.join(tmp, "unit_final.json")), True))
 
+# --- Step 7: pretraining on Kaggle clips, then fine-tuning on ours ---
+import contextlib
+import io
+quiet = lambda *a: None
+results.append(check("--pretrain-kaggle is off by default", T.parse_args([]).pretrain_kaggle, False))
+results.append(check("--pretrain-kaggle can be turned on", T.parse_args(["--pretrain-kaggle"]).pretrain_kaggle, True))
+
+small = T.parse_args(["--max-epochs", "2", "--hidden", "8", "--patience", "5"])
+ours_fit = [fake_clip(w, "anna", 6, n) for w in ["CAT", "DOG"] for n in range(3)]
+ours_val = [fake_clip("HI", "anna", 6, 9)]
+kag = [fake_clip(w, f"kaggle_{i}", 8, i) for i, w in enumerate(["BOB", "ANN", "TOM", "SUE", "JOE", "AMY", "DAN", "EVE"])]
+for c in kag:
+    c.features = c.features + 5  # Kaggle hands look different: they must not change our standardization
+
+# train() can start from given weights and given standardization numbers
+our_stats = MC.feature_stats(ours_fit)
+frozen = T.parse_args(["--max-epochs", "1", "--hidden", "8", "--lr", "0"])  # learning rate 0: weights can't move
+torch.manual_seed(5)
+start = {k: v.clone() for k, v in MC.make_model("lstm", MC.INPUT_SIZE, hidden=8).state_dict().items()}
+m0, s0, _ = T.train(ours_fit, ours_val, frozen, log=quiet, init=start, stats=our_stats)
+results.append(check("train() starts from the given weights", all(torch.equal(start[k], m0.state_dict()[k]) for k in start), True))
+results.append(check("train() uses the given standardization numbers", s0 is our_stats, True))
+
+# without Kaggle, fit_model() is exactly train() (so every earlier result is unchanged)
+mA, sA, _ = T.fit_model(ours_fit, ours_val, small, log=quiet)
+mB, sB, _ = T.train(ours_fit, ours_val, small, log=quiet)
+results.append(check("no Kaggle: fit_model() = train()",
+                     all(torch.equal(mA.state_dict()[k], mB.state_dict()[k]) for k in mA.state_dict()), True))
+
+# with Kaggle: pretrain, then fine-tune, standardized with OUR training clips only
+mK, sK, iK = T.fit_model(ours_fit, ours_val, small, kaggle=kag, log=quiet)
+results.append(check("pretraining keeps our standardization numbers",
+                     bool(np.allclose(sK[0], our_stats[0]) and np.allclose(sK[1], our_stats[1])), True))
+results.append(check("pretraining is recorded (clips, signers)",
+                     (iK["pretrain"]["n_clips"], iK["pretrain"]["n_signers"]), (len(kag), len(kag))))
+results.append(check("pretraining's stopping point is recorded", "best_epoch" in iK["pretrain"], True))
+results.append(check("pretrained and plain models differ",
+                     any(not torch.equal(mK.state_dict()[k], mA.state_dict()[k]) for k in mK.state_dict()), True))
+
+# folds: Kaggle clips add no folds and are never scored
+three = [fake_clip(w, s, 6, n) for w in ["CAT", "DOG", "HI"] for s in ["anna", "saaya", "thurushi"] for n in range(2)]
+with contextlib.redirect_stdout(io.StringIO()):
+    _, _, folds, _, records = T.run_folds(three, small, kaggle=kag)
+results.append(check("folds: still one per signer of ours", sorted(folds), ["anna", "saaya", "thurushi"]))
+results.append(check("folds: only our clips are scored", (len(records), {r["signer"] for r in records}),
+                     (len(three), {"anna", "saaya", "thurushi"})))
+results.append(check("folds: every fold was pretrained", all("pretrain" in f for f in folds.values()), True))
+
+# --final with pretraining
+cfg_f = T.parse_args(["--final", "--pretrain-kaggle", "--max-epochs", "2", "--hidden", "8", "--name", "unitk"])
+with tempfile.TemporaryDirectory() as tmp:
+    T.MODELS_DIR, T.RESULTS_DIR = tmp, tmp
+    info_f = T.run_final(everyone, cfg_f, log=quiet, kaggle=kag)
+    _, _, saved_f = MC.load_model(os.path.join(tmp, "unitk_final.pt"))
+results.append(check("final: saved as pretrained on Kaggle", saved_f["config"].get("pretrain_kaggle"), True))
+results.append(check("final: its training signers are ours only", saved_f["train_signers"], ["anna", "saaya", "thurushi"]))
+results.append(check("final: pretraining recorded", "pretrain" in info_f, True))
+
+# --- Step 7: test on Kaggle signers the model never saw ---
+kpool = [fake_clip(w, f"kaggle_{i % 10}", 8, i) for i, w in enumerate(["BOB", "ANN", "TOM", "SUE", "JOE", "AMY", "DAN",
+                                                                       "EVE", "KIM", "LEE", "MAX", "ZOE"] * 2)]
+k_train, k_test = T.kaggle_signer_split(kpool, test_frac=0.3, seed=0)
+train_who, test_who = {c.signer for c in k_train}, {c.signer for c in k_test}
+results.append(check("kaggle split: no signer on both sides", train_who & test_who, set()))
+results.append(check("kaggle split: every clip used once", sorted(c.path for c in k_train + k_test), sorted(c.path for c in kpool)))
+results.append(check("kaggle split: 30% of the signers are test signers", len(test_who), 3))
+results.append(check("kaggle split: same seed, same test signers",
+                     {c.signer for c in T.kaggle_signer_split(kpool[::-1], 0.3, 0)[1]}, test_who))
+
+results.append(check("--kaggle-test is off by default", T.parse_args([]).kaggle_test, False))
+results.append(check("--no-kaggle-train is off by default", T.parse_args(["--kaggle-test"]).no_kaggle_train, False))
+for bad in (["--kaggle-test", "--final"], ["--kaggle-test", "--pretrain-kaggle"], ["--kaggle-test", "--holdout-words", "CAT"],
+            ["--no-kaggle-train"]):
+    try:
+        T.parse_args(bad)
+        results.append(check(f"{' '.join(bad)} is refused", "accepted", "SystemExit"))
+    except SystemExit:
+        results.append(check(f"{' '.join(bad)} is refused", "SystemExit", "SystemExit"))
+
+for flags, want_kaggle_in_training in ((["--kaggle-test"], True), (["--kaggle-test", "--no-kaggle-train"], False)):
+    cfg_k = T.parse_args(flags + ["--max-epochs", "2", "--hidden", "8", "--name", "unitkt"])
+    with tempfile.TemporaryDirectory() as tmp:
+        T.RESULTS_DIR = tmp
+        res_k = T.run_kaggle_test(everyone, kpool, cfg_k, log=quiet)
+        written = os.path.exists(os.path.join(tmp, "unitkt.json")) and os.path.exists(os.path.join(tmp, "unitkt.md"))
+    tag = "ours + Kaggle" if want_kaggle_in_training else "ours only"
+    scored = {r["signer"] for r in res_k["predictions"]}
+    trained = set(res_k["train_signers"])
+    results.append(check(f"{tag}: only unseen Kaggle signers are scored", scored, test_who))
+    results.append(check(f"{tag}: no test signer was trained on", trained & test_who, set()))
+    results.append(check(f"{tag}: our signers are in training", {"anna", "saaya", "thurushi"} <= trained, True))
+    results.append(check(f"{tag}: Kaggle training signers {'are' if want_kaggle_in_training else 'are not'} in training",
+                         bool(trained & train_who), want_kaggle_in_training))
+    results.append(check(f"{tag}: every test clip scored once", len(res_k["predictions"]), len(k_test)))
+    results.append(check(f"{tag}: results files written", written, True))
+
 print("\nPASS: all train_ctc tests passed" if all(results) else "\nFAIL: some train_ctc tests failed")

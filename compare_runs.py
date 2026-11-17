@@ -52,7 +52,7 @@ def markdown(runs, names):
         L.append(f"| {label} | {s} | {' / '.join(pct(v) for v in c['values'])} | **{pct(c['mean'])}** "
                  f"| {pct(c['min'])}-{pct(c['max'])} | {pct(stats(runs, s, 'word_acc')['mean'])} "
                  f"| {pct(stats(runs, s, 'letter_recall')['mean'])} | {pct(stats(runs, s, 'cer_no_jz')['mean'])} |")
-    for s in signers:
+    for s in signers if runs[0].get("baseline_b") else []:  # Kaggle unseen-signer runs have no baseline rows
         b = runs[0]["baseline_b"][s]
         L.append(f"| Baseline B | {s} | {pct(b['cer'])} | {pct(b['cer'])} | - | {pct(b['word_acc'])} "
                  f"| {pct(b['letter_recall'])} | {pct(b['cer_no_jz'])} |")
