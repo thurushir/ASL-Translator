@@ -232,11 +232,78 @@ python predict_live_ctc.py                                  # live, with models/
 - **Live tests** (`results/live_test_thurushi.md`): live matches offline (about 29% CER on list words). Double letters, words not on the
   list (0 fully right), K/X, Q/P, I/J, fast signing; confidence can be confidently wrong on new words.
 
+## Step 7: Kaggle data (done so far, Anna)
+
+Google ASL Fingerspelling (Kaggle): https://www.kaggle.com/competitions/asl-fingerspelling/data. Download `train.csv` and
+one or more `train_landmarks/<file_id>.parquet` (about 1,000 recordings each) into `data_kaggle/` (ignored by git). Used so
+far: 2 files, `1019715464` and `1021040628`.
+
+| File / option | What it does |
+|---|---|
+| `kaggle_data.py` | Converts Kaggle recordings into our `Clip` format. `python kaggle_data.py` prints a summary. Rules below. |
+| `train_ctc.py --pretrain-kaggle` | Each fold first trains on all Kaggle clips (stopping on 15% of the Kaggle signers), then fine-tunes on ours exactly as before. Feature scaling comes from our training clips only. Also works with `--final` and `--holdout-words`. |
+| `train_ctc.py --kaggle-test` | One model on all our clips + 70% of the Kaggle signers, scored on the other 30% (signer split, fixed seed 0). `--no-kaggle-train`: same test, trained on our clips only. |
+| `compare_runs.py` | Runs with no baseline rows (Kaggle test) are allowed. |
+| `test_kaggle_data.py` | 26 tests with a fake parquet file (no download needed). `test_train_ctc.py` gained pretraining and Kaggle-test checks. |
+| `requirements.txt` | Adds `pandas` and `pyarrow` (versions that keep `numpy<2`). |
+
+**Conversion rules (fixed after the one-file feasibility check, before any training):** only phrases of letters and spaces
+(about 11% of Kaggle); spaces dropped (the model has no space; the live app separates words by the hand dropping); the hand
+seen in more frames is the signing hand, right hands mirrored to match our clips; y stretched by 3.16 = (16/9)², because
+Kaggle was filmed on portrait phones (feature gap from our clips 1.90 -> 0.43, about the same as between our own signers);
+frames assumed 30 fps (no timestamps; speed augmentation covers the error); recordings with fewer hand frames than the word
+needs are dropped; signers named `kaggle_<participant_id>`. Two files give 213 usable recordings from 82 signers.
+
+### How to verify
+```bash
+python test_kaggle_data.py; python test_train_ctc.py; python test_compare_runs.py   # PASS each
+python kaggle_data.py                                      # 213 recordings, 82 signers, gap about 0.40 (with the 2 files)
+python train_ctc.py --pretrain-kaggle --speed-aug --name step7_kaggle_2f            # also --seed 1/2 (_seed1/_seed2)
+python train_ctc.py --kaggle-test --speed-aug --name step7_kt_2f                    # also --seed 1/2
+python train_ctc.py --kaggle-test --no-kaggle-train --speed-aug --name step7_kt_ours_2f   # also --seed 1/2
+python compare_runs.py step7_kaggle_2f step7_kaggle_2f_seed1 step7_kaggle_2f_seed2 --out step7_kaggle_2f_3seeds
+```
+About 30 minutes per pretraining run and 10 to 20 per Kaggle-test run on an M1 MacBook. Numbers can differ slightly
+between laptops: compare runs made on the same laptop.
+
+### Results (mean of 3 runs, seeds 0-2)
+**Pretraining, held-out signer (our 3 folds).** Reference: LSTM + speed augmentation rerun on Anna's laptop, 23.8%
+(`results/step7_speed_3seeds.md`; Saaya's laptop: 23.5%).
+
+| Setup | CER per seed | CER mean | Word acc | Anna | Saaya | Thurushi |
+|---|---|---|---|---|---|---|
+| No Kaggle | 20.7 / 26.6 / 24.2% | 23.8% | 34.7% | 31.8% | 11.8% | 27.8% |
+| Kaggle, 1 file (101 clips) | 24.0 / 25.1 / 23.4% | 24.1% | 34.7% | 34.3% | 11.6% | 26.5% |
+| **Kaggle, 2 files (213 clips)** | **20.4 / 22.2 / 21.3%** | **21.3%** | **42.6%** | 37.2% | 7.6% | 19.1% |
+
+- One file did not help; two files beat no-Kaggle on every seed, so it counts as a gain by our rule. Seed 0 is close
+  (20.4% vs 20.7%), so the gain is real but modest.
+- Saaya and Thurushi improve a lot; **Anna gets worse** (31.8% -> 37.2%), mostly from the junk first letter (her resting
+  hand at the start read as a letter, usually F). Trimming or re-recording were considered and not done; it is a known limitation.
+
+**New Kaggle signers (`--kaggle-test`, 2 files: 25 test signers / 60 recordings, never seen).**
+
+| Trained on | CER | Letter recall | Word acc |
+|---|---|---|---|
+| Our clips only | 83.0% | 17.2% | 0% |
+| **Our clips + 57 Kaggle signers** | **56.0%** | **49.4%** | 0% |
+
+With 1 file (different split, 20 test signers) it was 82.9% vs 59.0%. Our 3 signers alone barely transfer to new people;
+Kaggle signers cut errors by about a third. No phrase is fully right: Kaggle phrases are long names and addresses.
+Files: `results/step7_*_3seeds.md` (`_2f` = two files).
+
+### Not done yet (next step)
+- New-words check with pretraining (`--holdout-words` + `--pretrain-kaggle`, against 32.1%). None of the 8 held-out
+  words appear inside the 2 files' Kaggle phrases (recheck if files are added).
+- More Kaggle files (two clearly helped more than one).
+- Retrain the 3 final models with pretraining (`--final --pretrain-kaggle --speed-aug`, seeds 0-2).
+- Outside signers (needs `collect_sequences.py --dir` and a scoring script), scored once at the end.
+
 ## Decisions carried forward
 - **Baseline is frozen.** Do not tune the static model; B is the reference.
 - **Best model:** LSTM + speed augmentation. Motion features and the Transformer stay in the code, off, as measured negative results.
 - **Every setting is fixed before it is tested**, chosen with validation data from the training signers, never with a held-out or outside signer's scores. Judge changes on 3 runs.
-- **Kaggle is now the top next step (Anna, Step 7)**: new words and new signers are the biggest gaps. It must happen before the final models are frozen and scored on outside signers.
+- **Kaggle pretraining (2 files) is in**: 21.3% vs 23.8% CER, and new Kaggle signers 56.0% vs 83.0%. Final models should use it; outside signers are scored on those, once, after everything else.
 - **Outside signers are scored once**, on the final models, after everything else.
 - **Word-list decoding is reported next to plain decoding, never instead of it.**
 - Words with J or Z are reported separately. Never commit `data_seq/`, outside clips, `data/`, `model.pickle` or `models/`; do commit `results/`.

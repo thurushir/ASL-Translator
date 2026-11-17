@@ -1,0 +1,7968 @@
+{
+  "date": "2026-11-15",
+  "n_clips": 495,
+  "signers": [
+    "anna",
+    "saaya",
+    "thurushi"
+  ],
+  "config": {
+    "fps": 15,
+    "hidden": 128,
+    "model": "lstm",
+    "layers": 2,
+    "dropout": 0.3,
+    "lr": 0.001,
+    "batch": 16,
+    "max_epochs": 300,
+    "patience": 30,
+    "val_frac": 0.15,
+    "seed": 1,
+    "overfit": 0,
+    "holdout_words": [],
+    "name": "step7_kaggle_2f_seed1",
+    "speed_aug": true,
+    "speed_min": 0.7,
+    "speed_max": 1.4,
+    "motion": false,
+    "save": false,
+    "pretrain_kaggle": true,
+    "kaggle_test": false,
+    "no_kaggle_train": false,
+    "final": false
+  },
+  "scores": {
+    "anna": {
+      "n": 165,
+      "cer": 0.3659574468085106,
+      "word_acc": 0.15151515151515152,
+      "letter_recall": 0.8397163120567376,
+      "n_no_jz": 135,
+      "cer_no_jz": 0.33506044905008636,
+      "word_acc_no_jz": 0.17777777777777778,
+      "letters": {
+        "A": {
+          "total": 54,
+          "correct": 0.9074074074074074,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              3
+            ],
+            [
+              "F",
+              1
+            ],
+            [
+              "R",
+              1
+            ]
+          ]
+        },
+        "B": {
+          "total": 18,
+          "correct": 0.9444444444444444,
+          "mistaken_for": [
+            [
+              "F",
+              1
+            ]
+          ]
+        },
+        "C": {
+          "total": 15,
+          "correct": 1.0,
+          "mistaken_for": []
+        },
+        "D": {
+          "total": 24,
+          "correct": 0.5833333333333334,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              2
+            ],
+            [
+              "C",
+              2
+            ],
+            [
+              "O",
+              2
+            ]
+          ]
+        },
+        "E": {
+          "total": 87,
+          "correct": 0.8620689655172413,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              7
+            ],
+            [
+              "W",
+              2
+            ],
+            [
+              "F",
+              2
+            ]
+          ]
+        },
+        "F": {
+          "total": 21,
+          "correct": 1.0,
+          "mistaken_for": []
+        },
+        "G": {
+          "total": 18,
+          "correct": 0.0,
+          "mistaken_for": [
+            [
+              "L",
+              6
+            ],
+            [
+              "(dropped)",
+              3
+            ],
+            [
+              "F",
+              2
+            ]
+          ]
+        },
+        "H": {
+          "total": 15,
+          "correct": 0.7333333333333333,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              3
+            ],
+            [
+              "F",
+              1
+            ]
+          ]
+        },
+        "I": {
+          "total": 42,
+          "correct": 1.0,
+          "mistaken_for": []
+        },
+        "J": {
+          "total": 15,
+          "correct": 0.5333333333333333,
+          "mistaken_for": [
+            [
+              "I",
+              7
+            ]
+          ]
+        },
+        "K": {
+          "total": 21,
+          "correct": 0.9523809523809523,
+          "mistaken_for": [
+            [
+              "V",
+              1
+            ]
+          ]
+        },
+        "L": {
+          "total": 36,
+          "correct": 0.9722222222222222,
+          "mistaken_for": [
+            [
+              "W",
+              1
+            ]
+          ]
+        },
+        "M": {
+          "total": 18,
+          "correct": 1.0,
+          "mistaken_for": []
+        },
+        "N": {
+          "total": 24,
+          "correct": 0.9166666666666666,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              1
+            ],
+            [
+              "M",
+              1
+            ]
+          ]
+        },
+        "O": {
+          "total": 63,
+          "correct": 0.8095238095238095,
+          "mistaken_for": [
+            [
+              "C",
+              2
+            ],
+            [
+              "L",
+              2
+            ],
+            [
+              "(dropped)",
+              2
+            ]
+          ]
+        },
+        "P": {
+          "total": 15,
+          "correct": 0.13333333333333333,
+          "mistaken_for": [
+            [
+              "U",
+              5
+            ],
+            [
+              "(dropped)",
+              4
+            ],
+            [
+              "A",
+              2
+            ]
+          ]
+        },
+        "Q": {
+          "total": 15,
+          "correct": 0.9333333333333333,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              1
+            ]
+          ]
+        },
+        "R": {
+          "total": 27,
+          "correct": 1.0,
+          "mistaken_for": []
+        },
+        "S": {
+          "total": 21,
+          "correct": 0.7619047619047619,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              4
+            ],
+            [
+              "K",
+              1
+            ]
+          ]
+        },
+        "T": {
+          "total": 30,
+          "correct": 0.7333333333333333,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              5
+            ],
+            [
+              "L",
+              1
+            ],
+            [
+              "E",
+              1
+            ]
+          ]
+        },
+        "U": {
+          "total": 24,
+          "correct": 0.9166666666666666,
+          "mistaken_for": [
+            [
+              "F",
+              1
+            ],
+            [
+              "(dropped)",
+              1
+            ]
+          ]
+        },
+        "V": {
+          "total": 15,
+          "correct": 0.8666666666666667,
+          "mistaken_for": [
+            [
+              "U",
+              2
+            ]
+          ]
+        },
+        "W": {
+          "total": 18,
+          "correct": 0.9444444444444444,
+          "mistaken_for": [
+            [
+              "F",
+              1
+            ]
+          ]
+        },
+        "X": {
+          "total": 15,
+          "correct": 0.8,
+          "mistaken_for": [
+            [
+              "E",
+              1
+            ],
+            [
+              "(dropped)",
+              1
+            ],
+            [
+              "O",
+              1
+            ]
+          ]
+        },
+        "Y": {
+          "total": 27,
+          "correct": 1.0,
+          "mistaken_for": []
+        },
+        "Z": {
+          "total": 27,
+          "correct": 0.8148148148148148,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              2
+            ],
+            [
+              "U",
+              1
+            ],
+            [
+              "K",
+              1
+            ]
+          ]
+        }
+      }
+    },
+    "saaya": {
+      "n": 165,
+      "cer": 0.08085106382978724,
+      "word_acc": 0.696969696969697,
+      "letter_recall": 0.9531914893617022,
+      "n_no_jz": 135,
+      "cer_no_jz": 0.06217616580310881,
+      "word_acc_no_jz": 0.7407407407407407,
+      "letters": {
+        "A": {
+          "total": 54,
+          "correct": 1.0,
+          "mistaken_for": []
+        },
+        "B": {
+          "total": 18,
+          "correct": 0.9444444444444444,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              1
+            ]
+          ]
+        },
+        "C": {
+          "total": 15,
+          "correct": 0.9333333333333333,
+          "mistaken_for": [
+            [
+              "O",
+              1
+            ]
+          ]
+        },
+        "D": {
+          "total": 24,
+          "correct": 0.9583333333333334,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              1
+            ]
+          ]
+        },
+        "E": {
+          "total": 87,
+          "correct": 0.9655172413793104,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              3
+            ]
+          ]
+        },
+        "F": {
+          "total": 21,
+          "correct": 1.0,
+          "mistaken_for": []
+        },
+        "G": {
+          "total": 18,
+          "correct": 0.8333333333333334,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              3
+            ]
+          ]
+        },
+        "H": {
+          "total": 15,
+          "correct": 1.0,
+          "mistaken_for": []
+        },
+        "I": {
+          "total": 42,
+          "correct": 1.0,
+          "mistaken_for": []
+        },
+        "J": {
+          "total": 15,
+          "correct": 0.9333333333333333,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              1
+            ]
+          ]
+        },
+        "K": {
+          "total": 21,
+          "correct": 1.0,
+          "mistaken_for": []
+        },
+        "L": {
+          "total": 36,
+          "correct": 0.9166666666666666,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              3
+            ]
+          ]
+        },
+        "M": {
+          "total": 18,
+          "correct": 1.0,
+          "mistaken_for": []
+        },
+        "N": {
+          "total": 24,
+          "correct": 1.0,
+          "mistaken_for": []
+        },
+        "O": {
+          "total": 63,
+          "correct": 0.9523809523809523,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              3
+            ]
+          ]
+        },
+        "P": {
+          "total": 15,
+          "correct": 0.5333333333333333,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              5
+            ],
+            [
+              "G",
+              1
+            ],
+            [
+              "Q",
+              1
+            ]
+          ]
+        },
+        "Q": {
+          "total": 15,
+          "correct": 1.0,
+          "mistaken_for": []
+        },
+        "R": {
+          "total": 27,
+          "correct": 0.8148148148148148,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              3
+            ],
+            [
+              "D",
+              1
+            ],
+            [
+              "U",
+              1
+            ]
+          ]
+        },
+        "S": {
+          "total": 21,
+          "correct": 1.0,
+          "mistaken_for": []
+        },
+        "T": {
+          "total": 30,
+          "correct": 0.9,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              3
+            ]
+          ]
+        },
+        "U": {
+          "total": 24,
+          "correct": 1.0,
+          "mistaken_for": []
+        },
+        "V": {
+          "total": 15,
+          "correct": 1.0,
+          "mistaken_for": []
+        },
+        "W": {
+          "total": 18,
+          "correct": 1.0,
+          "mistaken_for": []
+        },
+        "X": {
+          "total": 15,
+          "correct": 0.9333333333333333,
+          "mistaken_for": [
+            [
+              "D",
+              1
+            ]
+          ]
+        },
+        "Y": {
+          "total": 27,
+          "correct": 1.0,
+          "mistaken_for": []
+        },
+        "Z": {
+          "total": 27,
+          "correct": 0.9629629629629629,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              1
+            ]
+          ]
+        }
+      }
+    },
+    "thurushi": {
+      "n": 165,
+      "cer": 0.2198581560283688,
+      "word_acc": 0.34545454545454546,
+      "letter_recall": 0.7929078014184398,
+      "n_no_jz": 135,
+      "cer_no_jz": 0.23661485319516407,
+      "word_acc_no_jz": 0.3111111111111111,
+      "letters": {
+        "A": {
+          "total": 54,
+          "correct": 0.5370370370370371,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              24
+            ],
+            [
+              "T",
+              1
+            ]
+          ]
+        },
+        "B": {
+          "total": 18,
+          "correct": 0.5,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              9
+            ]
+          ]
+        },
+        "C": {
+          "total": 15,
+          "correct": 0.9333333333333333,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              1
+            ]
+          ]
+        },
+        "D": {
+          "total": 24,
+          "correct": 0.8333333333333334,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              3
+            ],
+            [
+              "F",
+              1
+            ]
+          ]
+        },
+        "E": {
+          "total": 87,
+          "correct": 0.9425287356321839,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              4
+            ],
+            [
+              "O",
+              1
+            ]
+          ]
+        },
+        "F": {
+          "total": 21,
+          "correct": 0.9523809523809523,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              1
+            ]
+          ]
+        },
+        "G": {
+          "total": 18,
+          "correct": 0.8333333333333334,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              3
+            ]
+          ]
+        },
+        "H": {
+          "total": 15,
+          "correct": 0.9333333333333333,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              1
+            ]
+          ]
+        },
+        "I": {
+          "total": 42,
+          "correct": 0.9761904761904762,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              1
+            ]
+          ]
+        },
+        "J": {
+          "total": 15,
+          "correct": 0.9333333333333333,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              1
+            ]
+          ]
+        },
+        "K": {
+          "total": 21,
+          "correct": 0.09523809523809523,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              12
+            ],
+            [
+              "D",
+              3
+            ],
+            [
+              "E",
+              1
+            ]
+          ]
+        },
+        "L": {
+          "total": 36,
+          "correct": 0.9166666666666666,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              3
+            ]
+          ]
+        },
+        "M": {
+          "total": 18,
+          "correct": 1.0,
+          "mistaken_for": []
+        },
+        "N": {
+          "total": 24,
+          "correct": 0.625,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              7
+            ],
+            [
+              "M",
+              1
+            ],
+            [
+              "P",
+              1
+            ]
+          ]
+        },
+        "O": {
+          "total": 63,
+          "correct": 0.7301587301587301,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              10
+            ],
+            [
+              "E",
+              6
+            ],
+            [
+              "W",
+              1
+            ]
+          ]
+        },
+        "P": {
+          "total": 15,
+          "correct": 0.6666666666666666,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              5
+            ]
+          ]
+        },
+        "Q": {
+          "total": 15,
+          "correct": 0.6666666666666666,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              5
+            ]
+          ]
+        },
+        "R": {
+          "total": 27,
+          "correct": 0.9259259259259259,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              2
+            ]
+          ]
+        },
+        "S": {
+          "total": 21,
+          "correct": 0.9047619047619048,
+          "mistaken_for": [
+            [
+              "T",
+              1
+            ],
+            [
+              "A",
+              1
+            ]
+          ]
+        },
+        "T": {
+          "total": 30,
+          "correct": 0.8333333333333334,
+          "mistaken_for": [
+            [
+              "O",
+              3
+            ],
+            [
+              "E",
+              1
+            ],
+            [
+              "(dropped)",
+              1
+            ]
+          ]
+        },
+        "U": {
+          "total": 24,
+          "correct": 1.0,
+          "mistaken_for": []
+        },
+        "V": {
+          "total": 15,
+          "correct": 0.9333333333333333,
+          "mistaken_for": [
+            [
+              "E",
+              1
+            ]
+          ]
+        },
+        "W": {
+          "total": 18,
+          "correct": 1.0,
+          "mistaken_for": []
+        },
+        "X": {
+          "total": 15,
+          "correct": 0.2,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              6
+            ],
+            [
+              "E",
+              5
+            ],
+            [
+              "O",
+              1
+            ]
+          ]
+        },
+        "Y": {
+          "total": 27,
+          "correct": 0.7777777777777778,
+          "mistaken_for": [
+            [
+              "A",
+              4
+            ],
+            [
+              "(dropped)",
+              2
+            ]
+          ]
+        },
+        "Z": {
+          "total": 27,
+          "correct": 0.6666666666666666,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              8
+            ],
+            [
+              "A",
+              1
+            ]
+          ]
+        }
+      }
+    },
+    "all": {
+      "n": 495,
+      "cer": 0.2222222222222222,
+      "word_acc": 0.397979797979798,
+      "letter_recall": 0.8619385342789598,
+      "n_no_jz": 405,
+      "cer_no_jz": 0.21128382268278642,
+      "word_acc_no_jz": 0.40987654320987654,
+      "letters": {
+        "A": {
+          "total": 162,
+          "correct": 0.8148148148148148,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              27
+            ],
+            [
+              "F",
+              1
+            ],
+            [
+              "R",
+              1
+            ]
+          ]
+        },
+        "B": {
+          "total": 54,
+          "correct": 0.7962962962962963,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              10
+            ],
+            [
+              "F",
+              1
+            ]
+          ]
+        },
+        "C": {
+          "total": 45,
+          "correct": 0.9555555555555556,
+          "mistaken_for": [
+            [
+              "O",
+              1
+            ],
+            [
+              "(dropped)",
+              1
+            ]
+          ]
+        },
+        "D": {
+          "total": 72,
+          "correct": 0.7916666666666666,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              6
+            ],
+            [
+              "C",
+              2
+            ],
+            [
+              "O",
+              2
+            ]
+          ]
+        },
+        "E": {
+          "total": 261,
+          "correct": 0.9233716475095786,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              14
+            ],
+            [
+              "W",
+              2
+            ],
+            [
+              "F",
+              2
+            ]
+          ]
+        },
+        "F": {
+          "total": 63,
+          "correct": 0.9841269841269841,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              1
+            ]
+          ]
+        },
+        "G": {
+          "total": 54,
+          "correct": 0.5555555555555556,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              9
+            ],
+            [
+              "L",
+              6
+            ],
+            [
+              "F",
+              2
+            ]
+          ]
+        },
+        "H": {
+          "total": 45,
+          "correct": 0.8888888888888888,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              4
+            ],
+            [
+              "F",
+              1
+            ]
+          ]
+        },
+        "I": {
+          "total": 126,
+          "correct": 0.9920634920634921,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              1
+            ]
+          ]
+        },
+        "J": {
+          "total": 45,
+          "correct": 0.8,
+          "mistaken_for": [
+            [
+              "I",
+              7
+            ],
+            [
+              "(dropped)",
+              2
+            ]
+          ]
+        },
+        "K": {
+          "total": 63,
+          "correct": 0.6825396825396826,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              12
+            ],
+            [
+              "D",
+              3
+            ],
+            [
+              "E",
+              1
+            ]
+          ]
+        },
+        "L": {
+          "total": 108,
+          "correct": 0.9351851851851852,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              6
+            ],
+            [
+              "W",
+              1
+            ]
+          ]
+        },
+        "M": {
+          "total": 54,
+          "correct": 1.0,
+          "mistaken_for": []
+        },
+        "N": {
+          "total": 72,
+          "correct": 0.8472222222222222,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              8
+            ],
+            [
+              "M",
+              2
+            ],
+            [
+              "P",
+              1
+            ]
+          ]
+        },
+        "O": {
+          "total": 189,
+          "correct": 0.8306878306878307,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              15
+            ],
+            [
+              "E",
+              7
+            ],
+            [
+              "C",
+              2
+            ]
+          ]
+        },
+        "P": {
+          "total": 45,
+          "correct": 0.4444444444444444,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              14
+            ],
+            [
+              "U",
+              5
+            ],
+            [
+              "A",
+              2
+            ]
+          ]
+        },
+        "Q": {
+          "total": 45,
+          "correct": 0.8666666666666667,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              6
+            ]
+          ]
+        },
+        "R": {
+          "total": 81,
+          "correct": 0.9135802469135802,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              5
+            ],
+            [
+              "D",
+              1
+            ],
+            [
+              "U",
+              1
+            ]
+          ]
+        },
+        "S": {
+          "total": 63,
+          "correct": 0.8888888888888888,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              4
+            ],
+            [
+              "K",
+              1
+            ],
+            [
+              "T",
+              1
+            ]
+          ]
+        },
+        "T": {
+          "total": 90,
+          "correct": 0.8222222222222222,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              9
+            ],
+            [
+              "O",
+              3
+            ],
+            [
+              "E",
+              2
+            ]
+          ]
+        },
+        "U": {
+          "total": 72,
+          "correct": 0.9722222222222222,
+          "mistaken_for": [
+            [
+              "F",
+              1
+            ],
+            [
+              "(dropped)",
+              1
+            ]
+          ]
+        },
+        "V": {
+          "total": 45,
+          "correct": 0.9333333333333333,
+          "mistaken_for": [
+            [
+              "U",
+              2
+            ],
+            [
+              "E",
+              1
+            ]
+          ]
+        },
+        "W": {
+          "total": 54,
+          "correct": 0.9814814814814815,
+          "mistaken_for": [
+            [
+              "F",
+              1
+            ]
+          ]
+        },
+        "X": {
+          "total": 45,
+          "correct": 0.6444444444444445,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              7
+            ],
+            [
+              "E",
+              6
+            ],
+            [
+              "O",
+              2
+            ]
+          ]
+        },
+        "Y": {
+          "total": 81,
+          "correct": 0.9259259259259259,
+          "mistaken_for": [
+            [
+              "A",
+              4
+            ],
+            [
+              "(dropped)",
+              2
+            ]
+          ]
+        },
+        "Z": {
+          "total": 81,
+          "correct": 0.8148148148148148,
+          "mistaken_for": [
+            [
+              "(dropped)",
+              11
+            ],
+            [
+              "U",
+              1
+            ],
+            [
+              "A",
+              1
+            ]
+          ]
+        }
+      }
+    }
+  },
+  "folds": {
+    "anna": {
+      "params": 601883,
+      "best_epoch": 53,
+      "epochs_run": 83,
+      "best_val_cer": 0.045662100456621,
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 2.1457,
+          "val_loss": 1.1256,
+          "val_cer": 0.4247
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.9811,
+          "val_loss": 0.7907,
+          "val_cer": 0.3881
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.6765,
+          "val_loss": 0.681,
+          "val_cer": 0.2831
+        },
+        {
+          "epoch": 4,
+          "train_loss": 0.533,
+          "val_loss": 0.5633,
+          "val_cer": 0.242
+        },
+        {
+          "epoch": 5,
+          "train_loss": 0.4345,
+          "val_loss": 0.5451,
+          "val_cer": 0.2374
+        },
+        {
+          "epoch": 6,
+          "train_loss": 0.3492,
+          "val_loss": 0.5222,
+          "val_cer": 0.1963
+        },
+        {
+          "epoch": 7,
+          "train_loss": 0.256,
+          "val_loss": 0.4901,
+          "val_cer": 0.1781
+        },
+        {
+          "epoch": 8,
+          "train_loss": 0.2269,
+          "val_loss": 0.5398,
+          "val_cer": 0.137
+        },
+        {
+          "epoch": 9,
+          "train_loss": 0.1857,
+          "val_loss": 0.4858,
+          "val_cer": 0.1416
+        },
+        {
+          "epoch": 10,
+          "train_loss": 0.1522,
+          "val_loss": 0.4368,
+          "val_cer": 0.1233
+        },
+        {
+          "epoch": 11,
+          "train_loss": 0.1513,
+          "val_loss": 0.4832,
+          "val_cer": 0.1096
+        },
+        {
+          "epoch": 12,
+          "train_loss": 0.1369,
+          "val_loss": 0.4426,
+          "val_cer": 0.1142
+        },
+        {
+          "epoch": 13,
+          "train_loss": 0.1179,
+          "val_loss": 0.3755,
+          "val_cer": 0.1142
+        },
+        {
+          "epoch": 14,
+          "train_loss": 0.1027,
+          "val_loss": 0.4132,
+          "val_cer": 0.105
+        },
+        {
+          "epoch": 15,
+          "train_loss": 0.0859,
+          "val_loss": 0.3967,
+          "val_cer": 0.0913
+        },
+        {
+          "epoch": 16,
+          "train_loss": 0.0909,
+          "val_loss": 0.4387,
+          "val_cer": 0.105
+        },
+        {
+          "epoch": 17,
+          "train_loss": 0.0817,
+          "val_loss": 0.4115,
+          "val_cer": 0.0959
+        },
+        {
+          "epoch": 18,
+          "train_loss": 0.068,
+          "val_loss": 0.4542,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 19,
+          "train_loss": 0.072,
+          "val_loss": 0.4352,
+          "val_cer": 0.0913
+        },
+        {
+          "epoch": 20,
+          "train_loss": 0.0674,
+          "val_loss": 0.4601,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 21,
+          "train_loss": 0.0581,
+          "val_loss": 0.4163,
+          "val_cer": 0.0731
+        },
+        {
+          "epoch": 22,
+          "train_loss": 0.0484,
+          "val_loss": 0.4157,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 23,
+          "train_loss": 0.0519,
+          "val_loss": 0.478,
+          "val_cer": 0.0913
+        },
+        {
+          "epoch": 24,
+          "train_loss": 0.056,
+          "val_loss": 0.3857,
+          "val_cer": 0.0776
+        },
+        {
+          "epoch": 25,
+          "train_loss": 0.0458,
+          "val_loss": 0.431,
+          "val_cer": 0.0776
+        },
+        {
+          "epoch": 26,
+          "train_loss": 0.0476,
+          "val_loss": 0.5372,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 27,
+          "train_loss": 0.0433,
+          "val_loss": 0.419,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 28,
+          "train_loss": 0.0387,
+          "val_loss": 0.4595,
+          "val_cer": 0.0776
+        },
+        {
+          "epoch": 29,
+          "train_loss": 0.0446,
+          "val_loss": 0.3646,
+          "val_cer": 0.0776
+        },
+        {
+          "epoch": 30,
+          "train_loss": 0.0391,
+          "val_loss": 0.4239,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 31,
+          "train_loss": 0.0391,
+          "val_loss": 0.504,
+          "val_cer": 0.0868
+        },
+        {
+          "epoch": 32,
+          "train_loss": 0.0401,
+          "val_loss": 0.3678,
+          "val_cer": 0.0776
+        },
+        {
+          "epoch": 33,
+          "train_loss": 0.0378,
+          "val_loss": 0.5126,
+          "val_cer": 0.0868
+        },
+        {
+          "epoch": 34,
+          "train_loss": 0.0404,
+          "val_loss": 0.4444,
+          "val_cer": 0.0776
+        },
+        {
+          "epoch": 35,
+          "train_loss": 0.0355,
+          "val_loss": 0.4669,
+          "val_cer": 0.0776
+        },
+        {
+          "epoch": 36,
+          "train_loss": 0.0359,
+          "val_loss": 0.4359,
+          "val_cer": 0.0731
+        },
+        {
+          "epoch": 37,
+          "train_loss": 0.0322,
+          "val_loss": 0.458,
+          "val_cer": 0.0731
+        },
+        {
+          "epoch": 38,
+          "train_loss": 0.0325,
+          "val_loss": 0.4623,
+          "val_cer": 0.0731
+        },
+        {
+          "epoch": 39,
+          "train_loss": 0.0381,
+          "val_loss": 0.4875,
+          "val_cer": 0.0685
+        },
+        {
+          "epoch": 40,
+          "train_loss": 0.0301,
+          "val_loss": 0.536,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 41,
+          "train_loss": 0.0287,
+          "val_loss": 0.5589,
+          "val_cer": 0.0731
+        },
+        {
+          "epoch": 42,
+          "train_loss": 0.0366,
+          "val_loss": 0.4818,
+          "val_cer": 0.0776
+        },
+        {
+          "epoch": 43,
+          "train_loss": 0.0317,
+          "val_loss": 0.5549,
+          "val_cer": 0.0776
+        },
+        {
+          "epoch": 44,
+          "train_loss": 0.0305,
+          "val_loss": 0.4693,
+          "val_cer": 0.0731
+        },
+        {
+          "epoch": 45,
+          "train_loss": 0.0325,
+          "val_loss": 0.4941,
+          "val_cer": 0.0685
+        },
+        {
+          "epoch": 46,
+          "train_loss": 0.0317,
+          "val_loss": 0.5611,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 47,
+          "train_loss": 0.0319,
+          "val_loss": 0.5362,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 48,
+          "train_loss": 0.026,
+          "val_loss": 0.3942,
+          "val_cer": 0.0685
+        },
+        {
+          "epoch": 49,
+          "train_loss": 0.0272,
+          "val_loss": 0.5059,
+          "val_cer": 0.0639
+        },
+        {
+          "epoch": 50,
+          "train_loss": 0.0292,
+          "val_loss": 0.5245,
+          "val_cer": 0.0731
+        },
+        {
+          "epoch": 51,
+          "train_loss": 0.0286,
+          "val_loss": 0.5412,
+          "val_cer": 0.0594
+        },
+        {
+          "epoch": 52,
+          "train_loss": 0.0273,
+          "val_loss": 0.5136,
+          "val_cer": 0.0548
+        },
+        {
+          "epoch": 53,
+          "train_loss": 0.024,
+          "val_loss": 0.5059,
+          "val_cer": 0.0457
+        },
+        {
+          "epoch": 54,
+          "train_loss": 0.0208,
+          "val_loss": 0.5185,
+          "val_cer": 0.0594
+        },
+        {
+          "epoch": 55,
+          "train_loss": 0.021,
+          "val_loss": 0.507,
+          "val_cer": 0.0639
+        },
+        {
+          "epoch": 56,
+          "train_loss": 0.0247,
+          "val_loss": 0.4989,
+          "val_cer": 0.0548
+        },
+        {
+          "epoch": 57,
+          "train_loss": 0.0256,
+          "val_loss": 0.5072,
+          "val_cer": 0.0594
+        },
+        {
+          "epoch": 58,
+          "train_loss": 0.0235,
+          "val_loss": 0.6485,
+          "val_cer": 0.0639
+        },
+        {
+          "epoch": 59,
+          "train_loss": 0.0267,
+          "val_loss": 0.6031,
+          "val_cer": 0.0685
+        },
+        {
+          "epoch": 60,
+          "train_loss": 0.0248,
+          "val_loss": 0.5201,
+          "val_cer": 0.0639
+        },
+        {
+          "epoch": 61,
+          "train_loss": 0.0369,
+          "val_loss": 0.6336,
+          "val_cer": 0.0685
+        },
+        {
+          "epoch": 62,
+          "train_loss": 0.0271,
+          "val_loss": 0.6612,
+          "val_cer": 0.0685
+        },
+        {
+          "epoch": 63,
+          "train_loss": 0.029,
+          "val_loss": 0.5217,
+          "val_cer": 0.0685
+        },
+        {
+          "epoch": 64,
+          "train_loss": 0.023,
+          "val_loss": 0.473,
+          "val_cer": 0.0685
+        },
+        {
+          "epoch": 65,
+          "train_loss": 0.0248,
+          "val_loss": 0.4383,
+          "val_cer": 0.0548
+        },
+        {
+          "epoch": 66,
+          "train_loss": 0.0239,
+          "val_loss": 0.4512,
+          "val_cer": 0.0594
+        },
+        {
+          "epoch": 67,
+          "train_loss": 0.0247,
+          "val_loss": 0.5775,
+          "val_cer": 0.0639
+        },
+        {
+          "epoch": 68,
+          "train_loss": 0.023,
+          "val_loss": 0.6082,
+          "val_cer": 0.0594
+        },
+        {
+          "epoch": 69,
+          "train_loss": 0.0217,
+          "val_loss": 0.5519,
+          "val_cer": 0.0594
+        },
+        {
+          "epoch": 70,
+          "train_loss": 0.0301,
+          "val_loss": 0.594,
+          "val_cer": 0.0594
+        },
+        {
+          "epoch": 71,
+          "train_loss": 0.017,
+          "val_loss": 0.5411,
+          "val_cer": 0.0548
+        },
+        {
+          "epoch": 72,
+          "train_loss": 0.0178,
+          "val_loss": 0.5088,
+          "val_cer": 0.0594
+        },
+        {
+          "epoch": 73,
+          "train_loss": 0.0358,
+          "val_loss": 0.5086,
+          "val_cer": 0.0639
+        },
+        {
+          "epoch": 74,
+          "train_loss": 0.0187,
+          "val_loss": 0.497,
+          "val_cer": 0.0685
+        },
+        {
+          "epoch": 75,
+          "train_loss": 0.0171,
+          "val_loss": 0.5817,
+          "val_cer": 0.0685
+        },
+        {
+          "epoch": 76,
+          "train_loss": 0.015,
+          "val_loss": 0.6537,
+          "val_cer": 0.0639
+        },
+        {
+          "epoch": 77,
+          "train_loss": 0.019,
+          "val_loss": 0.6758,
+          "val_cer": 0.0685
+        },
+        {
+          "epoch": 78,
+          "train_loss": 0.0193,
+          "val_loss": 0.6066,
+          "val_cer": 0.0639
+        },
+        {
+          "epoch": 79,
+          "train_loss": 0.0192,
+          "val_loss": 0.5984,
+          "val_cer": 0.0685
+        },
+        {
+          "epoch": 80,
+          "train_loss": 0.0158,
+          "val_loss": 0.7444,
+          "val_cer": 0.0639
+        },
+        {
+          "epoch": 81,
+          "train_loss": 0.0161,
+          "val_loss": 0.6476,
+          "val_cer": 0.0685
+        },
+        {
+          "epoch": 82,
+          "train_loss": 0.0335,
+          "val_loss": 0.4887,
+          "val_cer": 0.0594
+        },
+        {
+          "epoch": 83,
+          "train_loss": 0.0248,
+          "val_loss": 0.5292,
+          "val_cer": 0.0548
+        }
+      ],
+      "pretrain": {
+        "n_clips": 213,
+        "n_signers": 82,
+        "best_epoch": 75,
+        "epochs_run": 105,
+        "best_val_cer": 0.504739336492891
+      },
+      "seconds": 450,
+      "train_signers": [
+        "saaya",
+        "thurushi"
+      ],
+      "train_scores": {
+        "n": 330,
+        "cer": 0.02127659574468085,
+        "word_acc": 0.9090909090909091,
+        "letter_recall": 0.9801418439716312,
+        "n_no_jz": 270,
+        "cer_no_jz": 0.025906735751295335,
+        "word_acc_no_jz": 0.8888888888888888
+      },
+      "junk_start": 0.5818181818181818
+    },
+    "saaya": {
+      "params": 601883,
+      "best_epoch": 67,
+      "epochs_run": 97,
+      "best_val_cer": 0.0639269406392694,
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 2.3969,
+          "val_loss": 1.1784,
+          "val_cer": 0.5616
+        },
+        {
+          "epoch": 2,
+          "train_loss": 1.0781,
+          "val_loss": 0.9165,
+          "val_cer": 0.4018
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.7448,
+          "val_loss": 0.6905,
+          "val_cer": 0.2922
+        },
+        {
+          "epoch": 4,
+          "train_loss": 0.5742,
+          "val_loss": 0.5648,
+          "val_cer": 0.2283
+        },
+        {
+          "epoch": 5,
+          "train_loss": 0.4611,
+          "val_loss": 0.4978,
+          "val_cer": 0.2146
+        },
+        {
+          "epoch": 6,
+          "train_loss": 0.3841,
+          "val_loss": 0.4652,
+          "val_cer": 0.1644
+        },
+        {
+          "epoch": 7,
+          "train_loss": 0.3094,
+          "val_loss": 0.5102,
+          "val_cer": 0.1689
+        },
+        {
+          "epoch": 8,
+          "train_loss": 0.2746,
+          "val_loss": 0.3648,
+          "val_cer": 0.1507
+        },
+        {
+          "epoch": 9,
+          "train_loss": 0.2277,
+          "val_loss": 0.4665,
+          "val_cer": 0.1507
+        },
+        {
+          "epoch": 10,
+          "train_loss": 0.1885,
+          "val_loss": 0.3331,
+          "val_cer": 0.1279
+        },
+        {
+          "epoch": 11,
+          "train_loss": 0.1903,
+          "val_loss": 0.3924,
+          "val_cer": 0.1644
+        },
+        {
+          "epoch": 12,
+          "train_loss": 0.1548,
+          "val_loss": 0.3911,
+          "val_cer": 0.1096
+        },
+        {
+          "epoch": 13,
+          "train_loss": 0.1556,
+          "val_loss": 0.4214,
+          "val_cer": 0.1279
+        },
+        {
+          "epoch": 14,
+          "train_loss": 0.1261,
+          "val_loss": 0.3419,
+          "val_cer": 0.1233
+        },
+        {
+          "epoch": 15,
+          "train_loss": 0.104,
+          "val_loss": 0.3945,
+          "val_cer": 0.1142
+        },
+        {
+          "epoch": 16,
+          "train_loss": 0.1106,
+          "val_loss": 0.4581,
+          "val_cer": 0.105
+        },
+        {
+          "epoch": 17,
+          "train_loss": 0.1136,
+          "val_loss": 0.5485,
+          "val_cer": 0.105
+        },
+        {
+          "epoch": 18,
+          "train_loss": 0.098,
+          "val_loss": 0.4355,
+          "val_cer": 0.1005
+        },
+        {
+          "epoch": 19,
+          "train_loss": 0.0981,
+          "val_loss": 0.3764,
+          "val_cer": 0.1005
+        },
+        {
+          "epoch": 20,
+          "train_loss": 0.0858,
+          "val_loss": 0.3805,
+          "val_cer": 0.105
+        },
+        {
+          "epoch": 21,
+          "train_loss": 0.0831,
+          "val_loss": 0.4504,
+          "val_cer": 0.0913
+        },
+        {
+          "epoch": 22,
+          "train_loss": 0.0794,
+          "val_loss": 0.4362,
+          "val_cer": 0.1005
+        },
+        {
+          "epoch": 23,
+          "train_loss": 0.073,
+          "val_loss": 0.5297,
+          "val_cer": 0.0959
+        },
+        {
+          "epoch": 24,
+          "train_loss": 0.0664,
+          "val_loss": 0.3996,
+          "val_cer": 0.0959
+        },
+        {
+          "epoch": 25,
+          "train_loss": 0.0591,
+          "val_loss": 0.4422,
+          "val_cer": 0.0959
+        },
+        {
+          "epoch": 26,
+          "train_loss": 0.0609,
+          "val_loss": 0.4175,
+          "val_cer": 0.0913
+        },
+        {
+          "epoch": 27,
+          "train_loss": 0.0534,
+          "val_loss": 0.4278,
+          "val_cer": 0.0913
+        },
+        {
+          "epoch": 28,
+          "train_loss": 0.0569,
+          "val_loss": 0.3611,
+          "val_cer": 0.0868
+        },
+        {
+          "epoch": 29,
+          "train_loss": 0.0694,
+          "val_loss": 0.409,
+          "val_cer": 0.0959
+        },
+        {
+          "epoch": 30,
+          "train_loss": 0.055,
+          "val_loss": 0.4271,
+          "val_cer": 0.105
+        },
+        {
+          "epoch": 31,
+          "train_loss": 0.0459,
+          "val_loss": 0.4688,
+          "val_cer": 0.0913
+        },
+        {
+          "epoch": 32,
+          "train_loss": 0.0372,
+          "val_loss": 0.481,
+          "val_cer": 0.0959
+        },
+        {
+          "epoch": 33,
+          "train_loss": 0.0362,
+          "val_loss": 0.4194,
+          "val_cer": 0.0868
+        },
+        {
+          "epoch": 34,
+          "train_loss": 0.0393,
+          "val_loss": 0.5001,
+          "val_cer": 0.0913
+        },
+        {
+          "epoch": 35,
+          "train_loss": 0.0392,
+          "val_loss": 0.5602,
+          "val_cer": 0.0868
+        },
+        {
+          "epoch": 36,
+          "train_loss": 0.0377,
+          "val_loss": 0.608,
+          "val_cer": 0.0913
+        },
+        {
+          "epoch": 37,
+          "train_loss": 0.0367,
+          "val_loss": 0.4675,
+          "val_cer": 0.0959
+        },
+        {
+          "epoch": 38,
+          "train_loss": 0.0417,
+          "val_loss": 0.574,
+          "val_cer": 0.0868
+        },
+        {
+          "epoch": 39,
+          "train_loss": 0.0526,
+          "val_loss": 0.4471,
+          "val_cer": 0.1005
+        },
+        {
+          "epoch": 40,
+          "train_loss": 0.0474,
+          "val_loss": 0.5809,
+          "val_cer": 0.0959
+        },
+        {
+          "epoch": 41,
+          "train_loss": 0.0353,
+          "val_loss": 0.5142,
+          "val_cer": 0.0913
+        },
+        {
+          "epoch": 42,
+          "train_loss": 0.0306,
+          "val_loss": 0.5235,
+          "val_cer": 0.0868
+        },
+        {
+          "epoch": 43,
+          "train_loss": 0.0346,
+          "val_loss": 0.5502,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 44,
+          "train_loss": 0.03,
+          "val_loss": 0.5042,
+          "val_cer": 0.0913
+        },
+        {
+          "epoch": 45,
+          "train_loss": 0.0263,
+          "val_loss": 0.5075,
+          "val_cer": 0.0868
+        },
+        {
+          "epoch": 46,
+          "train_loss": 0.0218,
+          "val_loss": 0.4822,
+          "val_cer": 0.0959
+        },
+        {
+          "epoch": 47,
+          "train_loss": 0.0277,
+          "val_loss": 0.5637,
+          "val_cer": 0.105
+        },
+        {
+          "epoch": 48,
+          "train_loss": 0.0292,
+          "val_loss": 0.471,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 49,
+          "train_loss": 0.0211,
+          "val_loss": 0.483,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 50,
+          "train_loss": 0.0206,
+          "val_loss": 0.7841,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 51,
+          "train_loss": 0.0234,
+          "val_loss": 0.4025,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 52,
+          "train_loss": 0.0312,
+          "val_loss": 0.3745,
+          "val_cer": 0.0868
+        },
+        {
+          "epoch": 53,
+          "train_loss": 0.0206,
+          "val_loss": 0.4144,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 54,
+          "train_loss": 0.0192,
+          "val_loss": 0.3792,
+          "val_cer": 0.0868
+        },
+        {
+          "epoch": 55,
+          "train_loss": 0.0216,
+          "val_loss": 0.3562,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 56,
+          "train_loss": 0.0212,
+          "val_loss": 0.3449,
+          "val_cer": 0.0913
+        },
+        {
+          "epoch": 57,
+          "train_loss": 0.0185,
+          "val_loss": 0.3418,
+          "val_cer": 0.0868
+        },
+        {
+          "epoch": 58,
+          "train_loss": 0.0172,
+          "val_loss": 0.2757,
+          "val_cer": 0.0868
+        },
+        {
+          "epoch": 59,
+          "train_loss": 0.0266,
+          "val_loss": 0.3308,
+          "val_cer": 0.0776
+        },
+        {
+          "epoch": 60,
+          "train_loss": 0.0187,
+          "val_loss": 0.3355,
+          "val_cer": 0.0776
+        },
+        {
+          "epoch": 61,
+          "train_loss": 0.0157,
+          "val_loss": 0.3276,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 62,
+          "train_loss": 0.022,
+          "val_loss": 0.444,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 63,
+          "train_loss": 0.0236,
+          "val_loss": 0.3078,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 64,
+          "train_loss": 0.0192,
+          "val_loss": 0.4205,
+          "val_cer": 0.0868
+        },
+        {
+          "epoch": 65,
+          "train_loss": 0.0212,
+          "val_loss": 0.4469,
+          "val_cer": 0.0776
+        },
+        {
+          "epoch": 66,
+          "train_loss": 0.0166,
+          "val_loss": 0.4763,
+          "val_cer": 0.0731
+        },
+        {
+          "epoch": 67,
+          "train_loss": 0.0162,
+          "val_loss": 0.4317,
+          "val_cer": 0.0639
+        },
+        {
+          "epoch": 68,
+          "train_loss": 0.0147,
+          "val_loss": 0.4663,
+          "val_cer": 0.0685
+        },
+        {
+          "epoch": 69,
+          "train_loss": 0.0162,
+          "val_loss": 0.4336,
+          "val_cer": 0.0731
+        },
+        {
+          "epoch": 70,
+          "train_loss": 0.0171,
+          "val_loss": 0.4363,
+          "val_cer": 0.0731
+        },
+        {
+          "epoch": 71,
+          "train_loss": 0.0182,
+          "val_loss": 0.3977,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 72,
+          "train_loss": 0.0143,
+          "val_loss": 0.4496,
+          "val_cer": 0.0776
+        },
+        {
+          "epoch": 73,
+          "train_loss": 0.0177,
+          "val_loss": 0.4273,
+          "val_cer": 0.0731
+        },
+        {
+          "epoch": 74,
+          "train_loss": 0.0159,
+          "val_loss": 0.5335,
+          "val_cer": 0.0776
+        },
+        {
+          "epoch": 75,
+          "train_loss": 0.0175,
+          "val_loss": 0.4976,
+          "val_cer": 0.0685
+        },
+        {
+          "epoch": 76,
+          "train_loss": 0.0174,
+          "val_loss": 0.5429,
+          "val_cer": 0.0868
+        },
+        {
+          "epoch": 77,
+          "train_loss": 0.0242,
+          "val_loss": 0.5404,
+          "val_cer": 0.0776
+        },
+        {
+          "epoch": 78,
+          "train_loss": 0.0186,
+          "val_loss": 0.5389,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 79,
+          "train_loss": 0.035,
+          "val_loss": 0.4726,
+          "val_cer": 0.0913
+        },
+        {
+          "epoch": 80,
+          "train_loss": 0.0237,
+          "val_loss": 0.5415,
+          "val_cer": 0.1005
+        },
+        {
+          "epoch": 81,
+          "train_loss": 0.0218,
+          "val_loss": 0.5264,
+          "val_cer": 0.0776
+        },
+        {
+          "epoch": 82,
+          "train_loss": 0.017,
+          "val_loss": 0.5335,
+          "val_cer": 0.0868
+        },
+        {
+          "epoch": 83,
+          "train_loss": 0.0121,
+          "val_loss": 0.5388,
+          "val_cer": 0.0868
+        },
+        {
+          "epoch": 84,
+          "train_loss": 0.0175,
+          "val_loss": 0.5873,
+          "val_cer": 0.0868
+        },
+        {
+          "epoch": 85,
+          "train_loss": 0.0149,
+          "val_loss": 0.6882,
+          "val_cer": 0.0959
+        },
+        {
+          "epoch": 86,
+          "train_loss": 0.0241,
+          "val_loss": 0.5715,
+          "val_cer": 0.0776
+        },
+        {
+          "epoch": 87,
+          "train_loss": 0.029,
+          "val_loss": 0.5838,
+          "val_cer": 0.0776
+        },
+        {
+          "epoch": 88,
+          "train_loss": 0.0242,
+          "val_loss": 0.8157,
+          "val_cer": 0.0959
+        },
+        {
+          "epoch": 89,
+          "train_loss": 0.024,
+          "val_loss": 0.5742,
+          "val_cer": 0.0913
+        },
+        {
+          "epoch": 90,
+          "train_loss": 0.0523,
+          "val_loss": 0.5406,
+          "val_cer": 0.0913
+        },
+        {
+          "epoch": 91,
+          "train_loss": 0.0302,
+          "val_loss": 0.4565,
+          "val_cer": 0.0685
+        },
+        {
+          "epoch": 92,
+          "train_loss": 0.0215,
+          "val_loss": 0.5102,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 93,
+          "train_loss": 0.0143,
+          "val_loss": 0.5,
+          "val_cer": 0.0868
+        },
+        {
+          "epoch": 94,
+          "train_loss": 0.0133,
+          "val_loss": 0.44,
+          "val_cer": 0.0913
+        },
+        {
+          "epoch": 95,
+          "train_loss": 0.0116,
+          "val_loss": 0.5273,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 96,
+          "train_loss": 0.0148,
+          "val_loss": 0.5452,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 97,
+          "train_loss": 0.0136,
+          "val_loss": 0.4884,
+          "val_cer": 0.0685
+        }
+      ],
+      "pretrain": {
+        "n_clips": 213,
+        "n_signers": 82,
+        "best_epoch": 60,
+        "epochs_run": 90,
+        "best_val_cer": 0.523696682464455
+      },
+      "seconds": 422,
+      "train_signers": [
+        "anna",
+        "thurushi"
+      ],
+      "train_scores": {
+        "n": 330,
+        "cer": 0.014893617021276596,
+        "word_acc": 0.9454545454545454,
+        "letter_recall": 0.9858156028368794,
+        "n_no_jz": 270,
+        "cer_no_jz": 0.018134715025906734,
+        "word_acc_no_jz": 0.9333333333333333
+      },
+      "junk_start": 0.012121212121212121
+    },
+    "thurushi": {
+      "params": 601883,
+      "best_epoch": 89,
+      "epochs_run": 119,
+      "best_val_cer": 0.0182648401826484,
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 2.1846,
+          "val_loss": 1.3453,
+          "val_cer": 0.6804
+        },
+        {
+          "epoch": 2,
+          "train_loss": 1.0966,
+          "val_loss": 0.8864,
+          "val_cer": 0.5616
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.7502,
+          "val_loss": 0.7351,
+          "val_cer": 0.4612
+        },
+        {
+          "epoch": 4,
+          "train_loss": 0.6231,
+          "val_loss": 0.6022,
+          "val_cer": 0.3881
+        },
+        {
+          "epoch": 5,
+          "train_loss": 0.4941,
+          "val_loss": 0.5479,
+          "val_cer": 0.3333
+        },
+        {
+          "epoch": 6,
+          "train_loss": 0.4246,
+          "val_loss": 0.4596,
+          "val_cer": 0.274
+        },
+        {
+          "epoch": 7,
+          "train_loss": 0.3322,
+          "val_loss": 0.3444,
+          "val_cer": 0.1826
+        },
+        {
+          "epoch": 8,
+          "train_loss": 0.261,
+          "val_loss": 0.2884,
+          "val_cer": 0.1416
+        },
+        {
+          "epoch": 9,
+          "train_loss": 0.2114,
+          "val_loss": 0.2377,
+          "val_cer": 0.137
+        },
+        {
+          "epoch": 10,
+          "train_loss": 0.186,
+          "val_loss": 0.2382,
+          "val_cer": 0.105
+        },
+        {
+          "epoch": 11,
+          "train_loss": 0.1723,
+          "val_loss": 0.2283,
+          "val_cer": 0.1233
+        },
+        {
+          "epoch": 12,
+          "train_loss": 0.1614,
+          "val_loss": 0.2124,
+          "val_cer": 0.1096
+        },
+        {
+          "epoch": 13,
+          "train_loss": 0.132,
+          "val_loss": 0.2191,
+          "val_cer": 0.1233
+        },
+        {
+          "epoch": 14,
+          "train_loss": 0.1485,
+          "val_loss": 0.2445,
+          "val_cer": 0.137
+        },
+        {
+          "epoch": 15,
+          "train_loss": 0.1186,
+          "val_loss": 0.1982,
+          "val_cer": 0.1187
+        },
+        {
+          "epoch": 16,
+          "train_loss": 0.1119,
+          "val_loss": 0.2077,
+          "val_cer": 0.1142
+        },
+        {
+          "epoch": 17,
+          "train_loss": 0.1064,
+          "val_loss": 0.1274,
+          "val_cer": 0.0959
+        },
+        {
+          "epoch": 18,
+          "train_loss": 0.0929,
+          "val_loss": 0.1798,
+          "val_cer": 0.1096
+        },
+        {
+          "epoch": 19,
+          "train_loss": 0.0822,
+          "val_loss": 0.1528,
+          "val_cer": 0.1005
+        },
+        {
+          "epoch": 20,
+          "train_loss": 0.085,
+          "val_loss": 0.2123,
+          "val_cer": 0.0913
+        },
+        {
+          "epoch": 21,
+          "train_loss": 0.0793,
+          "val_loss": 0.1685,
+          "val_cer": 0.0913
+        },
+        {
+          "epoch": 22,
+          "train_loss": 0.0814,
+          "val_loss": 0.1596,
+          "val_cer": 0.0868
+        },
+        {
+          "epoch": 23,
+          "train_loss": 0.0743,
+          "val_loss": 0.1641,
+          "val_cer": 0.1005
+        },
+        {
+          "epoch": 24,
+          "train_loss": 0.0813,
+          "val_loss": 0.1788,
+          "val_cer": 0.1005
+        },
+        {
+          "epoch": 25,
+          "train_loss": 0.0723,
+          "val_loss": 0.1703,
+          "val_cer": 0.0913
+        },
+        {
+          "epoch": 26,
+          "train_loss": 0.0697,
+          "val_loss": 0.1252,
+          "val_cer": 0.0959
+        },
+        {
+          "epoch": 27,
+          "train_loss": 0.0694,
+          "val_loss": 0.1604,
+          "val_cer": 0.1096
+        },
+        {
+          "epoch": 28,
+          "train_loss": 0.065,
+          "val_loss": 0.1609,
+          "val_cer": 0.0913
+        },
+        {
+          "epoch": 29,
+          "train_loss": 0.069,
+          "val_loss": 0.1687,
+          "val_cer": 0.0913
+        },
+        {
+          "epoch": 30,
+          "train_loss": 0.0693,
+          "val_loss": 0.0991,
+          "val_cer": 0.0913
+        },
+        {
+          "epoch": 31,
+          "train_loss": 0.0692,
+          "val_loss": 0.1441,
+          "val_cer": 0.0959
+        },
+        {
+          "epoch": 32,
+          "train_loss": 0.0633,
+          "val_loss": 0.1438,
+          "val_cer": 0.0913
+        },
+        {
+          "epoch": 33,
+          "train_loss": 0.0762,
+          "val_loss": 0.176,
+          "val_cer": 0.1005
+        },
+        {
+          "epoch": 34,
+          "train_loss": 0.0698,
+          "val_loss": 0.1659,
+          "val_cer": 0.1005
+        },
+        {
+          "epoch": 35,
+          "train_loss": 0.0662,
+          "val_loss": 0.181,
+          "val_cer": 0.0959
+        },
+        {
+          "epoch": 36,
+          "train_loss": 0.0579,
+          "val_loss": 0.1505,
+          "val_cer": 0.1005
+        },
+        {
+          "epoch": 37,
+          "train_loss": 0.0541,
+          "val_loss": 0.1284,
+          "val_cer": 0.0731
+        },
+        {
+          "epoch": 38,
+          "train_loss": 0.0738,
+          "val_loss": 0.1545,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 39,
+          "train_loss": 0.0524,
+          "val_loss": 0.1245,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 40,
+          "train_loss": 0.0536,
+          "val_loss": 0.1539,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 41,
+          "train_loss": 0.0565,
+          "val_loss": 0.152,
+          "val_cer": 0.0776
+        },
+        {
+          "epoch": 42,
+          "train_loss": 0.0583,
+          "val_loss": 0.1193,
+          "val_cer": 0.0868
+        },
+        {
+          "epoch": 43,
+          "train_loss": 0.0495,
+          "val_loss": 0.1402,
+          "val_cer": 0.0913
+        },
+        {
+          "epoch": 44,
+          "train_loss": 0.0464,
+          "val_loss": 0.1449,
+          "val_cer": 0.0913
+        },
+        {
+          "epoch": 45,
+          "train_loss": 0.0539,
+          "val_loss": 0.1365,
+          "val_cer": 0.0868
+        },
+        {
+          "epoch": 46,
+          "train_loss": 0.0505,
+          "val_loss": 0.1145,
+          "val_cer": 0.0685
+        },
+        {
+          "epoch": 47,
+          "train_loss": 0.048,
+          "val_loss": 0.1857,
+          "val_cer": 0.1005
+        },
+        {
+          "epoch": 48,
+          "train_loss": 0.0417,
+          "val_loss": 0.1493,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 49,
+          "train_loss": 0.0374,
+          "val_loss": 0.0979,
+          "val_cer": 0.0776
+        },
+        {
+          "epoch": 50,
+          "train_loss": 0.0348,
+          "val_loss": 0.1122,
+          "val_cer": 0.0685
+        },
+        {
+          "epoch": 51,
+          "train_loss": 0.0321,
+          "val_loss": 0.0962,
+          "val_cer": 0.0502
+        },
+        {
+          "epoch": 52,
+          "train_loss": 0.0351,
+          "val_loss": 0.1397,
+          "val_cer": 0.0639
+        },
+        {
+          "epoch": 53,
+          "train_loss": 0.0366,
+          "val_loss": 0.1375,
+          "val_cer": 0.0685
+        },
+        {
+          "epoch": 54,
+          "train_loss": 0.0369,
+          "val_loss": 0.1286,
+          "val_cer": 0.0639
+        },
+        {
+          "epoch": 55,
+          "train_loss": 0.0323,
+          "val_loss": 0.1234,
+          "val_cer": 0.0502
+        },
+        {
+          "epoch": 56,
+          "train_loss": 0.04,
+          "val_loss": 0.1197,
+          "val_cer": 0.0594
+        },
+        {
+          "epoch": 57,
+          "train_loss": 0.0398,
+          "val_loss": 0.1547,
+          "val_cer": 0.0776
+        },
+        {
+          "epoch": 58,
+          "train_loss": 0.0406,
+          "val_loss": 0.1285,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 59,
+          "train_loss": 0.0412,
+          "val_loss": 0.17,
+          "val_cer": 0.0776
+        },
+        {
+          "epoch": 60,
+          "train_loss": 0.0322,
+          "val_loss": 0.1605,
+          "val_cer": 0.0685
+        },
+        {
+          "epoch": 61,
+          "train_loss": 0.0316,
+          "val_loss": 0.1177,
+          "val_cer": 0.0594
+        },
+        {
+          "epoch": 62,
+          "train_loss": 0.0328,
+          "val_loss": 0.1256,
+          "val_cer": 0.0639
+        },
+        {
+          "epoch": 63,
+          "train_loss": 0.0291,
+          "val_loss": 0.1117,
+          "val_cer": 0.0548
+        },
+        {
+          "epoch": 64,
+          "train_loss": 0.0276,
+          "val_loss": 0.1014,
+          "val_cer": 0.0594
+        },
+        {
+          "epoch": 65,
+          "train_loss": 0.0342,
+          "val_loss": 0.145,
+          "val_cer": 0.0594
+        },
+        {
+          "epoch": 66,
+          "train_loss": 0.0522,
+          "val_loss": 0.1542,
+          "val_cer": 0.0822
+        },
+        {
+          "epoch": 67,
+          "train_loss": 0.0313,
+          "val_loss": 0.1464,
+          "val_cer": 0.0548
+        },
+        {
+          "epoch": 68,
+          "train_loss": 0.0264,
+          "val_loss": 0.115,
+          "val_cer": 0.0457
+        },
+        {
+          "epoch": 69,
+          "train_loss": 0.0238,
+          "val_loss": 0.1077,
+          "val_cer": 0.0502
+        },
+        {
+          "epoch": 70,
+          "train_loss": 0.0256,
+          "val_loss": 0.1244,
+          "val_cer": 0.0411
+        },
+        {
+          "epoch": 71,
+          "train_loss": 0.0196,
+          "val_loss": 0.1506,
+          "val_cer": 0.0548
+        },
+        {
+          "epoch": 72,
+          "train_loss": 0.0185,
+          "val_loss": 0.1334,
+          "val_cer": 0.0502
+        },
+        {
+          "epoch": 73,
+          "train_loss": 0.0332,
+          "val_loss": 0.1175,
+          "val_cer": 0.0457
+        },
+        {
+          "epoch": 74,
+          "train_loss": 0.0276,
+          "val_loss": 0.1625,
+          "val_cer": 0.0548
+        },
+        {
+          "epoch": 75,
+          "train_loss": 0.0211,
+          "val_loss": 0.1397,
+          "val_cer": 0.0502
+        },
+        {
+          "epoch": 76,
+          "train_loss": 0.0199,
+          "val_loss": 0.1435,
+          "val_cer": 0.0502
+        },
+        {
+          "epoch": 77,
+          "train_loss": 0.0202,
+          "val_loss": 0.1363,
+          "val_cer": 0.0411
+        },
+        {
+          "epoch": 78,
+          "train_loss": 0.0179,
+          "val_loss": 0.1846,
+          "val_cer": 0.0594
+        },
+        {
+          "epoch": 79,
+          "train_loss": 0.0424,
+          "val_loss": 0.132,
+          "val_cer": 0.0457
+        },
+        {
+          "epoch": 80,
+          "train_loss": 0.0277,
+          "val_loss": 0.1269,
+          "val_cer": 0.0411
+        },
+        {
+          "epoch": 81,
+          "train_loss": 0.0447,
+          "val_loss": 0.2155,
+          "val_cer": 0.0639
+        },
+        {
+          "epoch": 82,
+          "train_loss": 0.0491,
+          "val_loss": 0.1563,
+          "val_cer": 0.0502
+        },
+        {
+          "epoch": 83,
+          "train_loss": 0.0371,
+          "val_loss": 0.2153,
+          "val_cer": 0.0639
+        },
+        {
+          "epoch": 84,
+          "train_loss": 0.0404,
+          "val_loss": 0.1968,
+          "val_cer": 0.0594
+        },
+        {
+          "epoch": 85,
+          "train_loss": 0.0367,
+          "val_loss": 0.0966,
+          "val_cer": 0.0548
+        },
+        {
+          "epoch": 86,
+          "train_loss": 0.0373,
+          "val_loss": 0.0988,
+          "val_cer": 0.0365
+        },
+        {
+          "epoch": 87,
+          "train_loss": 0.0302,
+          "val_loss": 0.1518,
+          "val_cer": 0.0411
+        },
+        {
+          "epoch": 88,
+          "train_loss": 0.0165,
+          "val_loss": 0.0683,
+          "val_cer": 0.032
+        },
+        {
+          "epoch": 89,
+          "train_loss": 0.0201,
+          "val_loss": 0.0316,
+          "val_cer": 0.0183
+        },
+        {
+          "epoch": 90,
+          "train_loss": 0.0148,
+          "val_loss": 0.1291,
+          "val_cer": 0.0457
+        },
+        {
+          "epoch": 91,
+          "train_loss": 0.0134,
+          "val_loss": 0.0935,
+          "val_cer": 0.0365
+        },
+        {
+          "epoch": 92,
+          "train_loss": 0.0111,
+          "val_loss": 0.0914,
+          "val_cer": 0.0411
+        },
+        {
+          "epoch": 93,
+          "train_loss": 0.0114,
+          "val_loss": 0.1189,
+          "val_cer": 0.0365
+        },
+        {
+          "epoch": 94,
+          "train_loss": 0.0104,
+          "val_loss": 0.1414,
+          "val_cer": 0.0411
+        },
+        {
+          "epoch": 95,
+          "train_loss": 0.0105,
+          "val_loss": 0.1275,
+          "val_cer": 0.0457
+        },
+        {
+          "epoch": 96,
+          "train_loss": 0.0109,
+          "val_loss": 0.1233,
+          "val_cer": 0.0457
+        },
+        {
+          "epoch": 97,
+          "train_loss": 0.0101,
+          "val_loss": 0.0955,
+          "val_cer": 0.0411
+        },
+        {
+          "epoch": 98,
+          "train_loss": 0.0081,
+          "val_loss": 0.092,
+          "val_cer": 0.032
+        },
+        {
+          "epoch": 99,
+          "train_loss": 0.0083,
+          "val_loss": 0.1099,
+          "val_cer": 0.0411
+        },
+        {
+          "epoch": 100,
+          "train_loss": 0.0101,
+          "val_loss": 0.1278,
+          "val_cer": 0.0411
+        },
+        {
+          "epoch": 101,
+          "train_loss": 0.0162,
+          "val_loss": 0.149,
+          "val_cer": 0.0502
+        },
+        {
+          "epoch": 102,
+          "train_loss": 0.014,
+          "val_loss": 0.1419,
+          "val_cer": 0.0502
+        },
+        {
+          "epoch": 103,
+          "train_loss": 0.01,
+          "val_loss": 0.1311,
+          "val_cer": 0.032
+        },
+        {
+          "epoch": 104,
+          "train_loss": 0.0108,
+          "val_loss": 0.1306,
+          "val_cer": 0.0365
+        },
+        {
+          "epoch": 105,
+          "train_loss": 0.0097,
+          "val_loss": 0.1338,
+          "val_cer": 0.032
+        },
+        {
+          "epoch": 106,
+          "train_loss": 0.0107,
+          "val_loss": 0.1218,
+          "val_cer": 0.0365
+        },
+        {
+          "epoch": 107,
+          "train_loss": 0.021,
+          "val_loss": 0.2276,
+          "val_cer": 0.0594
+        },
+        {
+          "epoch": 108,
+          "train_loss": 0.0112,
+          "val_loss": 0.1344,
+          "val_cer": 0.032
+        },
+        {
+          "epoch": 109,
+          "train_loss": 0.0132,
+          "val_loss": 0.1727,
+          "val_cer": 0.0457
+        },
+        {
+          "epoch": 110,
+          "train_loss": 0.0341,
+          "val_loss": 0.1721,
+          "val_cer": 0.0502
+        },
+        {
+          "epoch": 111,
+          "train_loss": 0.012,
+          "val_loss": 0.1493,
+          "val_cer": 0.0457
+        },
+        {
+          "epoch": 112,
+          "train_loss": 0.0081,
+          "val_loss": 0.1368,
+          "val_cer": 0.0411
+        },
+        {
+          "epoch": 113,
+          "train_loss": 0.008,
+          "val_loss": 0.127,
+          "val_cer": 0.032
+        },
+        {
+          "epoch": 114,
+          "train_loss": 0.0074,
+          "val_loss": 0.1444,
+          "val_cer": 0.0411
+        },
+        {
+          "epoch": 115,
+          "train_loss": 0.0129,
+          "val_loss": 0.1731,
+          "val_cer": 0.0411
+        },
+        {
+          "epoch": 116,
+          "train_loss": 0.01,
+          "val_loss": 0.1469,
+          "val_cer": 0.0274
+        },
+        {
+          "epoch": 117,
+          "train_loss": 0.0118,
+          "val_loss": 0.1453,
+          "val_cer": 0.032
+        },
+        {
+          "epoch": 118,
+          "train_loss": 0.0077,
+          "val_loss": 0.15,
+          "val_cer": 0.032
+        },
+        {
+          "epoch": 119,
+          "train_loss": 0.0084,
+          "val_loss": 0.1433,
+          "val_cer": 0.032
+        }
+      ],
+      "pretrain": {
+        "n_clips": 213,
+        "n_signers": 82,
+        "best_epoch": 57,
+        "epochs_run": 87,
+        "best_val_cer": 0.5213270142180095
+      },
+      "seconds": 607,
+      "train_signers": [
+        "anna",
+        "saaya"
+      ],
+      "train_scores": {
+        "n": 330,
+        "cer": 0.010638297872340425,
+        "word_acc": 0.9545454545454546,
+        "letter_recall": 0.9900709219858156,
+        "n_no_jz": 270,
+        "cer_no_jz": 0.012953367875647668,
+        "word_acc_no_jz": 0.9444444444444444
+      },
+      "junk_start": 0.012121212121212121
+    }
+  },
+  "new_words": null,
+  "baseline_b": {
+    "anna": {
+      "n": 165,
+      "cer": 0.4198581560283688,
+      "word_acc": 0.07878787878787878,
+      "letter_recall": 0.649645390070922,
+      "n_no_jz": 135,
+      "cer_no_jz": 0.385146804835924,
+      "word_acc_no_jz": 0.0962962962962963
+    },
+    "saaya": {
+      "n": 165,
+      "cer": 0.39858156028368796,
+      "word_acc": 0.21818181818181817,
+      "letter_recall": 0.6822695035460993,
+      "n_no_jz": 135,
+      "cer_no_jz": 0.33678756476683935,
+      "word_acc_no_jz": 0.26666666666666666
+    },
+    "thurushi": {
+      "n": 165,
+      "cer": 0.2794326241134752,
+      "word_acc": 0.2545454545454545,
+      "letter_recall": 0.7319148936170212,
+      "n_no_jz": 135,
+      "cer_no_jz": 0.2469775474956822,
+      "word_acc_no_jz": 0.3111111111111111
+    },
+    "all": {
+      "n": 495,
+      "cer": 0.3659574468085106,
+      "word_acc": 0.18383838383838383,
+      "letter_recall": 0.6879432624113475,
+      "n_no_jz": 405,
+      "cer_no_jz": 0.3229706390328152,
+      "word_acc_no_jz": 0.22469135802469137
+    }
+  },
+  "examples": {
+    "APPLE": {
+      "anna": "FAPLE",
+      "saaya": "APLE",
+      "thurushi": "PLE"
+    },
+    "BALL": {
+      "anna": "BALL",
+      "saaya": "BAL",
+      "thurushi": "AL"
+    },
+    "BIRTHDAY": {
+      "anna": "FBIRTDY",
+      "saaya": "BITHDAY",
+      "thurushi": "BIRTHDAY"
+    },
+    "BOOK": {
+      "anna": "FBMOK",
+      "saaya": "BOOK",
+      "thurushi": "BOE"
+    },
+    "BOX": {
+      "anna": "FBOX",
+      "saaya": "BOX",
+      "thurushi": "E"
+    },
+    "CAT": {
+      "anna": "CAT",
+      "saaya": "CAT",
+      "thurushi": "CT"
+    },
+    "COFFEE": {
+      "anna": "COFFE",
+      "saaya": "COFFE",
+      "thurushi": "COFFEE"
+    },
+    "DAD": {
+      "anna": "FCKAD",
+      "saaya": "DAD",
+      "thurushi": "DD"
+    },
+    "DOG": {
+      "anna": "BOO",
+      "saaya": "DOG",
+      "thurushi": "DEG"
+    },
+    "EGG": {
+      "anna": "FWFE",
+      "saaya": "EG",
+      "thurushi": "EG"
+    },
+    "ENJOY": {
+      "anna": "FENJOY",
+      "saaya": "ENJOY",
+      "thurushi": "EJOY"
+    },
+    "EXTRA": {
+      "anna": "FETRA",
+      "saaya": "EXTRA",
+      "thurushi": "ETRA"
+    },
+    "FAMILY": {
+      "anna": "FFAMILY",
+      "saaya": "FAMILY",
+      "thurushi": "FMILY"
+    },
+    "FOX": {
+      "anna": "FFOX",
+      "saaya": "FOX",
+      "thurushi": "FEX"
+    },
+    "FRIEND": {
+      "anna": "FRIEND",
+      "saaya": "FUIEND",
+      "thurushi": "FRIEND"
+    },
+    "FUZZY": {
+      "anna": "FFUZY",
+      "saaya": "FUZZY",
+      "thurushi": "FUZAY"
+    },
+    "GIFT": {
+      "anna": "WIFT",
+      "saaya": "GIFT",
+      "thurushi": "GIFT"
+    },
+    "GOOD": {
+      "anna": "CLOCO",
+      "saaya": "GOO",
+      "thurushi": "GOOD"
+    },
+    "GYM": {
+      "anna": "FLYM",
+      "saaya": "GYM",
+      "thurushi": "GYM"
+    },
+    "HELLO": {
+      "anna": "HELLOY",
+      "saaya": "HELLO",
+      "thurushi": "HELLO"
+    },
+    "HI": {
+      "anna": "BHIAE",
+      "saaya": "HI",
+      "thurushi": "HIY"
+    },
+    "JAZZ": {
+      "anna": "FIAZZ",
+      "saaya": "JAZZZ",
+      "thurushi": "JAZZ"
+    },
+    "JOB": {
+      "anna": "FIJOB",
+      "saaya": "JOB",
+      "thurushi": "JO"
+    },
+    "JUICE": {
+      "anna": "FIUICE",
+      "saaya": "JUIOE",
+      "thurushi": "JUICE"
+    },
+    "JUMP": {
+      "anna": "FIJORUM",
+      "saaya": "JUMP",
+      "thurushi": "JUMP"
+    },
+    "KEY": {
+      "anna": "KEY",
+      "saaya": "KEY",
+      "thurushi": "EY"
+    },
+    "LETTER": {
+      "anna": "FLETER",
+      "saaya": "LETER",
+      "thurushi": "LETEOR"
+    },
+    "LOVE": {
+      "anna": "LOWVEE",
+      "saaya": "LOVE",
+      "thurushi": "LOVE"
+    },
+    "MILK": {
+      "anna": "FMILK",
+      "saaya": "MILK",
+      "thurushi": "MIL"
+    },
+    "MY": {
+      "anna": "FMY",
+      "saaya": "MY",
+      "thurushi": "MA"
+    },
+    "NAME": {
+      "anna": "FNAME",
+      "saaya": "NAME",
+      "thurushi": "ME"
+    },
+    "NO": {
+      "anna": "NE",
+      "saaya": "NO",
+      "thurushi": "O"
+    },
+    "PIZZA": {
+      "anna": "CUIZZA",
+      "saaya": "GIZZZA",
+      "thurushi": "PIZZA"
+    },
+    "PLEASE": {
+      "anna": "WULEASE",
+      "saaya": "QLEASE",
+      "thurushi": "PLESASE"
+    },
+    "QUEEN": {
+      "anna": "CQUEN",
+      "saaya": "QUEN",
+      "thurushi": "QUEEN"
+    },
+    "QUICK": {
+      "anna": "WQUICK",
+      "saaya": "QUICK",
+      "thurushi": "UICD"
+    },
+    "QUIET": {
+      "anna": "CQUIET",
+      "saaya": "QUIENT",
+      "thurushi": "QUIET"
+    },
+    "QUIZ": {
+      "anna": "FWQUIZ",
+      "saaya": "QUIZZZZ",
+      "thurushi": "UIZ"
+    },
+    "SCHOOL": {
+      "anna": "SCHOL",
+      "saaya": "SCHOL",
+      "thurushi": "SCHOL"
+    },
+    "SIX": {
+      "anna": "FOSIX",
+      "saaya": "SIX",
+      "thurushi": "SIEX"
+    },
+    "SORRY": {
+      "anna": "FSORRY",
+      "saaya": "SORRY",
+      "thurushi": "SORRY"
+    },
+    "SQUARE": {
+      "anna": "SRE",
+      "saaya": "SQUARE",
+      "thurushi": "SQUARE"
+    },
+    "TAXI": {
+      "anna": "FCTAXI",
+      "saaya": "TAXI",
+      "thurushi": "TAI"
+    },
+    "THANKS": {
+      "anna": "FANK",
+      "saaya": "THANKS",
+      "thurushi": "THNDS"
+    },
+    "VAN": {
+      "anna": "VAN",
+      "saaya": "VAN",
+      "thurushi": "VAN"
+    },
+    "VIDEO": {
+      "anna": "UIDEO",
+      "saaya": "VIDEO",
+      "thurushi": "VIE"
+    },
+    "VOW": {
+      "anna": "VUOW",
+      "saaya": "VOW",
+      "thurushi": "VOW"
+    },
+    "WALK": {
+      "anna": "FWALK",
+      "saaya": "WALK",
+      "thurushi": "WL"
+    },
+    "WATER": {
+      "anna": "FWATER",
+      "saaya": "WATER",
+      "thurushi": "WTER"
+    },
+    "WAVE": {
+      "anna": "WAVEE",
+      "saaya": "WAVE",
+      "thurushi": "WAVE"
+    },
+    "WEB": {
+      "anna": "FWEB",
+      "saaya": "WEB",
+      "thurushi": "WEB"
+    },
+    "WEEKEND": {
+      "anna": "WEKEND",
+      "saaya": "WEEKEND",
+      "thurushi": "WEEND"
+    },
+    "YES": {
+      "anna": "FBRYES",
+      "saaya": "YES",
+      "thurushi": "YES"
+    },
+    "ZERO": {
+      "anna": "CZZERO",
+      "saaya": "ZERO",
+      "thurushi": "ERO"
+    },
+    "ZOO": {
+      "anna": "CKZO",
+      "saaya": "ZOO",
+      "thurushi": "OO"
+    }
+  },
+  "predictions": [
+    {
+      "path": "./data_seq/APPLE/anna_0.npz",
+      "word": "APPLE",
+      "signer": "anna",
+      "pred": "FAPLE",
+      "secs": 5.733,
+      "frames": 87,
+      "ms": 5.892
+    },
+    {
+      "path": "./data_seq/APPLE/anna_1.npz",
+      "word": "APPLE",
+      "signer": "anna",
+      "pred": "FALE",
+      "secs": 5.6,
+      "frames": 85,
+      "ms": 5.98
+    },
+    {
+      "path": "./data_seq/APPLE/anna_2.npz",
+      "word": "APPLE",
+      "signer": "anna",
+      "pred": "ALE",
+      "secs": 5.867,
+      "frames": 89,
+      "ms": 5.853
+    },
+    {
+      "path": "./data_seq/BALL/anna_0.npz",
+      "word": "BALL",
+      "signer": "anna",
+      "pred": "BALL",
+      "secs": 2.933,
+      "frames": 45,
+      "ms": 3.063
+    },
+    {
+      "path": "./data_seq/BALL/anna_1.npz",
+      "word": "BALL",
+      "signer": "anna",
+      "pred": "FBALL",
+      "secs": 3.533,
+      "frames": 54,
+      "ms": 3.757
+    },
+    {
+      "path": "./data_seq/BALL/anna_2.npz",
+      "word": "BALL",
+      "signer": "anna",
+      "pred": "FBALL",
+      "secs": 3.667,
+      "frames": 56,
+      "ms": 3.684
+    },
+    {
+      "path": "./data_seq/BIRTHDAY/anna_0.npz",
+      "word": "BIRTHDAY",
+      "signer": "anna",
+      "pred": "FBIRTDY",
+      "secs": 8.267,
+      "frames": 125,
+      "ms": 7.865
+    },
+    {
+      "path": "./data_seq/BIRTHDAY/anna_1.npz",
+      "word": "BIRTHDAY",
+      "signer": "anna",
+      "pred": "FBIRTHDAY",
+      "secs": 8.6,
+      "frames": 130,
+      "ms": 8.164
+    },
+    {
+      "path": "./data_seq/BIRTHDAY/anna_2.npz",
+      "word": "BIRTHDAY",
+      "signer": "anna",
+      "pred": "FBIRTAY",
+      "secs": 9.267,
+      "frames": 140,
+      "ms": 9.018
+    },
+    {
+      "path": "./data_seq/BOOK/anna_0.npz",
+      "word": "BOOK",
+      "signer": "anna",
+      "pred": "FBMOK",
+      "secs": 3.2,
+      "frames": 49,
+      "ms": 3.405
+    },
+    {
+      "path": "./data_seq/BOOK/anna_1.npz",
+      "word": "BOOK",
+      "signer": "anna",
+      "pred": "FBOK",
+      "secs": 3.667,
+      "frames": 56,
+      "ms": 3.666
+    },
+    {
+      "path": "./data_seq/BOOK/anna_2.npz",
+      "word": "BOOK",
+      "signer": "anna",
+      "pred": "FBOOK",
+      "secs": 3.467,
+      "frames": 53,
+      "ms": 3.516
+    },
+    {
+      "path": "./data_seq/BOX/anna_0.npz",
+      "word": "BOX",
+      "signer": "anna",
+      "pred": "FBOX",
+      "secs": 3.067,
+      "frames": 47,
+      "ms": 3.104
+    },
+    {
+      "path": "./data_seq/BOX/anna_1.npz",
+      "word": "BOX",
+      "signer": "anna",
+      "pred": "FBOX",
+      "secs": 3.0,
+      "frames": 46,
+      "ms": 3.3
+    },
+    {
+      "path": "./data_seq/BOX/anna_2.npz",
+      "word": "BOX",
+      "signer": "anna",
+      "pred": "FBOX",
+      "secs": 3.067,
+      "frames": 47,
+      "ms": 3.417
+    },
+    {
+      "path": "./data_seq/CAT/anna_0.npz",
+      "word": "CAT",
+      "signer": "anna",
+      "pred": "CAT",
+      "secs": 2.667,
+      "frames": 41,
+      "ms": 2.779
+    },
+    {
+      "path": "./data_seq/CAT/anna_1.npz",
+      "word": "CAT",
+      "signer": "anna",
+      "pred": "CAT",
+      "secs": 3.2,
+      "frames": 49,
+      "ms": 3.771
+    },
+    {
+      "path": "./data_seq/CAT/anna_2.npz",
+      "word": "CAT",
+      "signer": "anna",
+      "pred": "CAT",
+      "secs": 3.8,
+      "frames": 58,
+      "ms": 4.734
+    },
+    {
+      "path": "./data_seq/COFFEE/anna_0.npz",
+      "word": "COFFEE",
+      "signer": "anna",
+      "pred": "COFFE",
+      "secs": 5.0,
+      "frames": 76,
+      "ms": 5.315
+    },
+    {
+      "path": "./data_seq/COFFEE/anna_1.npz",
+      "word": "COFFEE",
+      "signer": "anna",
+      "pred": "COFFE",
+      "secs": 5.8,
+      "frames": 88,
+      "ms": 5.872
+    },
+    {
+      "path": "./data_seq/COFFEE/anna_2.npz",
+      "word": "COFFEE",
+      "signer": "anna",
+      "pred": "FCOFFEE",
+      "secs": 6.067,
+      "frames": 92,
+      "ms": 6.294
+    },
+    {
+      "path": "./data_seq/DAD/anna_0.npz",
+      "word": "DAD",
+      "signer": "anna",
+      "pred": "FCKAD",
+      "secs": 3.533,
+      "frames": 54,
+      "ms": 3.974
+    },
+    {
+      "path": "./data_seq/DAD/anna_1.npz",
+      "word": "DAD",
+      "signer": "anna",
+      "pred": "CAX",
+      "secs": 2.867,
+      "frames": 44,
+      "ms": 3.223
+    },
+    {
+      "path": "./data_seq/DAD/anna_2.npz",
+      "word": "DAD",
+      "signer": "anna",
+      "pred": "CRA",
+      "secs": 3.333,
+      "frames": 51,
+      "ms": 3.441
+    },
+    {
+      "path": "./data_seq/DOG/anna_0.npz",
+      "word": "DOG",
+      "signer": "anna",
+      "pred": "BOO",
+      "secs": 3.333,
+      "frames": 51,
+      "ms": 3.378
+    },
+    {
+      "path": "./data_seq/DOG/anna_1.npz",
+      "word": "DOG",
+      "signer": "anna",
+      "pred": "BDO",
+      "secs": 3.0,
+      "frames": 46,
+      "ms": 3.199
+    },
+    {
+      "path": "./data_seq/DOG/anna_2.npz",
+      "word": "DOG",
+      "signer": "anna",
+      "pred": "BDO",
+      "secs": 3.0,
+      "frames": 46,
+      "ms": 3.366
+    },
+    {
+      "path": "./data_seq/EGG/anna_0.npz",
+      "word": "EGG",
+      "signer": "anna",
+      "pred": "FWFE",
+      "secs": 2.8,
+      "frames": 43,
+      "ms": 2.994
+    },
+    {
+      "path": "./data_seq/EGG/anna_1.npz",
+      "word": "EGG",
+      "signer": "anna",
+      "pred": "FFEZ",
+      "secs": 3.4,
+      "frames": 52,
+      "ms": 3.555
+    },
+    {
+      "path": "./data_seq/EGG/anna_2.npz",
+      "word": "EGG",
+      "signer": "anna",
+      "pred": "FEZL",
+      "secs": 3.067,
+      "frames": 47,
+      "ms": 3.152
+    },
+    {
+      "path": "./data_seq/ENJOY/anna_0.npz",
+      "word": "ENJOY",
+      "signer": "anna",
+      "pred": "FENJOY",
+      "secs": 5.067,
+      "frames": 77,
+      "ms": 5.053
+    },
+    {
+      "path": "./data_seq/ENJOY/anna_1.npz",
+      "word": "ENJOY",
+      "signer": "anna",
+      "pred": "ENJOY",
+      "secs": 5.267,
+      "frames": 80,
+      "ms": 5.21
+    },
+    {
+      "path": "./data_seq/ENJOY/anna_2.npz",
+      "word": "ENJOY",
+      "signer": "anna",
+      "pred": "FENJOY",
+      "secs": 5.2,
+      "frames": 79,
+      "ms": 5.018
+    },
+    {
+      "path": "./data_seq/EXTRA/anna_0.npz",
+      "word": "EXTRA",
+      "signer": "anna",
+      "pred": "FETRA",
+      "secs": 5.733,
+      "frames": 87,
+      "ms": 5.495
+    },
+    {
+      "path": "./data_seq/EXTRA/anna_1.npz",
+      "word": "EXTRA",
+      "signer": "anna",
+      "pred": "FEXTRA",
+      "secs": 5.2,
+      "frames": 79,
+      "ms": 5.09
+    },
+    {
+      "path": "./data_seq/EXTRA/anna_2.npz",
+      "word": "EXTRA",
+      "signer": "anna",
+      "pred": "ETRA",
+      "secs": 4.933,
+      "frames": 75,
+      "ms": 4.8
+    },
+    {
+      "path": "./data_seq/FAMILY/anna_0.npz",
+      "word": "FAMILY",
+      "signer": "anna",
+      "pred": "FFAMILY",
+      "secs": 5.8,
+      "frames": 88,
+      "ms": 5.558
+    },
+    {
+      "path": "./data_seq/FAMILY/anna_1.npz",
+      "word": "FAMILY",
+      "signer": "anna",
+      "pred": "FAMILY",
+      "secs": 5.867,
+      "frames": 89,
+      "ms": 5.591
+    },
+    {
+      "path": "./data_seq/FAMILY/anna_2.npz",
+      "word": "FAMILY",
+      "signer": "anna",
+      "pred": "FAMILY",
+      "secs": 6.133,
+      "frames": 93,
+      "ms": 5.855
+    },
+    {
+      "path": "./data_seq/FOX/anna_0.npz",
+      "word": "FOX",
+      "signer": "anna",
+      "pred": "FFOX",
+      "secs": 3.4,
+      "frames": 52,
+      "ms": 3.354
+    },
+    {
+      "path": "./data_seq/FOX/anna_1.npz",
+      "word": "FOX",
+      "signer": "anna",
+      "pred": "FFO",
+      "secs": 3.6,
+      "frames": 55,
+      "ms": 3.67
+    },
+    {
+      "path": "./data_seq/FOX/anna_2.npz",
+      "word": "FOX",
+      "signer": "anna",
+      "pred": "FOX",
+      "secs": 3.533,
+      "frames": 54,
+      "ms": 3.48
+    },
+    {
+      "path": "./data_seq/FRIEND/anna_0.npz",
+      "word": "FRIEND",
+      "signer": "anna",
+      "pred": "FRIEND",
+      "secs": 5.933,
+      "frames": 90,
+      "ms": 5.778
+    },
+    {
+      "path": "./data_seq/FRIEND/anna_1.npz",
+      "word": "FRIEND",
+      "signer": "anna",
+      "pred": "FRIEND",
+      "secs": 5.867,
+      "frames": 89,
+      "ms": 5.847
+    },
+    {
+      "path": "./data_seq/FRIEND/anna_2.npz",
+      "word": "FRIEND",
+      "signer": "anna",
+      "pred": "FRIEND",
+      "secs": 6.933,
+      "frames": 105,
+      "ms": 6.784
+    },
+    {
+      "path": "./data_seq/FUZZY/anna_0.npz",
+      "word": "FUZZY",
+      "signer": "anna",
+      "pred": "FFUZY",
+      "secs": 6.133,
+      "frames": 93,
+      "ms": 5.964
+    },
+    {
+      "path": "./data_seq/FUZZY/anna_1.npz",
+      "word": "FUZZY",
+      "signer": "anna",
+      "pred": "FUZY",
+      "secs": 6.4,
+      "frames": 97,
+      "ms": 6.166
+    },
+    {
+      "path": "./data_seq/FUZZY/anna_2.npz",
+      "word": "FUZZY",
+      "signer": "anna",
+      "pred": "FUZY",
+      "secs": 6.467,
+      "frames": 98,
+      "ms": 6.308
+    },
+    {
+      "path": "./data_seq/GIFT/anna_0.npz",
+      "word": "GIFT",
+      "signer": "anna",
+      "pred": "WIFT",
+      "secs": 4.667,
+      "frames": 71,
+      "ms": 4.5
+    },
+    {
+      "path": "./data_seq/GIFT/anna_1.npz",
+      "word": "GIFT",
+      "signer": "anna",
+      "pred": "FLIFT",
+      "secs": 5.533,
+      "frames": 84,
+      "ms": 5.573
+    },
+    {
+      "path": "./data_seq/GIFT/anna_2.npz",
+      "word": "GIFT",
+      "signer": "anna",
+      "pred": "FWIFT",
+      "secs": 4.733,
+      "frames": 72,
+      "ms": 4.581
+    },
+    {
+      "path": "./data_seq/GOOD/anna_0.npz",
+      "word": "GOOD",
+      "signer": "anna",
+      "pred": "CLOCO",
+      "secs": 3.133,
+      "frames": 48,
+      "ms": 3.093
+    },
+    {
+      "path": "./data_seq/GOOD/anna_1.npz",
+      "word": "GOOD",
+      "signer": "anna",
+      "pred": "LO",
+      "secs": 3.4,
+      "frames": 52,
+      "ms": 3.571
+    },
+    {
+      "path": "./data_seq/GOOD/anna_2.npz",
+      "word": "GOOD",
+      "signer": "anna",
+      "pred": "LOCO",
+      "secs": 3.267,
+      "frames": 50,
+      "ms": 3.623
+    },
+    {
+      "path": "./data_seq/GYM/anna_0.npz",
+      "word": "GYM",
+      "signer": "anna",
+      "pred": "FLYM",
+      "secs": 3.333,
+      "frames": 51,
+      "ms": 3.541
+    },
+    {
+      "path": "./data_seq/GYM/anna_1.npz",
+      "word": "GYM",
+      "signer": "anna",
+      "pred": "FYM",
+      "secs": 3.733,
+      "frames": 57,
+      "ms": 3.846
+    },
+    {
+      "path": "./data_seq/GYM/anna_2.npz",
+      "word": "GYM",
+      "signer": "anna",
+      "pred": "FLYM",
+      "secs": 3.533,
+      "frames": 54,
+      "ms": 3.563
+    },
+    {
+      "path": "./data_seq/HELLO/anna_0.npz",
+      "word": "HELLO",
+      "signer": "anna",
+      "pred": "HELLOY",
+      "secs": 4.133,
+      "frames": 63,
+      "ms": 4.006
+    },
+    {
+      "path": "./data_seq/HELLO/anna_1.npz",
+      "word": "HELLO",
+      "signer": "anna",
+      "pred": "HELLO",
+      "secs": 3.867,
+      "frames": 59,
+      "ms": 3.926
+    },
+    {
+      "path": "./data_seq/HELLO/anna_2.npz",
+      "word": "HELLO",
+      "signer": "anna",
+      "pred": "HELLO",
+      "secs": 3.867,
+      "frames": 59,
+      "ms": 3.893
+    },
+    {
+      "path": "./data_seq/HI/anna_0.npz",
+      "word": "HI",
+      "signer": "anna",
+      "pred": "BHIAE",
+      "secs": 3.333,
+      "frames": 51,
+      "ms": 3.303
+    },
+    {
+      "path": "./data_seq/HI/anna_1.npz",
+      "word": "HI",
+      "signer": "anna",
+      "pred": "HIL",
+      "secs": 2.867,
+      "frames": 44,
+      "ms": 2.974
+    },
+    {
+      "path": "./data_seq/HI/anna_2.npz",
+      "word": "HI",
+      "signer": "anna",
+      "pred": "HIL",
+      "secs": 2.733,
+      "frames": 42,
+      "ms": 3.09
+    },
+    {
+      "path": "./data_seq/JAZZ/anna_0.npz",
+      "word": "JAZZ",
+      "signer": "anna",
+      "pred": "FIAZZ",
+      "secs": 5.933,
+      "frames": 90,
+      "ms": 5.764
+    },
+    {
+      "path": "./data_seq/JAZZ/anna_1.npz",
+      "word": "JAZZ",
+      "signer": "anna",
+      "pred": "FIAZZZE",
+      "secs": 6.467,
+      "frames": 98,
+      "ms": 6.286
+    },
+    {
+      "path": "./data_seq/JAZZ/anna_2.npz",
+      "word": "JAZZ",
+      "signer": "anna",
+      "pred": "FIAZZ",
+      "secs": 6.267,
+      "frames": 95,
+      "ms": 6.157
+    },
+    {
+      "path": "./data_seq/JOB/anna_0.npz",
+      "word": "JOB",
+      "signer": "anna",
+      "pred": "FIJOB",
+      "secs": 3.867,
+      "frames": 59,
+      "ms": 3.827
+    },
+    {
+      "path": "./data_seq/JOB/anna_1.npz",
+      "word": "JOB",
+      "signer": "anna",
+      "pred": "FIOB",
+      "secs": 4.133,
+      "frames": 63,
+      "ms": 4.067
+    },
+    {
+      "path": "./data_seq/JOB/anna_2.npz",
+      "word": "JOB",
+      "signer": "anna",
+      "pred": "FIJIOB",
+      "secs": 3.733,
+      "frames": 57,
+      "ms": 3.646
+    },
+    {
+      "path": "./data_seq/JUICE/anna_0.npz",
+      "word": "JUICE",
+      "signer": "anna",
+      "pred": "FIUICE",
+      "secs": 5.133,
+      "frames": 78,
+      "ms": 4.918
+    },
+    {
+      "path": "./data_seq/JUICE/anna_1.npz",
+      "word": "JUICE",
+      "signer": "anna",
+      "pred": "FIJIUICE",
+      "secs": 5.533,
+      "frames": 84,
+      "ms": 5.327
+    },
+    {
+      "path": "./data_seq/JUICE/anna_2.npz",
+      "word": "JUICE",
+      "signer": "anna",
+      "pred": "FIJRUICE",
+      "secs": 6.067,
+      "frames": 92,
+      "ms": 5.775
+    },
+    {
+      "path": "./data_seq/JUMP/anna_0.npz",
+      "word": "JUMP",
+      "signer": "anna",
+      "pred": "FIJORUM",
+      "secs": 5.733,
+      "frames": 87,
+      "ms": 5.629
+    },
+    {
+      "path": "./data_seq/JUMP/anna_1.npz",
+      "word": "JUMP",
+      "signer": "anna",
+      "pred": "FIUM",
+      "secs": 4.6,
+      "frames": 70,
+      "ms": 4.604
+    },
+    {
+      "path": "./data_seq/JUMP/anna_2.npz",
+      "word": "JUMP",
+      "signer": "anna",
+      "pred": "FIUMP",
+      "secs": 5.267,
+      "frames": 80,
+      "ms": 5.095
+    },
+    {
+      "path": "./data_seq/KEY/anna_0.npz",
+      "word": "KEY",
+      "signer": "anna",
+      "pred": "KEY",
+      "secs": 3.0,
+      "frames": 46,
+      "ms": 2.996
+    },
+    {
+      "path": "./data_seq/KEY/anna_1.npz",
+      "word": "KEY",
+      "signer": "anna",
+      "pred": "KEY",
+      "secs": 3.2,
+      "frames": 49,
+      "ms": 3.127
+    },
+    {
+      "path": "./data_seq/KEY/anna_2.npz",
+      "word": "KEY",
+      "signer": "anna",
+      "pred": "KEY",
+      "secs": 3.2,
+      "frames": 49,
+      "ms": 3.181
+    },
+    {
+      "path": "./data_seq/LETTER/anna_0.npz",
+      "word": "LETTER",
+      "signer": "anna",
+      "pred": "FLETER",
+      "secs": 5.933,
+      "frames": 90,
+      "ms": 5.649
+    },
+    {
+      "path": "./data_seq/LETTER/anna_1.npz",
+      "word": "LETTER",
+      "signer": "anna",
+      "pred": "WCLEER",
+      "secs": 6.2,
+      "frames": 94,
+      "ms": 5.964
+    },
+    {
+      "path": "./data_seq/LETTER/anna_2.npz",
+      "word": "LETTER",
+      "signer": "anna",
+      "pred": "FWLETER",
+      "secs": 6.733,
+      "frames": 102,
+      "ms": 6.518
+    },
+    {
+      "path": "./data_seq/LOVE/anna_0.npz",
+      "word": "LOVE",
+      "signer": "anna",
+      "pred": "LOWVEE",
+      "secs": 3.8,
+      "frames": 58,
+      "ms": 3.716
+    },
+    {
+      "path": "./data_seq/LOVE/anna_1.npz",
+      "word": "LOVE",
+      "signer": "anna",
+      "pred": "FCLOVE",
+      "secs": 4.0,
+      "frames": 61,
+      "ms": 3.973
+    },
+    {
+      "path": "./data_seq/LOVE/anna_2.npz",
+      "word": "LOVE",
+      "signer": "anna",
+      "pred": "LOWVE",
+      "secs": 3.867,
+      "frames": 59,
+      "ms": 3.783
+    },
+    {
+      "path": "./data_seq/MILK/anna_0.npz",
+      "word": "MILK",
+      "signer": "anna",
+      "pred": "FMILK",
+      "secs": 4.267,
+      "frames": 65,
+      "ms": 4.299
+    },
+    {
+      "path": "./data_seq/MILK/anna_1.npz",
+      "word": "MILK",
+      "signer": "anna",
+      "pred": "FMILK",
+      "secs": 4.067,
+      "frames": 62,
+      "ms": 4.058
+    },
+    {
+      "path": "./data_seq/MILK/anna_2.npz",
+      "word": "MILK",
+      "signer": "anna",
+      "pred": "FBMILK",
+      "secs": 3.933,
+      "frames": 60,
+      "ms": 3.864
+    },
+    {
+      "path": "./data_seq/MY/anna_0.npz",
+      "word": "MY",
+      "signer": "anna",
+      "pred": "FMY",
+      "secs": 2.733,
+      "frames": 42,
+      "ms": 2.886
+    },
+    {
+      "path": "./data_seq/MY/anna_1.npz",
+      "word": "MY",
+      "signer": "anna",
+      "pred": "FMY",
+      "secs": 2.533,
+      "frames": 39,
+      "ms": 2.688
+    },
+    {
+      "path": "./data_seq/MY/anna_2.npz",
+      "word": "MY",
+      "signer": "anna",
+      "pred": "FMY",
+      "secs": 2.8,
+      "frames": 43,
+      "ms": 3.062
+    },
+    {
+      "path": "./data_seq/NAME/anna_0.npz",
+      "word": "NAME",
+      "signer": "anna",
+      "pred": "FNAME",
+      "secs": 3.4,
+      "frames": 52,
+      "ms": 3.464
+    },
+    {
+      "path": "./data_seq/NAME/anna_1.npz",
+      "word": "NAME",
+      "signer": "anna",
+      "pred": "FNAME",
+      "secs": 3.2,
+      "frames": 49,
+      "ms": 3.181
+    },
+    {
+      "path": "./data_seq/NAME/anna_2.npz",
+      "word": "NAME",
+      "signer": "anna",
+      "pred": "FNAME",
+      "secs": 3.467,
+      "frames": 53,
+      "ms": 3.405
+    },
+    {
+      "path": "./data_seq/NO/anna_0.npz",
+      "word": "NO",
+      "signer": "anna",
+      "pred": "NE",
+      "secs": 1.867,
+      "frames": 29,
+      "ms": 2.095
+    },
+    {
+      "path": "./data_seq/NO/anna_1.npz",
+      "word": "NO",
+      "signer": "anna",
+      "pred": "O",
+      "secs": 2.2,
+      "frames": 34,
+      "ms": 2.367
+    },
+    {
+      "path": "./data_seq/NO/anna_2.npz",
+      "word": "NO",
+      "signer": "anna",
+      "pred": "MO",
+      "secs": 2.4,
+      "frames": 37,
+      "ms": 2.541
+    },
+    {
+      "path": "./data_seq/PIZZA/anna_0.npz",
+      "word": "PIZZA",
+      "signer": "anna",
+      "pred": "CUIZZA",
+      "secs": 6.067,
+      "frames": 92,
+      "ms": 5.84
+    },
+    {
+      "path": "./data_seq/PIZZA/anna_1.npz",
+      "word": "PIZZA",
+      "signer": "anna",
+      "pred": "WUIZZA",
+      "secs": 5.733,
+      "frames": 87,
+      "ms": 5.519
+    },
+    {
+      "path": "./data_seq/PIZZA/anna_2.npz",
+      "word": "PIZZA",
+      "signer": "anna",
+      "pred": "WCUIZZA",
+      "secs": 6.2,
+      "frames": 94,
+      "ms": 5.976
+    },
+    {
+      "path": "./data_seq/PLEASE/anna_0.npz",
+      "word": "PLEASE",
+      "signer": "anna",
+      "pred": "WULEASE",
+      "secs": 5.933,
+      "frames": 90,
+      "ms": 5.712
+    },
+    {
+      "path": "./data_seq/PLEASE/anna_1.npz",
+      "word": "PLEASE",
+      "signer": "anna",
+      "pred": "WULEASE",
+      "secs": 5.667,
+      "frames": 86,
+      "ms": 5.358
+    },
+    {
+      "path": "./data_seq/PLEASE/anna_2.npz",
+      "word": "PLEASE",
+      "signer": "anna",
+      "pred": "FWLEASE",
+      "secs": 5.6,
+      "frames": 85,
+      "ms": 5.36
+    },
+    {
+      "path": "./data_seq/QUEEN/anna_0.npz",
+      "word": "QUEEN",
+      "signer": "anna",
+      "pred": "CQUEN",
+      "secs": 4.867,
+      "frames": 74,
+      "ms": 4.835
+    },
+    {
+      "path": "./data_seq/QUEEN/anna_1.npz",
+      "word": "QUEEN",
+      "signer": "anna",
+      "pred": "FQUEN",
+      "secs": 5.467,
+      "frames": 83,
+      "ms": 5.294
+    },
+    {
+      "path": "./data_seq/QUEEN/anna_2.npz",
+      "word": "QUEEN",
+      "signer": "anna",
+      "pred": "WQUEN",
+      "secs": 5.267,
+      "frames": 80,
+      "ms": 5.302
+    },
+    {
+      "path": "./data_seq/QUICK/anna_0.npz",
+      "word": "QUICK",
+      "signer": "anna",
+      "pred": "WQUICK",
+      "secs": 5.4,
+      "frames": 82,
+      "ms": 5.605
+    },
+    {
+      "path": "./data_seq/QUICK/anna_1.npz",
+      "word": "QUICK",
+      "signer": "anna",
+      "pred": "QUICK",
+      "secs": 5.267,
+      "frames": 80,
+      "ms": 5.304
+    },
+    {
+      "path": "./data_seq/QUICK/anna_2.npz",
+      "word": "QUICK",
+      "signer": "anna",
+      "pred": "QUICK",
+      "secs": 5.0,
+      "frames": 76,
+      "ms": 5.171
+    },
+    {
+      "path": "./data_seq/QUIET/anna_0.npz",
+      "word": "QUIET",
+      "signer": "anna",
+      "pred": "CQUIET",
+      "secs": 4.867,
+      "frames": 74,
+      "ms": 4.862
+    },
+    {
+      "path": "./data_seq/QUIET/anna_1.npz",
+      "word": "QUIET",
+      "signer": "anna",
+      "pred": "FQUIET",
+      "secs": 4.933,
+      "frames": 75,
+      "ms": 4.744
+    },
+    {
+      "path": "./data_seq/QUIET/anna_2.npz",
+      "word": "QUIET",
+      "signer": "anna",
+      "pred": "CQUIET",
+      "secs": 5.133,
+      "frames": 78,
+      "ms": 5.099
+    },
+    {
+      "path": "./data_seq/QUIZ/anna_0.npz",
+      "word": "QUIZ",
+      "signer": "anna",
+      "pred": "FWQUIZ",
+      "secs": 4.8,
+      "frames": 73,
+      "ms": 4.587
+    },
+    {
+      "path": "./data_seq/QUIZ/anna_1.npz",
+      "word": "QUIZ",
+      "signer": "anna",
+      "pred": "FQUIZE",
+      "secs": 5.533,
+      "frames": 84,
+      "ms": 5.726
+    },
+    {
+      "path": "./data_seq/QUIZ/anna_2.npz",
+      "word": "QUIZ",
+      "signer": "anna",
+      "pred": "WCQUIZ",
+      "secs": 5.4,
+      "frames": 82,
+      "ms": 5.201
+    },
+    {
+      "path": "./data_seq/SCHOOL/anna_0.npz",
+      "word": "SCHOOL",
+      "signer": "anna",
+      "pred": "SCHOL",
+      "secs": 6.267,
+      "frames": 95,
+      "ms": 5.938
+    },
+    {
+      "path": "./data_seq/SCHOOL/anna_1.npz",
+      "word": "SCHOOL",
+      "signer": "anna",
+      "pred": "SCHOL",
+      "secs": 5.067,
+      "frames": 77,
+      "ms": 5.117
+    },
+    {
+      "path": "./data_seq/SCHOOL/anna_2.npz",
+      "word": "SCHOOL",
+      "signer": "anna",
+      "pred": "SCHOOL",
+      "secs": 5.533,
+      "frames": 84,
+      "ms": 5.335
+    },
+    {
+      "path": "./data_seq/SIX/anna_0.npz",
+      "word": "SIX",
+      "signer": "anna",
+      "pred": "FOSIX",
+      "secs": 2.933,
+      "frames": 45,
+      "ms": 3.056
+    },
+    {
+      "path": "./data_seq/SIX/anna_1.npz",
+      "word": "SIX",
+      "signer": "anna",
+      "pred": "COSIX",
+      "secs": 2.8,
+      "frames": 43,
+      "ms": 2.823
+    },
+    {
+      "path": "./data_seq/SIX/anna_2.npz",
+      "word": "SIX",
+      "signer": "anna",
+      "pred": "CSIX",
+      "secs": 2.8,
+      "frames": 43,
+      "ms": 2.95
+    },
+    {
+      "path": "./data_seq/SORRY/anna_0.npz",
+      "word": "SORRY",
+      "signer": "anna",
+      "pred": "FSORRY",
+      "secs": 4.467,
+      "frames": 68,
+      "ms": 4.366
+    },
+    {
+      "path": "./data_seq/SORRY/anna_1.npz",
+      "word": "SORRY",
+      "signer": "anna",
+      "pred": "FSORRY",
+      "secs": 4.2,
+      "frames": 64,
+      "ms": 4.102
+    },
+    {
+      "path": "./data_seq/SORRY/anna_2.npz",
+      "word": "SORRY",
+      "signer": "anna",
+      "pred": "FSORRY",
+      "secs": 4.467,
+      "frames": 68,
+      "ms": 4.332
+    },
+    {
+      "path": "./data_seq/SQUARE/anna_0.npz",
+      "word": "SQUARE",
+      "signer": "anna",
+      "pred": "SRE",
+      "secs": 5.0,
+      "frames": 76,
+      "ms": 4.828
+    },
+    {
+      "path": "./data_seq/SQUARE/anna_1.npz",
+      "word": "SQUARE",
+      "signer": "anna",
+      "pred": "FOSQUARE",
+      "secs": 5.8,
+      "frames": 88,
+      "ms": 5.508
+    },
+    {
+      "path": "./data_seq/SQUARE/anna_2.npz",
+      "word": "SQUARE",
+      "signer": "anna",
+      "pred": "FSQUARE",
+      "secs": 5.8,
+      "frames": 88,
+      "ms": 5.811
+    },
+    {
+      "path": "./data_seq/TAXI/anna_0.npz",
+      "word": "TAXI",
+      "signer": "anna",
+      "pred": "FCTAXI",
+      "secs": 4.2,
+      "frames": 64,
+      "ms": 4.058
+    },
+    {
+      "path": "./data_seq/TAXI/anna_1.npz",
+      "word": "TAXI",
+      "signer": "anna",
+      "pred": "FCTAXI",
+      "secs": 4.667,
+      "frames": 71,
+      "ms": 4.521
+    },
+    {
+      "path": "./data_seq/TAXI/anna_2.npz",
+      "word": "TAXI",
+      "signer": "anna",
+      "pred": "FCTAXI",
+      "secs": 4.333,
+      "frames": 66,
+      "ms": 4.37
+    },
+    {
+      "path": "./data_seq/THANKS/anna_0.npz",
+      "word": "THANKS",
+      "signer": "anna",
+      "pred": "FANK",
+      "secs": 5.8,
+      "frames": 88,
+      "ms": 5.693
+    },
+    {
+      "path": "./data_seq/THANKS/anna_1.npz",
+      "word": "THANKS",
+      "signer": "anna",
+      "pred": "ANK",
+      "secs": 5.6,
+      "frames": 85,
+      "ms": 5.416
+    },
+    {
+      "path": "./data_seq/THANKS/anna_2.npz",
+      "word": "THANKS",
+      "signer": "anna",
+      "pred": "FHAUNVK",
+      "secs": 5.533,
+      "frames": 84,
+      "ms": 5.447
+    },
+    {
+      "path": "./data_seq/VAN/anna_0.npz",
+      "word": "VAN",
+      "signer": "anna",
+      "pred": "VAN",
+      "secs": 2.867,
+      "frames": 44,
+      "ms": 3.043
+    },
+    {
+      "path": "./data_seq/VAN/anna_1.npz",
+      "word": "VAN",
+      "signer": "anna",
+      "pred": "FVUVAN",
+      "secs": 3.067,
+      "frames": 47,
+      "ms": 3.134
+    },
+    {
+      "path": "./data_seq/VAN/anna_2.npz",
+      "word": "VAN",
+      "signer": "anna",
+      "pred": "VAN",
+      "secs": 2.867,
+      "frames": 44,
+      "ms": 2.893
+    },
+    {
+      "path": "./data_seq/VIDEO/anna_0.npz",
+      "word": "VIDEO",
+      "signer": "anna",
+      "pred": "UIDEO",
+      "secs": 4.867,
+      "frames": 74,
+      "ms": 4.8
+    },
+    {
+      "path": "./data_seq/VIDEO/anna_1.npz",
+      "word": "VIDEO",
+      "signer": "anna",
+      "pred": "VUIDEO",
+      "secs": 5.0,
+      "frames": 76,
+      "ms": 5.408
+    },
+    {
+      "path": "./data_seq/VIDEO/anna_2.npz",
+      "word": "VIDEO",
+      "signer": "anna",
+      "pred": "WVIDEO",
+      "secs": 4.6,
+      "frames": 70,
+      "ms": 4.928
+    },
+    {
+      "path": "./data_seq/VOW/anna_0.npz",
+      "word": "VOW",
+      "signer": "anna",
+      "pred": "VUOW",
+      "secs": 2.933,
+      "frames": 45,
+      "ms": 3.036
+    },
+    {
+      "path": "./data_seq/VOW/anna_1.npz",
+      "word": "VOW",
+      "signer": "anna",
+      "pred": "VOW",
+      "secs": 3.0,
+      "frames": 46,
+      "ms": 3.047
+    },
+    {
+      "path": "./data_seq/VOW/anna_2.npz",
+      "word": "VOW",
+      "signer": "anna",
+      "pred": "UOW",
+      "secs": 3.533,
+      "frames": 54,
+      "ms": 3.644
+    },
+    {
+      "path": "./data_seq/WALK/anna_0.npz",
+      "word": "WALK",
+      "signer": "anna",
+      "pred": "FWALK",
+      "secs": 4.0,
+      "frames": 61,
+      "ms": 3.885
+    },
+    {
+      "path": "./data_seq/WALK/anna_1.npz",
+      "word": "WALK",
+      "signer": "anna",
+      "pred": "WALK",
+      "secs": 3.6,
+      "frames": 55,
+      "ms": 3.551
+    },
+    {
+      "path": "./data_seq/WALK/anna_2.npz",
+      "word": "WALK",
+      "signer": "anna",
+      "pred": "WALK",
+      "secs": 3.533,
+      "frames": 54,
+      "ms": 3.451
+    },
+    {
+      "path": "./data_seq/WATER/anna_0.npz",
+      "word": "WATER",
+      "signer": "anna",
+      "pred": "FWATER",
+      "secs": 5.2,
+      "frames": 79,
+      "ms": 5.127
+    },
+    {
+      "path": "./data_seq/WATER/anna_1.npz",
+      "word": "WATER",
+      "signer": "anna",
+      "pred": "FWAER",
+      "secs": 5.8,
+      "frames": 88,
+      "ms": 5.566
+    },
+    {
+      "path": "./data_seq/WATER/anna_2.npz",
+      "word": "WATER",
+      "signer": "anna",
+      "pred": "FWATER",
+      "secs": 5.733,
+      "frames": 87,
+      "ms": 5.589
+    },
+    {
+      "path": "./data_seq/WAVE/anna_0.npz",
+      "word": "WAVE",
+      "signer": "anna",
+      "pred": "WAVEE",
+      "secs": 3.8,
+      "frames": 58,
+      "ms": 3.742
+    },
+    {
+      "path": "./data_seq/WAVE/anna_1.npz",
+      "word": "WAVE",
+      "signer": "anna",
+      "pred": "WAVEE",
+      "secs": 4.0,
+      "frames": 61,
+      "ms": 4.111
+    },
+    {
+      "path": "./data_seq/WAVE/anna_2.npz",
+      "word": "WAVE",
+      "signer": "anna",
+      "pred": "WAVE",
+      "secs": 3.933,
+      "frames": 60,
+      "ms": 3.833
+    },
+    {
+      "path": "./data_seq/WEB/anna_0.npz",
+      "word": "WEB",
+      "signer": "anna",
+      "pred": "FWEB",
+      "secs": 2.8,
+      "frames": 43,
+      "ms": 2.907
+    },
+    {
+      "path": "./data_seq/WEB/anna_1.npz",
+      "word": "WEB",
+      "signer": "anna",
+      "pred": "FWEB",
+      "secs": 3.2,
+      "frames": 49,
+      "ms": 3.22
+    },
+    {
+      "path": "./data_seq/WEB/anna_2.npz",
+      "word": "WEB",
+      "signer": "anna",
+      "pred": "FWEB",
+      "secs": 2.867,
+      "frames": 44,
+      "ms": 2.961
+    },
+    {
+      "path": "./data_seq/WEEKEND/anna_0.npz",
+      "word": "WEEKEND",
+      "signer": "anna",
+      "pred": "WEKEND",
+      "secs": 7.133,
+      "frames": 108,
+      "ms": 6.812
+    },
+    {
+      "path": "./data_seq/WEEKEND/anna_1.npz",
+      "word": "WEEKEND",
+      "signer": "anna",
+      "pred": "WEKENOD",
+      "secs": 8.867,
+      "frames": 134,
+      "ms": 8.414
+    },
+    {
+      "path": "./data_seq/WEEKEND/anna_2.npz",
+      "word": "WEEKEND",
+      "signer": "anna",
+      "pred": "FWEKEND",
+      "secs": 8.333,
+      "frames": 126,
+      "ms": 7.801
+    },
+    {
+      "path": "./data_seq/YES/anna_0.npz",
+      "word": "YES",
+      "signer": "anna",
+      "pred": "FBRYES",
+      "secs": 3.2,
+      "frames": 49,
+      "ms": 3.69
+    },
+    {
+      "path": "./data_seq/YES/anna_1.npz",
+      "word": "YES",
+      "signer": "anna",
+      "pred": "FBRYE",
+      "secs": 3.133,
+      "frames": 48,
+      "ms": 3.219
+    },
+    {
+      "path": "./data_seq/YES/anna_2.npz",
+      "word": "YES",
+      "signer": "anna",
+      "pred": "FRYE",
+      "secs": 2.867,
+      "frames": 44,
+      "ms": 2.877
+    },
+    {
+      "path": "./data_seq/ZERO/anna_0.npz",
+      "word": "ZERO",
+      "signer": "anna",
+      "pred": "CZZERO",
+      "secs": 4.667,
+      "frames": 71,
+      "ms": 4.84
+    },
+    {
+      "path": "./data_seq/ZERO/anna_1.npz",
+      "word": "ZERO",
+      "signer": "anna",
+      "pred": "CZZERO",
+      "secs": 4.667,
+      "frames": 71,
+      "ms": 4.621
+    },
+    {
+      "path": "./data_seq/ZERO/anna_2.npz",
+      "word": "ZERO",
+      "signer": "anna",
+      "pred": "CZERO",
+      "secs": 4.6,
+      "frames": 70,
+      "ms": 4.449
+    },
+    {
+      "path": "./data_seq/ZOO/anna_0.npz",
+      "word": "ZOO",
+      "signer": "anna",
+      "pred": "CKZO",
+      "secs": 3.333,
+      "frames": 51,
+      "ms": 3.269
+    },
+    {
+      "path": "./data_seq/ZOO/anna_1.npz",
+      "word": "ZOO",
+      "signer": "anna",
+      "pred": "ZZO",
+      "secs": 3.667,
+      "frames": 56,
+      "ms": 3.918
+    },
+    {
+      "path": "./data_seq/ZOO/anna_2.npz",
+      "word": "ZOO",
+      "signer": "anna",
+      "pred": "CLLO",
+      "secs": 3.133,
+      "frames": 48,
+      "ms": 3.249
+    },
+    {
+      "path": "./data_seq/APPLE/saaya_0.npz",
+      "word": "APPLE",
+      "signer": "saaya",
+      "pred": "APLE",
+      "secs": 4.4,
+      "frames": 67,
+      "ms": 4.909
+    },
+    {
+      "path": "./data_seq/APPLE/saaya_1.npz",
+      "word": "APPLE",
+      "signer": "saaya",
+      "pred": "APLE",
+      "secs": 4.467,
+      "frames": 68,
+      "ms": 4.451
+    },
+    {
+      "path": "./data_seq/APPLE/saaya_2.npz",
+      "word": "APPLE",
+      "signer": "saaya",
+      "pred": "APLE",
+      "secs": 4.8,
+      "frames": 73,
+      "ms": 4.666
+    },
+    {
+      "path": "./data_seq/BALL/saaya_0.npz",
+      "word": "BALL",
+      "signer": "saaya",
+      "pred": "BAL",
+      "secs": 2.6,
+      "frames": 40,
+      "ms": 3.032
+    },
+    {
+      "path": "./data_seq/BALL/saaya_1.npz",
+      "word": "BALL",
+      "signer": "saaya",
+      "pred": "BAL",
+      "secs": 2.867,
+      "frames": 44,
+      "ms": 2.911
+    },
+    {
+      "path": "./data_seq/BALL/saaya_2.npz",
+      "word": "BALL",
+      "signer": "saaya",
+      "pred": "BAL",
+      "secs": 3.467,
+      "frames": 53,
+      "ms": 3.411
+    },
+    {
+      "path": "./data_seq/BIRTHDAY/saaya_0.npz",
+      "word": "BIRTHDAY",
+      "signer": "saaya",
+      "pred": "BITHDAY",
+      "secs": 9.067,
+      "frames": 137,
+      "ms": 8.478
+    },
+    {
+      "path": "./data_seq/BIRTHDAY/saaya_1.npz",
+      "word": "BIRTHDAY",
+      "signer": "saaya",
+      "pred": "BITHDAY",
+      "secs": 8.933,
+      "frames": 135,
+      "ms": 8.367
+    },
+    {
+      "path": "./data_seq/BIRTHDAY/saaya_2.npz",
+      "word": "BIRTHDAY",
+      "signer": "saaya",
+      "pred": "BIDTHDAY",
+      "secs": 9.267,
+      "frames": 140,
+      "ms": 8.75
+    },
+    {
+      "path": "./data_seq/BOOK/saaya_0.npz",
+      "word": "BOOK",
+      "signer": "saaya",
+      "pred": "BOOK",
+      "secs": 3.533,
+      "frames": 54,
+      "ms": 3.6
+    },
+    {
+      "path": "./data_seq/BOOK/saaya_1.npz",
+      "word": "BOOK",
+      "signer": "saaya",
+      "pred": "BOOK",
+      "secs": 4.333,
+      "frames": 66,
+      "ms": 4.325
+    },
+    {
+      "path": "./data_seq/BOOK/saaya_2.npz",
+      "word": "BOOK",
+      "signer": "saaya",
+      "pred": "BOOK",
+      "secs": 4.0,
+      "frames": 61,
+      "ms": 3.77
+    },
+    {
+      "path": "./data_seq/BOX/saaya_0.npz",
+      "word": "BOX",
+      "signer": "saaya",
+      "pred": "BOX",
+      "secs": 2.8,
+      "frames": 43,
+      "ms": 3.175
+    },
+    {
+      "path": "./data_seq/BOX/saaya_1.npz",
+      "word": "BOX",
+      "signer": "saaya",
+      "pred": "OX",
+      "secs": 3.533,
+      "frames": 54,
+      "ms": 3.832
+    },
+    {
+      "path": "./data_seq/BOX/saaya_2.npz",
+      "word": "BOX",
+      "signer": "saaya",
+      "pred": "BOX",
+      "secs": 3.733,
+      "frames": 57,
+      "ms": 3.804
+    },
+    {
+      "path": "./data_seq/CAT/saaya_0.npz",
+      "word": "CAT",
+      "signer": "saaya",
+      "pred": "CAT",
+      "secs": 3.467,
+      "frames": 53,
+      "ms": 3.743
+    },
+    {
+      "path": "./data_seq/CAT/saaya_1.npz",
+      "word": "CAT",
+      "signer": "saaya",
+      "pred": "CAT",
+      "secs": 3.0,
+      "frames": 46,
+      "ms": 3.094
+    },
+    {
+      "path": "./data_seq/CAT/saaya_2.npz",
+      "word": "CAT",
+      "signer": "saaya",
+      "pred": "CAT",
+      "secs": 3.267,
+      "frames": 50,
+      "ms": 3.31
+    },
+    {
+      "path": "./data_seq/COFFEE/saaya_0.npz",
+      "word": "COFFEE",
+      "signer": "saaya",
+      "pred": "COFFE",
+      "secs": 5.667,
+      "frames": 86,
+      "ms": 5.322
+    },
+    {
+      "path": "./data_seq/COFFEE/saaya_1.npz",
+      "word": "COFFEE",
+      "signer": "saaya",
+      "pred": "COFFEE",
+      "secs": 5.933,
+      "frames": 90,
+      "ms": 5.749
+    },
+    {
+      "path": "./data_seq/COFFEE/saaya_2.npz",
+      "word": "COFFEE",
+      "signer": "saaya",
+      "pred": "COFFEE",
+      "secs": 6.267,
+      "frames": 95,
+      "ms": 6.221
+    },
+    {
+      "path": "./data_seq/DAD/saaya_0.npz",
+      "word": "DAD",
+      "signer": "saaya",
+      "pred": "DAD",
+      "secs": 3.267,
+      "frames": 50,
+      "ms": 3.234
+    },
+    {
+      "path": "./data_seq/DAD/saaya_1.npz",
+      "word": "DAD",
+      "signer": "saaya",
+      "pred": "DAD",
+      "secs": 3.733,
+      "frames": 57,
+      "ms": 3.56
+    },
+    {
+      "path": "./data_seq/DAD/saaya_2.npz",
+      "word": "DAD",
+      "signer": "saaya",
+      "pred": "DAD",
+      "secs": 3.467,
+      "frames": 53,
+      "ms": 3.309
+    },
+    {
+      "path": "./data_seq/DOG/saaya_0.npz",
+      "word": "DOG",
+      "signer": "saaya",
+      "pred": "DOG",
+      "secs": 3.467,
+      "frames": 53,
+      "ms": 3.284
+    },
+    {
+      "path": "./data_seq/DOG/saaya_1.npz",
+      "word": "DOG",
+      "signer": "saaya",
+      "pred": "DOG",
+      "secs": 3.133,
+      "frames": 48,
+      "ms": 3.037
+    },
+    {
+      "path": "./data_seq/DOG/saaya_2.npz",
+      "word": "DOG",
+      "signer": "saaya",
+      "pred": "DOG",
+      "secs": 3.067,
+      "frames": 47,
+      "ms": 2.987
+    },
+    {
+      "path": "./data_seq/EGG/saaya_0.npz",
+      "word": "EGG",
+      "signer": "saaya",
+      "pred": "EG",
+      "secs": 3.133,
+      "frames": 48,
+      "ms": 3.033
+    },
+    {
+      "path": "./data_seq/EGG/saaya_1.npz",
+      "word": "EGG",
+      "signer": "saaya",
+      "pred": "EG",
+      "secs": 2.867,
+      "frames": 44,
+      "ms": 2.86
+    },
+    {
+      "path": "./data_seq/EGG/saaya_2.npz",
+      "word": "EGG",
+      "signer": "saaya",
+      "pred": "EG",
+      "secs": 2.8,
+      "frames": 43,
+      "ms": 2.715
+    },
+    {
+      "path": "./data_seq/ENJOY/saaya_0.npz",
+      "word": "ENJOY",
+      "signer": "saaya",
+      "pred": "ENJOY",
+      "secs": 5.733,
+      "frames": 87,
+      "ms": 5.348
+    },
+    {
+      "path": "./data_seq/ENJOY/saaya_1.npz",
+      "word": "ENJOY",
+      "signer": "saaya",
+      "pred": "ENJOY",
+      "secs": 5.733,
+      "frames": 87,
+      "ms": 5.428
+    },
+    {
+      "path": "./data_seq/ENJOY/saaya_2.npz",
+      "word": "ENJOY",
+      "signer": "saaya",
+      "pred": "ENJOY",
+      "secs": 5.733,
+      "frames": 87,
+      "ms": 5.394
+    },
+    {
+      "path": "./data_seq/EXTRA/saaya_0.npz",
+      "word": "EXTRA",
+      "signer": "saaya",
+      "pred": "EXTRA",
+      "secs": 5.133,
+      "frames": 78,
+      "ms": 4.82
+    },
+    {
+      "path": "./data_seq/EXTRA/saaya_1.npz",
+      "word": "EXTRA",
+      "signer": "saaya",
+      "pred": "EXTRA",
+      "secs": 6.867,
+      "frames": 104,
+      "ms": 6.615
+    },
+    {
+      "path": "./data_seq/EXTRA/saaya_2.npz",
+      "word": "EXTRA",
+      "signer": "saaya",
+      "pred": "EXTRA",
+      "secs": 5.2,
+      "frames": 79,
+      "ms": 4.898
+    },
+    {
+      "path": "./data_seq/FAMILY/saaya_0.npz",
+      "word": "FAMILY",
+      "signer": "saaya",
+      "pred": "FAMILY",
+      "secs": 5.8,
+      "frames": 88,
+      "ms": 5.462
+    },
+    {
+      "path": "./data_seq/FAMILY/saaya_1.npz",
+      "word": "FAMILY",
+      "signer": "saaya",
+      "pred": "FAMKILY",
+      "secs": 5.733,
+      "frames": 87,
+      "ms": 5.577
+    },
+    {
+      "path": "./data_seq/FAMILY/saaya_2.npz",
+      "word": "FAMILY",
+      "signer": "saaya",
+      "pred": "FAMILY",
+      "secs": 5.933,
+      "frames": 90,
+      "ms": 5.42
+    },
+    {
+      "path": "./data_seq/FOX/saaya_0.npz",
+      "word": "FOX",
+      "signer": "saaya",
+      "pred": "FOX",
+      "secs": 4.0,
+      "frames": 61,
+      "ms": 3.788
+    },
+    {
+      "path": "./data_seq/FOX/saaya_1.npz",
+      "word": "FOX",
+      "signer": "saaya",
+      "pred": "FOX",
+      "secs": 3.867,
+      "frames": 59,
+      "ms": 3.959
+    },
+    {
+      "path": "./data_seq/FOX/saaya_2.npz",
+      "word": "FOX",
+      "signer": "saaya",
+      "pred": "FOD",
+      "secs": 3.467,
+      "frames": 53,
+      "ms": 3.315
+    },
+    {
+      "path": "./data_seq/FRIEND/saaya_0.npz",
+      "word": "FRIEND",
+      "signer": "saaya",
+      "pred": "FUIEND",
+      "secs": 6.733,
+      "frames": 102,
+      "ms": 6.511
+    },
+    {
+      "path": "./data_seq/FRIEND/saaya_1.npz",
+      "word": "FRIEND",
+      "signer": "saaya",
+      "pred": "FRIEND",
+      "secs": 5.467,
+      "frames": 83,
+      "ms": 5.136
+    },
+    {
+      "path": "./data_seq/FRIEND/saaya_2.npz",
+      "word": "FRIEND",
+      "signer": "saaya",
+      "pred": "FIEND",
+      "secs": 6.733,
+      "frames": 102,
+      "ms": 6.231
+    },
+    {
+      "path": "./data_seq/FUZZY/saaya_0.npz",
+      "word": "FUZZY",
+      "signer": "saaya",
+      "pred": "FUZZY",
+      "secs": 5.867,
+      "frames": 89,
+      "ms": 5.602
+    },
+    {
+      "path": "./data_seq/FUZZY/saaya_1.npz",
+      "word": "FUZZY",
+      "signer": "saaya",
+      "pred": "FUZZY",
+      "secs": 5.4,
+      "frames": 82,
+      "ms": 5.052
+    },
+    {
+      "path": "./data_seq/FUZZY/saaya_2.npz",
+      "word": "FUZZY",
+      "signer": "saaya",
+      "pred": "FUZZZY",
+      "secs": 6.467,
+      "frames": 98,
+      "ms": 6.25
+    },
+    {
+      "path": "./data_seq/GIFT/saaya_0.npz",
+      "word": "GIFT",
+      "signer": "saaya",
+      "pred": "GIFT",
+      "secs": 4.467,
+      "frames": 68,
+      "ms": 4.282
+    },
+    {
+      "path": "./data_seq/GIFT/saaya_1.npz",
+      "word": "GIFT",
+      "signer": "saaya",
+      "pred": "GIFT",
+      "secs": 4.533,
+      "frames": 69,
+      "ms": 4.582
+    },
+    {
+      "path": "./data_seq/GIFT/saaya_2.npz",
+      "word": "GIFT",
+      "signer": "saaya",
+      "pred": "GIFT",
+      "secs": 4.6,
+      "frames": 70,
+      "ms": 4.429
+    },
+    {
+      "path": "./data_seq/GOOD/saaya_0.npz",
+      "word": "GOOD",
+      "signer": "saaya",
+      "pred": "GOO",
+      "secs": 3.6,
+      "frames": 55,
+      "ms": 3.694
+    },
+    {
+      "path": "./data_seq/GOOD/saaya_1.npz",
+      "word": "GOOD",
+      "signer": "saaya",
+      "pred": "GOOD",
+      "secs": 3.067,
+      "frames": 47,
+      "ms": 2.983
+    },
+    {
+      "path": "./data_seq/GOOD/saaya_2.npz",
+      "word": "GOOD",
+      "signer": "saaya",
+      "pred": "GOD",
+      "secs": 3.267,
+      "frames": 50,
+      "ms": 3.142
+    },
+    {
+      "path": "./data_seq/GYM/saaya_0.npz",
+      "word": "GYM",
+      "signer": "saaya",
+      "pred": "GYM",
+      "secs": 3.333,
+      "frames": 51,
+      "ms": 3.442
+    },
+    {
+      "path": "./data_seq/GYM/saaya_1.npz",
+      "word": "GYM",
+      "signer": "saaya",
+      "pred": "GYM",
+      "secs": 3.2,
+      "frames": 49,
+      "ms": 3.106
+    },
+    {
+      "path": "./data_seq/GYM/saaya_2.npz",
+      "word": "GYM",
+      "signer": "saaya",
+      "pred": "GYM",
+      "secs": 3.6,
+      "frames": 55,
+      "ms": 3.732
+    },
+    {
+      "path": "./data_seq/HELLO/saaya_0.npz",
+      "word": "HELLO",
+      "signer": "saaya",
+      "pred": "HELLO",
+      "secs": 4.933,
+      "frames": 75,
+      "ms": 4.94
+    },
+    {
+      "path": "./data_seq/HELLO/saaya_1.npz",
+      "word": "HELLO",
+      "signer": "saaya",
+      "pred": "HELLO",
+      "secs": 4.733,
+      "frames": 72,
+      "ms": 4.519
+    },
+    {
+      "path": "./data_seq/HELLO/saaya_2.npz",
+      "word": "HELLO",
+      "signer": "saaya",
+      "pred": "HELLO",
+      "secs": 5.133,
+      "frames": 78,
+      "ms": 4.911
+    },
+    {
+      "path": "./data_seq/HI/saaya_0.npz",
+      "word": "HI",
+      "signer": "saaya",
+      "pred": "HI",
+      "secs": 4.4,
+      "frames": 67,
+      "ms": 4.207
+    },
+    {
+      "path": "./data_seq/HI/saaya_1.npz",
+      "word": "HI",
+      "signer": "saaya",
+      "pred": "HI",
+      "secs": 3.067,
+      "frames": 47,
+      "ms": 3.191
+    },
+    {
+      "path": "./data_seq/HI/saaya_2.npz",
+      "word": "HI",
+      "signer": "saaya",
+      "pred": "HI",
+      "secs": 2.533,
+      "frames": 39,
+      "ms": 2.547
+    },
+    {
+      "path": "./data_seq/JAZZ/saaya_0.npz",
+      "word": "JAZZ",
+      "signer": "saaya",
+      "pred": "JAZZZ",
+      "secs": 4.133,
+      "frames": 63,
+      "ms": 3.891
+    },
+    {
+      "path": "./data_seq/JAZZ/saaya_1.npz",
+      "word": "JAZZ",
+      "signer": "saaya",
+      "pred": "JAZZZ",
+      "secs": 4.4,
+      "frames": 67,
+      "ms": 4.242
+    },
+    {
+      "path": "./data_seq/JAZZ/saaya_2.npz",
+      "word": "JAZZ",
+      "signer": "saaya",
+      "pred": "JAZZ",
+      "secs": 4.4,
+      "frames": 67,
+      "ms": 4.264
+    },
+    {
+      "path": "./data_seq/JOB/saaya_0.npz",
+      "word": "JOB",
+      "signer": "saaya",
+      "pred": "JOB",
+      "secs": 3.133,
+      "frames": 48,
+      "ms": 3.272
+    },
+    {
+      "path": "./data_seq/JOB/saaya_1.npz",
+      "word": "JOB",
+      "signer": "saaya",
+      "pred": "JOB",
+      "secs": 2.933,
+      "frames": 45,
+      "ms": 3.416
+    },
+    {
+      "path": "./data_seq/JOB/saaya_2.npz",
+      "word": "JOB",
+      "signer": "saaya",
+      "pred": "OB",
+      "secs": 3.267,
+      "frames": 50,
+      "ms": 3.184
+    },
+    {
+      "path": "./data_seq/JUICE/saaya_0.npz",
+      "word": "JUICE",
+      "signer": "saaya",
+      "pred": "JUIOE",
+      "secs": 5.4,
+      "frames": 82,
+      "ms": 5.64
+    },
+    {
+      "path": "./data_seq/JUICE/saaya_1.npz",
+      "word": "JUICE",
+      "signer": "saaya",
+      "pred": "JUICE",
+      "secs": 4.867,
+      "frames": 74,
+      "ms": 4.969
+    },
+    {
+      "path": "./data_seq/JUICE/saaya_2.npz",
+      "word": "JUICE",
+      "signer": "saaya",
+      "pred": "JUICE",
+      "secs": 4.8,
+      "frames": 73,
+      "ms": 4.518
+    },
+    {
+      "path": "./data_seq/JUMP/saaya_0.npz",
+      "word": "JUMP",
+      "signer": "saaya",
+      "pred": "JUMP",
+      "secs": 4.8,
+      "frames": 73,
+      "ms": 4.653
+    },
+    {
+      "path": "./data_seq/JUMP/saaya_1.npz",
+      "word": "JUMP",
+      "signer": "saaya",
+      "pred": "JUMEP",
+      "secs": 5.267,
+      "frames": 80,
+      "ms": 5.049
+    },
+    {
+      "path": "./data_seq/JUMP/saaya_2.npz",
+      "word": "JUMP",
+      "signer": "saaya",
+      "pred": "JUMGP",
+      "secs": 4.667,
+      "frames": 71,
+      "ms": 4.656
+    },
+    {
+      "path": "./data_seq/KEY/saaya_0.npz",
+      "word": "KEY",
+      "signer": "saaya",
+      "pred": "KEY",
+      "secs": 2.533,
+      "frames": 39,
+      "ms": 2.915
+    },
+    {
+      "path": "./data_seq/KEY/saaya_1.npz",
+      "word": "KEY",
+      "signer": "saaya",
+      "pred": "KEY",
+      "secs": 2.267,
+      "frames": 35,
+      "ms": 2.275
+    },
+    {
+      "path": "./data_seq/KEY/saaya_2.npz",
+      "word": "KEY",
+      "signer": "saaya",
+      "pred": "KEY",
+      "secs": 2.4,
+      "frames": 37,
+      "ms": 2.417
+    },
+    {
+      "path": "./data_seq/LETTER/saaya_0.npz",
+      "word": "LETTER",
+      "signer": "saaya",
+      "pred": "LETER",
+      "secs": 6.733,
+      "frames": 102,
+      "ms": 6.302
+    },
+    {
+      "path": "./data_seq/LETTER/saaya_1.npz",
+      "word": "LETTER",
+      "signer": "saaya",
+      "pred": "LETER",
+      "secs": 6.067,
+      "frames": 92,
+      "ms": 5.717
+    },
+    {
+      "path": "./data_seq/LETTER/saaya_2.npz",
+      "word": "LETTER",
+      "signer": "saaya",
+      "pred": "LETER",
+      "secs": 6.733,
+      "frames": 102,
+      "ms": 6.243
+    },
+    {
+      "path": "./data_seq/LOVE/saaya_0.npz",
+      "word": "LOVE",
+      "signer": "saaya",
+      "pred": "LOVE",
+      "secs": 5.067,
+      "frames": 77,
+      "ms": 4.763
+    },
+    {
+      "path": "./data_seq/LOVE/saaya_1.npz",
+      "word": "LOVE",
+      "signer": "saaya",
+      "pred": "LOVE",
+      "secs": 4.067,
+      "frames": 62,
+      "ms": 3.835
+    },
+    {
+      "path": "./data_seq/LOVE/saaya_2.npz",
+      "word": "LOVE",
+      "signer": "saaya",
+      "pred": "LOVE",
+      "secs": 3.8,
+      "frames": 58,
+      "ms": 3.917
+    },
+    {
+      "path": "./data_seq/MILK/saaya_0.npz",
+      "word": "MILK",
+      "signer": "saaya",
+      "pred": "MILK",
+      "secs": 3.733,
+      "frames": 57,
+      "ms": 3.597
+    },
+    {
+      "path": "./data_seq/MILK/saaya_1.npz",
+      "word": "MILK",
+      "signer": "saaya",
+      "pred": "MILK",
+      "secs": 3.4,
+      "frames": 52,
+      "ms": 3.481
+    },
+    {
+      "path": "./data_seq/MILK/saaya_2.npz",
+      "word": "MILK",
+      "signer": "saaya",
+      "pred": "MILK",
+      "secs": 4.067,
+      "frames": 62,
+      "ms": 3.957
+    },
+    {
+      "path": "./data_seq/MY/saaya_0.npz",
+      "word": "MY",
+      "signer": "saaya",
+      "pred": "MY",
+      "secs": 2.667,
+      "frames": 41,
+      "ms": 2.647
+    },
+    {
+      "path": "./data_seq/MY/saaya_1.npz",
+      "word": "MY",
+      "signer": "saaya",
+      "pred": "MY",
+      "secs": 2.6,
+      "frames": 40,
+      "ms": 2.579
+    },
+    {
+      "path": "./data_seq/MY/saaya_2.npz",
+      "word": "MY",
+      "signer": "saaya",
+      "pred": "MY",
+      "secs": 2.533,
+      "frames": 39,
+      "ms": 2.602
+    },
+    {
+      "path": "./data_seq/NAME/saaya_0.npz",
+      "word": "NAME",
+      "signer": "saaya",
+      "pred": "NAME",
+      "secs": 5.867,
+      "frames": 89,
+      "ms": 5.597
+    },
+    {
+      "path": "./data_seq/NAME/saaya_1.npz",
+      "word": "NAME",
+      "signer": "saaya",
+      "pred": "NAME",
+      "secs": 4.733,
+      "frames": 72,
+      "ms": 4.819
+    },
+    {
+      "path": "./data_seq/NAME/saaya_2.npz",
+      "word": "NAME",
+      "signer": "saaya",
+      "pred": "NAME",
+      "secs": 4.933,
+      "frames": 75,
+      "ms": 4.757
+    },
+    {
+      "path": "./data_seq/NO/saaya_0.npz",
+      "word": "NO",
+      "signer": "saaya",
+      "pred": "NO",
+      "secs": 2.0,
+      "frames": 31,
+      "ms": 2.056
+    },
+    {
+      "path": "./data_seq/NO/saaya_1.npz",
+      "word": "NO",
+      "signer": "saaya",
+      "pred": "NO",
+      "secs": 1.8,
+      "frames": 28,
+      "ms": 1.872
+    },
+    {
+      "path": "./data_seq/NO/saaya_2.npz",
+      "word": "NO",
+      "signer": "saaya",
+      "pred": "NOO",
+      "secs": 3.333,
+      "frames": 51,
+      "ms": 3.213
+    },
+    {
+      "path": "./data_seq/PIZZA/saaya_0.npz",
+      "word": "PIZZA",
+      "signer": "saaya",
+      "pred": "GIZZZA",
+      "secs": 5.2,
+      "frames": 79,
+      "ms": 5.178
+    },
+    {
+      "path": "./data_seq/PIZZA/saaya_1.npz",
+      "word": "PIZZA",
+      "signer": "saaya",
+      "pred": "PIZZZZA",
+      "secs": 4.667,
+      "frames": 71,
+      "ms": 4.671
+    },
+    {
+      "path": "./data_seq/PIZZA/saaya_2.npz",
+      "word": "PIZZA",
+      "signer": "saaya",
+      "pred": "PIZA",
+      "secs": 5.667,
+      "frames": 86,
+      "ms": 5.704
+    },
+    {
+      "path": "./data_seq/PLEASE/saaya_0.npz",
+      "word": "PLEASE",
+      "signer": "saaya",
+      "pred": "QLEASE",
+      "secs": 6.867,
+      "frames": 104,
+      "ms": 6.579
+    },
+    {
+      "path": "./data_seq/PLEASE/saaya_1.npz",
+      "word": "PLEASE",
+      "signer": "saaya",
+      "pred": "LEASE",
+      "secs": 6.067,
+      "frames": 92,
+      "ms": 5.688
+    },
+    {
+      "path": "./data_seq/PLEASE/saaya_2.npz",
+      "word": "PLEASE",
+      "signer": "saaya",
+      "pred": "LEASE",
+      "secs": 5.867,
+      "frames": 89,
+      "ms": 5.621
+    },
+    {
+      "path": "./data_seq/QUEEN/saaya_0.npz",
+      "word": "QUEEN",
+      "signer": "saaya",
+      "pred": "QUEN",
+      "secs": 5.467,
+      "frames": 83,
+      "ms": 5.234
+    },
+    {
+      "path": "./data_seq/QUEEN/saaya_1.npz",
+      "word": "QUEEN",
+      "signer": "saaya",
+      "pred": "QUEEN",
+      "secs": 4.867,
+      "frames": 74,
+      "ms": 4.876
+    },
+    {
+      "path": "./data_seq/QUEEN/saaya_2.npz",
+      "word": "QUEEN",
+      "signer": "saaya",
+      "pred": "QUEN",
+      "secs": 5.933,
+      "frames": 90,
+      "ms": 5.851
+    },
+    {
+      "path": "./data_seq/QUICK/saaya_0.npz",
+      "word": "QUICK",
+      "signer": "saaya",
+      "pred": "QUICK",
+      "secs": 5.333,
+      "frames": 81,
+      "ms": 5.152
+    },
+    {
+      "path": "./data_seq/QUICK/saaya_1.npz",
+      "word": "QUICK",
+      "signer": "saaya",
+      "pred": "QUICK",
+      "secs": 5.2,
+      "frames": 79,
+      "ms": 4.947
+    },
+    {
+      "path": "./data_seq/QUICK/saaya_2.npz",
+      "word": "QUICK",
+      "signer": "saaya",
+      "pred": "QUICK",
+      "secs": 5.333,
+      "frames": 81,
+      "ms": 5.063
+    },
+    {
+      "path": "./data_seq/QUIET/saaya_0.npz",
+      "word": "QUIET",
+      "signer": "saaya",
+      "pred": "QUIENT",
+      "secs": 5.0,
+      "frames": 76,
+      "ms": 4.79
+    },
+    {
+      "path": "./data_seq/QUIET/saaya_1.npz",
+      "word": "QUIET",
+      "signer": "saaya",
+      "pred": "QUIET",
+      "secs": 5.667,
+      "frames": 86,
+      "ms": 5.545
+    },
+    {
+      "path": "./data_seq/QUIET/saaya_2.npz",
+      "word": "QUIET",
+      "signer": "saaya",
+      "pred": "QUIET",
+      "secs": 6.0,
+      "frames": 91,
+      "ms": 5.833
+    },
+    {
+      "path": "./data_seq/QUIZ/saaya_0.npz",
+      "word": "QUIZ",
+      "signer": "saaya",
+      "pred": "QUIZZZZ",
+      "secs": 4.533,
+      "frames": 69,
+      "ms": 4.301
+    },
+    {
+      "path": "./data_seq/QUIZ/saaya_1.npz",
+      "word": "QUIZ",
+      "signer": "saaya",
+      "pred": "QUIZZZ",
+      "secs": 4.667,
+      "frames": 71,
+      "ms": 5.336
+    },
+    {
+      "path": "./data_seq/QUIZ/saaya_2.npz",
+      "word": "QUIZ",
+      "signer": "saaya",
+      "pred": "QUIZZ",
+      "secs": 4.4,
+      "frames": 67,
+      "ms": 4.654
+    },
+    {
+      "path": "./data_seq/SCHOOL/saaya_0.npz",
+      "word": "SCHOOL",
+      "signer": "saaya",
+      "pred": "SCHOL",
+      "secs": 6.2,
+      "frames": 94,
+      "ms": 6.029
+    },
+    {
+      "path": "./data_seq/SCHOOL/saaya_1.npz",
+      "word": "SCHOOL",
+      "signer": "saaya",
+      "pred": "SCHOL",
+      "secs": 6.267,
+      "frames": 95,
+      "ms": 5.931
+    },
+    {
+      "path": "./data_seq/SCHOOL/saaya_2.npz",
+      "word": "SCHOOL",
+      "signer": "saaya",
+      "pred": "SCHOOL",
+      "secs": 5.867,
+      "frames": 89,
+      "ms": 5.895
+    },
+    {
+      "path": "./data_seq/SIX/saaya_0.npz",
+      "word": "SIX",
+      "signer": "saaya",
+      "pred": "SIX",
+      "secs": 5.667,
+      "frames": 86,
+      "ms": 6.566
+    },
+    {
+      "path": "./data_seq/SIX/saaya_1.npz",
+      "word": "SIX",
+      "signer": "saaya",
+      "pred": "SIX",
+      "secs": 3.333,
+      "frames": 51,
+      "ms": 3.779
+    },
+    {
+      "path": "./data_seq/SIX/saaya_2.npz",
+      "word": "SIX",
+      "signer": "saaya",
+      "pred": "SIX",
+      "secs": 3.2,
+      "frames": 49,
+      "ms": 3.186
+    },
+    {
+      "path": "./data_seq/SORRY/saaya_0.npz",
+      "word": "SORRY",
+      "signer": "saaya",
+      "pred": "SORRY",
+      "secs": 4.8,
+      "frames": 73,
+      "ms": 4.606
+    },
+    {
+      "path": "./data_seq/SORRY/saaya_1.npz",
+      "word": "SORRY",
+      "signer": "saaya",
+      "pred": "SORRY",
+      "secs": 5.4,
+      "frames": 82,
+      "ms": 5.108
+    },
+    {
+      "path": "./data_seq/SORRY/saaya_2.npz",
+      "word": "SORRY",
+      "signer": "saaya",
+      "pred": "SORRY",
+      "secs": 5.8,
+      "frames": 88,
+      "ms": 5.691
+    },
+    {
+      "path": "./data_seq/SQUARE/saaya_0.npz",
+      "word": "SQUARE",
+      "signer": "saaya",
+      "pred": "SQUARE",
+      "secs": 6.4,
+      "frames": 97,
+      "ms": 6.087
+    },
+    {
+      "path": "./data_seq/SQUARE/saaya_1.npz",
+      "word": "SQUARE",
+      "signer": "saaya",
+      "pred": "SQUARE",
+      "secs": 6.333,
+      "frames": 96,
+      "ms": 5.906
+    },
+    {
+      "path": "./data_seq/SQUARE/saaya_2.npz",
+      "word": "SQUARE",
+      "signer": "saaya",
+      "pred": "SQUARE",
+      "secs": 7.467,
+      "frames": 113,
+      "ms": 7.519
+    },
+    {
+      "path": "./data_seq/TAXI/saaya_0.npz",
+      "word": "TAXI",
+      "signer": "saaya",
+      "pred": "TAXI",
+      "secs": 4.533,
+      "frames": 69,
+      "ms": 4.383
+    },
+    {
+      "path": "./data_seq/TAXI/saaya_1.npz",
+      "word": "TAXI",
+      "signer": "saaya",
+      "pred": "TAXI",
+      "secs": 4.467,
+      "frames": 68,
+      "ms": 4.281
+    },
+    {
+      "path": "./data_seq/TAXI/saaya_2.npz",
+      "word": "TAXI",
+      "signer": "saaya",
+      "pred": "TAXI",
+      "secs": 5.2,
+      "frames": 79,
+      "ms": 5.054
+    },
+    {
+      "path": "./data_seq/THANKS/saaya_0.npz",
+      "word": "THANKS",
+      "signer": "saaya",
+      "pred": "THANKS",
+      "secs": 9.2,
+      "frames": 139,
+      "ms": 8.766
+    },
+    {
+      "path": "./data_seq/THANKS/saaya_1.npz",
+      "word": "THANKS",
+      "signer": "saaya",
+      "pred": "THANKS",
+      "secs": 7.867,
+      "frames": 119,
+      "ms": 7.448
+    },
+    {
+      "path": "./data_seq/THANKS/saaya_2.npz",
+      "word": "THANKS",
+      "signer": "saaya",
+      "pred": "TNHANKS",
+      "secs": 7.733,
+      "frames": 117,
+      "ms": 7.144
+    },
+    {
+      "path": "./data_seq/VAN/saaya_0.npz",
+      "word": "VAN",
+      "signer": "saaya",
+      "pred": "VAN",
+      "secs": 3.067,
+      "frames": 47,
+      "ms": 3.009
+    },
+    {
+      "path": "./data_seq/VAN/saaya_1.npz",
+      "word": "VAN",
+      "signer": "saaya",
+      "pred": "VAN",
+      "secs": 3.933,
+      "frames": 60,
+      "ms": 3.716
+    },
+    {
+      "path": "./data_seq/VAN/saaya_2.npz",
+      "word": "VAN",
+      "signer": "saaya",
+      "pred": "VAN",
+      "secs": 3.667,
+      "frames": 56,
+      "ms": 3.504
+    },
+    {
+      "path": "./data_seq/VIDEO/saaya_0.npz",
+      "word": "VIDEO",
+      "signer": "saaya",
+      "pred": "VIDEO",
+      "secs": 6.133,
+      "frames": 93,
+      "ms": 6.018
+    },
+    {
+      "path": "./data_seq/VIDEO/saaya_1.npz",
+      "word": "VIDEO",
+      "signer": "saaya",
+      "pred": "VIDEO",
+      "secs": 5.067,
+      "frames": 77,
+      "ms": 4.875
+    },
+    {
+      "path": "./data_seq/VIDEO/saaya_2.npz",
+      "word": "VIDEO",
+      "signer": "saaya",
+      "pred": "VIDEO",
+      "secs": 5.333,
+      "frames": 81,
+      "ms": 5.057
+    },
+    {
+      "path": "./data_seq/VOW/saaya_0.npz",
+      "word": "VOW",
+      "signer": "saaya",
+      "pred": "VOW",
+      "secs": 3.333,
+      "frames": 51,
+      "ms": 3.204
+    },
+    {
+      "path": "./data_seq/VOW/saaya_1.npz",
+      "word": "VOW",
+      "signer": "saaya",
+      "pred": "VOW",
+      "secs": 2.867,
+      "frames": 44,
+      "ms": 2.813
+    },
+    {
+      "path": "./data_seq/VOW/saaya_2.npz",
+      "word": "VOW",
+      "signer": "saaya",
+      "pred": "VOW",
+      "secs": 2.667,
+      "frames": 41,
+      "ms": 2.639
+    },
+    {
+      "path": "./data_seq/WALK/saaya_0.npz",
+      "word": "WALK",
+      "signer": "saaya",
+      "pred": "WALK",
+      "secs": 3.667,
+      "frames": 56,
+      "ms": 3.498
+    },
+    {
+      "path": "./data_seq/WALK/saaya_1.npz",
+      "word": "WALK",
+      "signer": "saaya",
+      "pred": "WALK",
+      "secs": 4.6,
+      "frames": 70,
+      "ms": 4.435
+    },
+    {
+      "path": "./data_seq/WALK/saaya_2.npz",
+      "word": "WALK",
+      "signer": "saaya",
+      "pred": "WALK",
+      "secs": 4.333,
+      "frames": 66,
+      "ms": 4.3
+    },
+    {
+      "path": "./data_seq/WATER/saaya_0.npz",
+      "word": "WATER",
+      "signer": "saaya",
+      "pred": "WATER",
+      "secs": 7.133,
+      "frames": 108,
+      "ms": 6.689
+    },
+    {
+      "path": "./data_seq/WATER/saaya_1.npz",
+      "word": "WATER",
+      "signer": "saaya",
+      "pred": "WATER",
+      "secs": 7.667,
+      "frames": 116,
+      "ms": 7.346
+    },
+    {
+      "path": "./data_seq/WATER/saaya_2.npz",
+      "word": "WATER",
+      "signer": "saaya",
+      "pred": "WATEEVR",
+      "secs": 5.533,
+      "frames": 84,
+      "ms": 5.412
+    },
+    {
+      "path": "./data_seq/WAVE/saaya_0.npz",
+      "word": "WAVE",
+      "signer": "saaya",
+      "pred": "WAVE",
+      "secs": 3.733,
+      "frames": 57,
+      "ms": 3.62
+    },
+    {
+      "path": "./data_seq/WAVE/saaya_1.npz",
+      "word": "WAVE",
+      "signer": "saaya",
+      "pred": "WAVE",
+      "secs": 3.867,
+      "frames": 59,
+      "ms": 3.718
+    },
+    {
+      "path": "./data_seq/WAVE/saaya_2.npz",
+      "word": "WAVE",
+      "signer": "saaya",
+      "pred": "WAVE",
+      "secs": 4.4,
+      "frames": 67,
+      "ms": 4.283
+    },
+    {
+      "path": "./data_seq/WEB/saaya_0.npz",
+      "word": "WEB",
+      "signer": "saaya",
+      "pred": "WEB",
+      "secs": 3.067,
+      "frames": 47,
+      "ms": 3.229
+    },
+    {
+      "path": "./data_seq/WEB/saaya_1.npz",
+      "word": "WEB",
+      "signer": "saaya",
+      "pred": "WEB",
+      "secs": 2.8,
+      "frames": 43,
+      "ms": 2.794
+    },
+    {
+      "path": "./data_seq/WEB/saaya_2.npz",
+      "word": "WEB",
+      "signer": "saaya",
+      "pred": "WEB",
+      "secs": 3.867,
+      "frames": 59,
+      "ms": 3.719
+    },
+    {
+      "path": "./data_seq/WEEKEND/saaya_0.npz",
+      "word": "WEEKEND",
+      "signer": "saaya",
+      "pred": "WEEKEND",
+      "secs": 7.933,
+      "frames": 120,
+      "ms": 7.433
+    },
+    {
+      "path": "./data_seq/WEEKEND/saaya_1.npz",
+      "word": "WEEKEND",
+      "signer": "saaya",
+      "pred": "WEEKEND",
+      "secs": 7.867,
+      "frames": 119,
+      "ms": 7.355
+    },
+    {
+      "path": "./data_seq/WEEKEND/saaya_2.npz",
+      "word": "WEEKEND",
+      "signer": "saaya",
+      "pred": "WEEKEND",
+      "secs": 6.867,
+      "frames": 104,
+      "ms": 6.387
+    },
+    {
+      "path": "./data_seq/YES/saaya_0.npz",
+      "word": "YES",
+      "signer": "saaya",
+      "pred": "YES",
+      "secs": 3.933,
+      "frames": 60,
+      "ms": 3.866
+    },
+    {
+      "path": "./data_seq/YES/saaya_1.npz",
+      "word": "YES",
+      "signer": "saaya",
+      "pred": "YESS",
+      "secs": 3.533,
+      "frames": 54,
+      "ms": 3.702
+    },
+    {
+      "path": "./data_seq/YES/saaya_2.npz",
+      "word": "YES",
+      "signer": "saaya",
+      "pred": "YES",
+      "secs": 3.733,
+      "frames": 57,
+      "ms": 3.535
+    },
+    {
+      "path": "./data_seq/ZERO/saaya_0.npz",
+      "word": "ZERO",
+      "signer": "saaya",
+      "pred": "ZERO",
+      "secs": 4.6,
+      "frames": 70,
+      "ms": 4.482
+    },
+    {
+      "path": "./data_seq/ZERO/saaya_1.npz",
+      "word": "ZERO",
+      "signer": "saaya",
+      "pred": "DZEROO",
+      "secs": 5.067,
+      "frames": 77,
+      "ms": 4.95
+    },
+    {
+      "path": "./data_seq/ZERO/saaya_2.npz",
+      "word": "ZERO",
+      "signer": "saaya",
+      "pred": "DZERO",
+      "secs": 4.8,
+      "frames": 73,
+      "ms": 4.532
+    },
+    {
+      "path": "./data_seq/ZOO/saaya_0.npz",
+      "word": "ZOO",
+      "signer": "saaya",
+      "pred": "ZOO",
+      "secs": 3.067,
+      "frames": 47,
+      "ms": 2.964
+    },
+    {
+      "path": "./data_seq/ZOO/saaya_1.npz",
+      "word": "ZOO",
+      "signer": "saaya",
+      "pred": "ZOO",
+      "secs": 2.933,
+      "frames": 45,
+      "ms": 2.87
+    },
+    {
+      "path": "./data_seq/ZOO/saaya_2.npz",
+      "word": "ZOO",
+      "signer": "saaya",
+      "pred": "ZOO",
+      "secs": 3.333,
+      "frames": 51,
+      "ms": 3.422
+    },
+    {
+      "path": "./data_seq/APPLE/thurushi_0.npz",
+      "word": "APPLE",
+      "signer": "thurushi",
+      "pred": "PLE",
+      "secs": 2.667,
+      "frames": 41,
+      "ms": 3.028
+    },
+    {
+      "path": "./data_seq/APPLE/thurushi_1.npz",
+      "word": "APPLE",
+      "signer": "thurushi",
+      "pred": "APLE",
+      "secs": 2.8,
+      "frames": 43,
+      "ms": 2.86
+    },
+    {
+      "path": "./data_seq/APPLE/thurushi_2.npz",
+      "word": "APPLE",
+      "signer": "thurushi",
+      "pred": "PLE",
+      "secs": 2.4,
+      "frames": 37,
+      "ms": 2.519
+    },
+    {
+      "path": "./data_seq/BALL/thurushi_0.npz",
+      "word": "BALL",
+      "signer": "thurushi",
+      "pred": "AL",
+      "secs": 1.533,
+      "frames": 24,
+      "ms": 1.889
+    },
+    {
+      "path": "./data_seq/BALL/thurushi_1.npz",
+      "word": "BALL",
+      "signer": "thurushi",
+      "pred": "BAL",
+      "secs": 1.933,
+      "frames": 30,
+      "ms": 2.006
+    },
+    {
+      "path": "./data_seq/BALL/thurushi_2.npz",
+      "word": "BALL",
+      "signer": "thurushi",
+      "pred": "BALL",
+      "secs": 2.467,
+      "frames": 38,
+      "ms": 2.457
+    },
+    {
+      "path": "./data_seq/BIRTHDAY/thurushi_0.npz",
+      "word": "BIRTHDAY",
+      "signer": "thurushi",
+      "pred": "BIRTHDAY",
+      "secs": 6.733,
+      "frames": 102,
+      "ms": 6.517
+    },
+    {
+      "path": "./data_seq/BIRTHDAY/thurushi_1.npz",
+      "word": "BIRTHDAY",
+      "signer": "thurushi",
+      "pred": "IRTHDA",
+      "secs": 5.733,
+      "frames": 87,
+      "ms": 5.524
+    },
+    {
+      "path": "./data_seq/BIRTHDAY/thurushi_2.npz",
+      "word": "BIRTHDAY",
+      "signer": "thurushi",
+      "pred": "BIRTHDA",
+      "secs": 5.467,
+      "frames": 83,
+      "ms": 5.307
+    },
+    {
+      "path": "./data_seq/BOOK/thurushi_0.npz",
+      "word": "BOOK",
+      "signer": "thurushi",
+      "pred": "BOE",
+      "secs": 2.333,
+      "frames": 36,
+      "ms": 2.634
+    },
+    {
+      "path": "./data_seq/BOOK/thurushi_1.npz",
+      "word": "BOOK",
+      "signer": "thurushi",
+      "pred": "OK",
+      "secs": 1.933,
+      "frames": 30,
+      "ms": 2.028
+    },
+    {
+      "path": "./data_seq/BOOK/thurushi_2.npz",
+      "word": "BOOK",
+      "signer": "thurushi",
+      "pred": "BO",
+      "secs": 2.333,
+      "frames": 36,
+      "ms": 2.401
+    },
+    {
+      "path": "./data_seq/BOX/thurushi_0.npz",
+      "word": "BOX",
+      "signer": "thurushi",
+      "pred": "E",
+      "secs": 1.6,
+      "frames": 25,
+      "ms": 1.803
+    },
+    {
+      "path": "./data_seq/BOX/thurushi_1.npz",
+      "word": "BOX",
+      "signer": "thurushi",
+      "pred": "WE",
+      "secs": 2.133,
+      "frames": 33,
+      "ms": 2.205
+    },
+    {
+      "path": "./data_seq/BOX/thurushi_2.npz",
+      "word": "BOX",
+      "signer": "thurushi",
+      "pred": "EE",
+      "secs": 1.6,
+      "frames": 25,
+      "ms": 1.712
+    },
+    {
+      "path": "./data_seq/CAT/thurushi_0.npz",
+      "word": "CAT",
+      "signer": "thurushi",
+      "pred": "CT",
+      "secs": 1.667,
+      "frames": 26,
+      "ms": 1.794
+    },
+    {
+      "path": "./data_seq/CAT/thurushi_1.npz",
+      "word": "CAT",
+      "signer": "thurushi",
+      "pred": "CT",
+      "secs": 2.133,
+      "frames": 33,
+      "ms": 2.18
+    },
+    {
+      "path": "./data_seq/CAT/thurushi_2.npz",
+      "word": "CAT",
+      "signer": "thurushi",
+      "pred": "CT",
+      "secs": 1.933,
+      "frames": 30,
+      "ms": 2.053
+    },
+    {
+      "path": "./data_seq/COFFEE/thurushi_0.npz",
+      "word": "COFFEE",
+      "signer": "thurushi",
+      "pred": "COFFEE",
+      "secs": 3.467,
+      "frames": 53,
+      "ms": 3.514
+    },
+    {
+      "path": "./data_seq/COFFEE/thurushi_1.npz",
+      "word": "COFFEE",
+      "signer": "thurushi",
+      "pred": "COFEE",
+      "secs": 3.333,
+      "frames": 51,
+      "ms": 3.266
+    },
+    {
+      "path": "./data_seq/COFFEE/thurushi_2.npz",
+      "word": "COFFEE",
+      "signer": "thurushi",
+      "pred": "COFFEE",
+      "secs": 3.0,
+      "frames": 46,
+      "ms": 2.987
+    },
+    {
+      "path": "./data_seq/DAD/thurushi_0.npz",
+      "word": "DAD",
+      "signer": "thurushi",
+      "pred": "DD",
+      "secs": 2.2,
+      "frames": 34,
+      "ms": 2.265
+    },
+    {
+      "path": "./data_seq/DAD/thurushi_1.npz",
+      "word": "DAD",
+      "signer": "thurushi",
+      "pred": "NDAD",
+      "secs": 2.067,
+      "frames": 32,
+      "ms": 2.14
+    },
+    {
+      "path": "./data_seq/DAD/thurushi_2.npz",
+      "word": "DAD",
+      "signer": "thurushi",
+      "pred": "DAD",
+      "secs": 2.467,
+      "frames": 38,
+      "ms": 2.5
+    },
+    {
+      "path": "./data_seq/DOG/thurushi_0.npz",
+      "word": "DOG",
+      "signer": "thurushi",
+      "pred": "DEG",
+      "secs": 1.467,
+      "frames": 23,
+      "ms": 1.609
+    },
+    {
+      "path": "./data_seq/DOG/thurushi_1.npz",
+      "word": "DOG",
+      "signer": "thurushi",
+      "pred": "DOG",
+      "secs": 1.8,
+      "frames": 28,
+      "ms": 1.867
+    },
+    {
+      "path": "./data_seq/DOG/thurushi_2.npz",
+      "word": "DOG",
+      "signer": "thurushi",
+      "pred": "OG",
+      "secs": 1.933,
+      "frames": 30,
+      "ms": 2.023
+    },
+    {
+      "path": "./data_seq/EGG/thurushi_0.npz",
+      "word": "EGG",
+      "signer": "thurushi",
+      "pred": "EG",
+      "secs": 2.0,
+      "frames": 31,
+      "ms": 2.087
+    },
+    {
+      "path": "./data_seq/EGG/thurushi_1.npz",
+      "word": "EGG",
+      "signer": "thurushi",
+      "pred": "EG",
+      "secs": 1.6,
+      "frames": 25,
+      "ms": 1.696
+    },
+    {
+      "path": "./data_seq/EGG/thurushi_2.npz",
+      "word": "EGG",
+      "signer": "thurushi",
+      "pred": "EG",
+      "secs": 1.933,
+      "frames": 30,
+      "ms": 2.029
+    },
+    {
+      "path": "./data_seq/ENJOY/thurushi_0.npz",
+      "word": "ENJOY",
+      "signer": "thurushi",
+      "pred": "EJOY",
+      "secs": 3.067,
+      "frames": 47,
+      "ms": 2.963
+    },
+    {
+      "path": "./data_seq/ENJOY/thurushi_1.npz",
+      "word": "ENJOY",
+      "signer": "thurushi",
+      "pred": "ENOY",
+      "secs": 4.0,
+      "frames": 61,
+      "ms": 3.753
+    },
+    {
+      "path": "./data_seq/ENJOY/thurushi_2.npz",
+      "word": "ENJOY",
+      "signer": "thurushi",
+      "pred": "ENJOY",
+      "secs": 4.133,
+      "frames": 63,
+      "ms": 3.869
+    },
+    {
+      "path": "./data_seq/EXTRA/thurushi_0.npz",
+      "word": "EXTRA",
+      "signer": "thurushi",
+      "pred": "ETRA",
+      "secs": 2.867,
+      "frames": 44,
+      "ms": 3.002
+    },
+    {
+      "path": "./data_seq/EXTRA/thurushi_1.npz",
+      "word": "EXTRA",
+      "signer": "thurushi",
+      "pred": "ETA",
+      "secs": 2.733,
+      "frames": 42,
+      "ms": 2.846
+    },
+    {
+      "path": "./data_seq/EXTRA/thurushi_2.npz",
+      "word": "EXTRA",
+      "signer": "thurushi",
+      "pred": "ETA",
+      "secs": 3.067,
+      "frames": 47,
+      "ms": 3.041
+    },
+    {
+      "path": "./data_seq/FAMILY/thurushi_0.npz",
+      "word": "FAMILY",
+      "signer": "thurushi",
+      "pred": "FMILY",
+      "secs": 3.533,
+      "frames": 54,
+      "ms": 3.378
+    },
+    {
+      "path": "./data_seq/FAMILY/thurushi_1.npz",
+      "word": "FAMILY",
+      "signer": "thurushi",
+      "pred": "FMILY",
+      "secs": 3.867,
+      "frames": 59,
+      "ms": 3.759
+    },
+    {
+      "path": "./data_seq/FAMILY/thurushi_2.npz",
+      "word": "FAMILY",
+      "signer": "thurushi",
+      "pred": "FMILY",
+      "secs": 3.467,
+      "frames": 53,
+      "ms": 3.548
+    },
+    {
+      "path": "./data_seq/FOX/thurushi_0.npz",
+      "word": "FOX",
+      "signer": "thurushi",
+      "pred": "FEX",
+      "secs": 1.4,
+      "frames": 22,
+      "ms": 1.583
+    },
+    {
+      "path": "./data_seq/FOX/thurushi_1.npz",
+      "word": "FOX",
+      "signer": "thurushi",
+      "pred": "FE",
+      "secs": 1.8,
+      "frames": 28,
+      "ms": 1.933
+    },
+    {
+      "path": "./data_seq/FOX/thurushi_2.npz",
+      "word": "FOX",
+      "signer": "thurushi",
+      "pred": "FEO",
+      "secs": 1.867,
+      "frames": 29,
+      "ms": 1.929
+    },
+    {
+      "path": "./data_seq/FRIEND/thurushi_0.npz",
+      "word": "FRIEND",
+      "signer": "thurushi",
+      "pred": "FRIEND",
+      "secs": 5.0,
+      "frames": 76,
+      "ms": 5.449
+    },
+    {
+      "path": "./data_seq/FRIEND/thurushi_1.npz",
+      "word": "FRIEND",
+      "signer": "thurushi",
+      "pred": "FRIEND",
+      "secs": 4.867,
+      "frames": 74,
+      "ms": 5.283
+    },
+    {
+      "path": "./data_seq/FRIEND/thurushi_2.npz",
+      "word": "FRIEND",
+      "signer": "thurushi",
+      "pred": "FRIEND",
+      "secs": 5.4,
+      "frames": 82,
+      "ms": 5.272
+    },
+    {
+      "path": "./data_seq/FUZZY/thurushi_0.npz",
+      "word": "FUZZY",
+      "signer": "thurushi",
+      "pred": "FUZAY",
+      "secs": 3.133,
+      "frames": 48,
+      "ms": 3.108
+    },
+    {
+      "path": "./data_seq/FUZZY/thurushi_1.npz",
+      "word": "FUZZY",
+      "signer": "thurushi",
+      "pred": "FUZY",
+      "secs": 2.467,
+      "frames": 38,
+      "ms": 2.55
+    },
+    {
+      "path": "./data_seq/FUZZY/thurushi_2.npz",
+      "word": "FUZZY",
+      "signer": "thurushi",
+      "pred": "FUZY",
+      "secs": 2.6,
+      "frames": 40,
+      "ms": 2.77
+    },
+    {
+      "path": "./data_seq/GIFT/thurushi_0.npz",
+      "word": "GIFT",
+      "signer": "thurushi",
+      "pred": "GIFT",
+      "secs": 2.733,
+      "frames": 42,
+      "ms": 2.842
+    },
+    {
+      "path": "./data_seq/GIFT/thurushi_1.npz",
+      "word": "GIFT",
+      "signer": "thurushi",
+      "pred": "GIFT",
+      "secs": 3.467,
+      "frames": 53,
+      "ms": 3.535
+    },
+    {
+      "path": "./data_seq/GIFT/thurushi_2.npz",
+      "word": "GIFT",
+      "signer": "thurushi",
+      "pred": "GFT",
+      "secs": 2.4,
+      "frames": 37,
+      "ms": 2.505
+    },
+    {
+      "path": "./data_seq/GOOD/thurushi_0.npz",
+      "word": "GOOD",
+      "signer": "thurushi",
+      "pred": "GOOD",
+      "secs": 1.867,
+      "frames": 29,
+      "ms": 1.958
+    },
+    {
+      "path": "./data_seq/GOOD/thurushi_1.npz",
+      "word": "GOOD",
+      "signer": "thurushi",
+      "pred": "GOOD",
+      "secs": 1.733,
+      "frames": 27,
+      "ms": 1.95
+    },
+    {
+      "path": "./data_seq/GOOD/thurushi_2.npz",
+      "word": "GOOD",
+      "signer": "thurushi",
+      "pred": "GO",
+      "secs": 2.0,
+      "frames": 31,
+      "ms": 2.101
+    },
+    {
+      "path": "./data_seq/GYM/thurushi_0.npz",
+      "word": "GYM",
+      "signer": "thurushi",
+      "pred": "GYM",
+      "secs": 1.8,
+      "frames": 28,
+      "ms": 1.974
+    },
+    {
+      "path": "./data_seq/GYM/thurushi_1.npz",
+      "word": "GYM",
+      "signer": "thurushi",
+      "pred": "GYM",
+      "secs": 1.867,
+      "frames": 29,
+      "ms": 2.067
+    },
+    {
+      "path": "./data_seq/GYM/thurushi_2.npz",
+      "word": "GYM",
+      "signer": "thurushi",
+      "pred": "GYAM",
+      "secs": 1.933,
+      "frames": 30,
+      "ms": 2.054
+    },
+    {
+      "path": "./data_seq/HELLO/thurushi_0.npz",
+      "word": "HELLO",
+      "signer": "thurushi",
+      "pred": "HELLO",
+      "secs": 3.0,
+      "frames": 46,
+      "ms": 3.073
+    },
+    {
+      "path": "./data_seq/HELLO/thurushi_1.npz",
+      "word": "HELLO",
+      "signer": "thurushi",
+      "pred": "HELLO",
+      "secs": 3.133,
+      "frames": 48,
+      "ms": 3.7
+    },
+    {
+      "path": "./data_seq/HELLO/thurushi_2.npz",
+      "word": "HELLO",
+      "signer": "thurushi",
+      "pred": "HELO",
+      "secs": 2.267,
+      "frames": 35,
+      "ms": 2.361
+    },
+    {
+      "path": "./data_seq/HI/thurushi_0.npz",
+      "word": "HI",
+      "signer": "thurushi",
+      "pred": "HIY",
+      "secs": 2.133,
+      "frames": 33,
+      "ms": 2.189
+    },
+    {
+      "path": "./data_seq/HI/thurushi_1.npz",
+      "word": "HI",
+      "signer": "thurushi",
+      "pred": "HI",
+      "secs": 1.733,
+      "frames": 27,
+      "ms": 1.857
+    },
+    {
+      "path": "./data_seq/HI/thurushi_2.npz",
+      "word": "HI",
+      "signer": "thurushi",
+      "pred": "HI",
+      "secs": 1.533,
+      "frames": 24,
+      "ms": 1.662
+    },
+    {
+      "path": "./data_seq/JAZZ/thurushi_0.npz",
+      "word": "JAZZ",
+      "signer": "thurushi",
+      "pred": "JAZZ",
+      "secs": 3.667,
+      "frames": 56,
+      "ms": 3.657
+    },
+    {
+      "path": "./data_seq/JAZZ/thurushi_1.npz",
+      "word": "JAZZ",
+      "signer": "thurushi",
+      "pred": "JAZZ",
+      "secs": 3.267,
+      "frames": 50,
+      "ms": 3.223
+    },
+    {
+      "path": "./data_seq/JAZZ/thurushi_2.npz",
+      "word": "JAZZ",
+      "signer": "thurushi",
+      "pred": "JAZZ",
+      "secs": 3.067,
+      "frames": 47,
+      "ms": 3.176
+    },
+    {
+      "path": "./data_seq/JOB/thurushi_0.npz",
+      "word": "JOB",
+      "signer": "thurushi",
+      "pred": "JO",
+      "secs": 2.0,
+      "frames": 31,
+      "ms": 2.107
+    },
+    {
+      "path": "./data_seq/JOB/thurushi_1.npz",
+      "word": "JOB",
+      "signer": "thurushi",
+      "pred": "JOB",
+      "secs": 1.867,
+      "frames": 29,
+      "ms": 1.962
+    },
+    {
+      "path": "./data_seq/JOB/thurushi_2.npz",
+      "word": "JOB",
+      "signer": "thurushi",
+      "pred": "JO",
+      "secs": 1.933,
+      "frames": 30,
+      "ms": 2.07
+    },
+    {
+      "path": "./data_seq/JUICE/thurushi_0.npz",
+      "word": "JUICE",
+      "signer": "thurushi",
+      "pred": "JUICE",
+      "secs": 3.533,
+      "frames": 54,
+      "ms": 3.571
+    },
+    {
+      "path": "./data_seq/JUICE/thurushi_1.npz",
+      "word": "JUICE",
+      "signer": "thurushi",
+      "pred": "JUICE",
+      "secs": 4.2,
+      "frames": 64,
+      "ms": 4.079
+    },
+    {
+      "path": "./data_seq/JUICE/thurushi_2.npz",
+      "word": "JUICE",
+      "signer": "thurushi",
+      "pred": "JUICE",
+      "secs": 4.067,
+      "frames": 62,
+      "ms": 4.012
+    },
+    {
+      "path": "./data_seq/JUMP/thurushi_0.npz",
+      "word": "JUMP",
+      "signer": "thurushi",
+      "pred": "JUMP",
+      "secs": 3.0,
+      "frames": 46,
+      "ms": 3.019
+    },
+    {
+      "path": "./data_seq/JUMP/thurushi_1.npz",
+      "word": "JUMP",
+      "signer": "thurushi",
+      "pred": "JUMP",
+      "secs": 2.667,
+      "frames": 41,
+      "ms": 3.115
+    },
+    {
+      "path": "./data_seq/JUMP/thurushi_2.npz",
+      "word": "JUMP",
+      "signer": "thurushi",
+      "pred": "JUMP",
+      "secs": 2.533,
+      "frames": 39,
+      "ms": 2.655
+    },
+    {
+      "path": "./data_seq/KEY/thurushi_0.npz",
+      "word": "KEY",
+      "signer": "thurushi",
+      "pred": "EY",
+      "secs": 2.4,
+      "frames": 37,
+      "ms": 2.463
+    },
+    {
+      "path": "./data_seq/KEY/thurushi_1.npz",
+      "word": "KEY",
+      "signer": "thurushi",
+      "pred": "EY",
+      "secs": 1.867,
+      "frames": 29,
+      "ms": 1.944
+    },
+    {
+      "path": "./data_seq/KEY/thurushi_2.npz",
+      "word": "KEY",
+      "signer": "thurushi",
+      "pred": "EY",
+      "secs": 1.867,
+      "frames": 29,
+      "ms": 1.916
+    },
+    {
+      "path": "./data_seq/LETTER/thurushi_0.npz",
+      "word": "LETTER",
+      "signer": "thurushi",
+      "pred": "LETEOR",
+      "secs": 3.267,
+      "frames": 50,
+      "ms": 3.237
+    },
+    {
+      "path": "./data_seq/LETTER/thurushi_1.npz",
+      "word": "LETTER",
+      "signer": "thurushi",
+      "pred": "LETOER",
+      "secs": 2.667,
+      "frames": 41,
+      "ms": 2.804
+    },
+    {
+      "path": "./data_seq/LETTER/thurushi_2.npz",
+      "word": "LETTER",
+      "signer": "thurushi",
+      "pred": "LETOEOR",
+      "secs": 3.067,
+      "frames": 47,
+      "ms": 3.205
+    },
+    {
+      "path": "./data_seq/LOVE/thurushi_0.npz",
+      "word": "LOVE",
+      "signer": "thurushi",
+      "pred": "LOVE",
+      "secs": 2.067,
+      "frames": 32,
+      "ms": 2.201
+    },
+    {
+      "path": "./data_seq/LOVE/thurushi_1.npz",
+      "word": "LOVE",
+      "signer": "thurushi",
+      "pred": "LOV",
+      "secs": 1.467,
+      "frames": 23,
+      "ms": 1.662
+    },
+    {
+      "path": "./data_seq/LOVE/thurushi_2.npz",
+      "word": "LOVE",
+      "signer": "thurushi",
+      "pred": "LOVE",
+      "secs": 1.933,
+      "frames": 30,
+      "ms": 2.04
+    },
+    {
+      "path": "./data_seq/MILK/thurushi_0.npz",
+      "word": "MILK",
+      "signer": "thurushi",
+      "pred": "MIL",
+      "secs": 3.2,
+      "frames": 49,
+      "ms": 3.256
+    },
+    {
+      "path": "./data_seq/MILK/thurushi_1.npz",
+      "word": "MILK",
+      "signer": "thurushi",
+      "pred": "MIL",
+      "secs": 3.267,
+      "frames": 50,
+      "ms": 3.229
+    },
+    {
+      "path": "./data_seq/MILK/thurushi_2.npz",
+      "word": "MILK",
+      "signer": "thurushi",
+      "pred": "MIL",
+      "secs": 3.2,
+      "frames": 49,
+      "ms": 3.212
+    },
+    {
+      "path": "./data_seq/MY/thurushi_0.npz",
+      "word": "MY",
+      "signer": "thurushi",
+      "pred": "MA",
+      "secs": 1.4,
+      "frames": 22,
+      "ms": 1.532
+    },
+    {
+      "path": "./data_seq/MY/thurushi_1.npz",
+      "word": "MY",
+      "signer": "thurushi",
+      "pred": "MA",
+      "secs": 1.6,
+      "frames": 25,
+      "ms": 1.715
+    },
+    {
+      "path": "./data_seq/MY/thurushi_2.npz",
+      "word": "MY",
+      "signer": "thurushi",
+      "pred": "MA",
+      "secs": 1.533,
+      "frames": 24,
+      "ms": 1.683
+    },
+    {
+      "path": "./data_seq/NAME/thurushi_0.npz",
+      "word": "NAME",
+      "signer": "thurushi",
+      "pred": "ME",
+      "secs": 2.0,
+      "frames": 31,
+      "ms": 2.065
+    },
+    {
+      "path": "./data_seq/NAME/thurushi_1.npz",
+      "word": "NAME",
+      "signer": "thurushi",
+      "pred": "ME",
+      "secs": 2.4,
+      "frames": 37,
+      "ms": 2.617
+    },
+    {
+      "path": "./data_seq/NAME/thurushi_2.npz",
+      "word": "NAME",
+      "signer": "thurushi",
+      "pred": "ME",
+      "secs": 2.067,
+      "frames": 32,
+      "ms": 2.2
+    },
+    {
+      "path": "./data_seq/NO/thurushi_0.npz",
+      "word": "NO",
+      "signer": "thurushi",
+      "pred": "O",
+      "secs": 1.2,
+      "frames": 19,
+      "ms": 1.416
+    },
+    {
+      "path": "./data_seq/NO/thurushi_1.npz",
+      "word": "NO",
+      "signer": "thurushi",
+      "pred": "O",
+      "secs": 1.2,
+      "frames": 19,
+      "ms": 1.388
+    },
+    {
+      "path": "./data_seq/NO/thurushi_2.npz",
+      "word": "NO",
+      "signer": "thurushi",
+      "pred": "ME",
+      "secs": 2.133,
+      "frames": 33,
+      "ms": 2.186
+    },
+    {
+      "path": "./data_seq/PIZZA/thurushi_0.npz",
+      "word": "PIZZA",
+      "signer": "thurushi",
+      "pred": "PIZZA",
+      "secs": 3.2,
+      "frames": 49,
+      "ms": 3.146
+    },
+    {
+      "path": "./data_seq/PIZZA/thurushi_1.npz",
+      "word": "PIZZA",
+      "signer": "thurushi",
+      "pred": "IZA",
+      "secs": 3.333,
+      "frames": 51,
+      "ms": 3.381
+    },
+    {
+      "path": "./data_seq/PIZZA/thurushi_2.npz",
+      "word": "PIZZA",
+      "signer": "thurushi",
+      "pred": "IZA",
+      "secs": 3.267,
+      "frames": 50,
+      "ms": 3.255
+    },
+    {
+      "path": "./data_seq/PLEASE/thurushi_0.npz",
+      "word": "PLEASE",
+      "signer": "thurushi",
+      "pred": "PLESASE",
+      "secs": 3.067,
+      "frames": 47,
+      "ms": 3.044
+    },
+    {
+      "path": "./data_seq/PLEASE/thurushi_1.npz",
+      "word": "PLEASE",
+      "signer": "thurushi",
+      "pred": "PLESE",
+      "secs": 3.533,
+      "frames": 54,
+      "ms": 3.533
+    },
+    {
+      "path": "./data_seq/PLEASE/thurushi_2.npz",
+      "word": "PLEASE",
+      "signer": "thurushi",
+      "pred": "PLESE",
+      "secs": 3.4,
+      "frames": 52,
+      "ms": 3.316
+    },
+    {
+      "path": "./data_seq/QUEEN/thurushi_0.npz",
+      "word": "QUEEN",
+      "signer": "thurushi",
+      "pred": "QUEEN",
+      "secs": 2.2,
+      "frames": 34,
+      "ms": 2.375
+    },
+    {
+      "path": "./data_seq/QUEEN/thurushi_1.npz",
+      "word": "QUEEN",
+      "signer": "thurushi",
+      "pred": "UEEN",
+      "secs": 3.0,
+      "frames": 46,
+      "ms": 2.996
+    },
+    {
+      "path": "./data_seq/QUEEN/thurushi_2.npz",
+      "word": "QUEEN",
+      "signer": "thurushi",
+      "pred": "QUEE",
+      "secs": 2.667,
+      "frames": 41,
+      "ms": 2.738
+    },
+    {
+      "path": "./data_seq/QUICK/thurushi_0.npz",
+      "word": "QUICK",
+      "signer": "thurushi",
+      "pred": "UICD",
+      "secs": 2.4,
+      "frames": 37,
+      "ms": 2.43
+    },
+    {
+      "path": "./data_seq/QUICK/thurushi_1.npz",
+      "word": "QUICK",
+      "signer": "thurushi",
+      "pred": "QUICO",
+      "secs": 2.6,
+      "frames": 40,
+      "ms": 3.051
+    },
+    {
+      "path": "./data_seq/QUICK/thurushi_2.npz",
+      "word": "QUICK",
+      "signer": "thurushi",
+      "pred": "QUIC",
+      "secs": 2.533,
+      "frames": 39,
+      "ms": 2.568
+    },
+    {
+      "path": "./data_seq/QUIET/thurushi_0.npz",
+      "word": "QUIET",
+      "signer": "thurushi",
+      "pred": "QUIET",
+      "secs": 2.467,
+      "frames": 38,
+      "ms": 2.484
+    },
+    {
+      "path": "./data_seq/QUIET/thurushi_1.npz",
+      "word": "QUIET",
+      "signer": "thurushi",
+      "pred": "QUIET",
+      "secs": 2.4,
+      "frames": 37,
+      "ms": 2.417
+    },
+    {
+      "path": "./data_seq/QUIET/thurushi_2.npz",
+      "word": "QUIET",
+      "signer": "thurushi",
+      "pred": "UIET",
+      "secs": 3.333,
+      "frames": 51,
+      "ms": 3.291
+    },
+    {
+      "path": "./data_seq/QUIZ/thurushi_0.npz",
+      "word": "QUIZ",
+      "signer": "thurushi",
+      "pred": "UIZ",
+      "secs": 2.467,
+      "frames": 38,
+      "ms": 2.556
+    },
+    {
+      "path": "./data_seq/QUIZ/thurushi_1.npz",
+      "word": "QUIZ",
+      "signer": "thurushi",
+      "pred": "UIZ",
+      "secs": 2.0,
+      "frames": 31,
+      "ms": 2.216
+    },
+    {
+      "path": "./data_seq/QUIZ/thurushi_2.npz",
+      "word": "QUIZ",
+      "signer": "thurushi",
+      "pred": "QUI",
+      "secs": 2.467,
+      "frames": 38,
+      "ms": 2.503
+    },
+    {
+      "path": "./data_seq/SCHOOL/thurushi_0.npz",
+      "word": "SCHOOL",
+      "signer": "thurushi",
+      "pred": "SCHOL",
+      "secs": 2.933,
+      "frames": 45,
+      "ms": 2.894
+    },
+    {
+      "path": "./data_seq/SCHOOL/thurushi_1.npz",
+      "word": "SCHOOL",
+      "signer": "thurushi",
+      "pred": "SHOL",
+      "secs": 3.0,
+      "frames": 46,
+      "ms": 3.228
+    },
+    {
+      "path": "./data_seq/SCHOOL/thurushi_2.npz",
+      "word": "SCHOOL",
+      "signer": "thurushi",
+      "pred": "SCHOL",
+      "secs": 2.867,
+      "frames": 44,
+      "ms": 2.983
+    },
+    {
+      "path": "./data_seq/SIX/thurushi_0.npz",
+      "word": "SIX",
+      "signer": "thurushi",
+      "pred": "SIEX",
+      "secs": 2.733,
+      "frames": 42,
+      "ms": 2.851
+    },
+    {
+      "path": "./data_seq/SIX/thurushi_1.npz",
+      "word": "SIX",
+      "signer": "thurushi",
+      "pred": "SIE",
+      "secs": 2.2,
+      "frames": 34,
+      "ms": 2.401
+    },
+    {
+      "path": "./data_seq/SIX/thurushi_2.npz",
+      "word": "SIX",
+      "signer": "thurushi",
+      "pred": "SIX",
+      "secs": 2.0,
+      "frames": 31,
+      "ms": 2.199
+    },
+    {
+      "path": "./data_seq/SORRY/thurushi_0.npz",
+      "word": "SORRY",
+      "signer": "thurushi",
+      "pred": "SORRY",
+      "secs": 2.867,
+      "frames": 44,
+      "ms": 3.084
+    },
+    {
+      "path": "./data_seq/SORRY/thurushi_1.npz",
+      "word": "SORRY",
+      "signer": "thurushi",
+      "pred": "SORRY",
+      "secs": 2.533,
+      "frames": 39,
+      "ms": 2.594
+    },
+    {
+      "path": "./data_seq/SORRY/thurushi_2.npz",
+      "word": "SORRY",
+      "signer": "thurushi",
+      "pred": "SOERRY",
+      "secs": 2.8,
+      "frames": 43,
+      "ms": 2.74
+    },
+    {
+      "path": "./data_seq/SQUARE/thurushi_0.npz",
+      "word": "SQUARE",
+      "signer": "thurushi",
+      "pred": "SQUARE",
+      "secs": 3.333,
+      "frames": 51,
+      "ms": 3.194
+    },
+    {
+      "path": "./data_seq/SQUARE/thurushi_1.npz",
+      "word": "SQUARE",
+      "signer": "thurushi",
+      "pred": "SQUARE",
+      "secs": 3.533,
+      "frames": 54,
+      "ms": 3.371
+    },
+    {
+      "path": "./data_seq/SQUARE/thurushi_2.npz",
+      "word": "SQUARE",
+      "signer": "thurushi",
+      "pred": "SQUARE",
+      "secs": 3.0,
+      "frames": 46,
+      "ms": 3.027
+    },
+    {
+      "path": "./data_seq/TAXI/thurushi_0.npz",
+      "word": "TAXI",
+      "signer": "thurushi",
+      "pred": "TAI",
+      "secs": 1.933,
+      "frames": 30,
+      "ms": 2.133
+    },
+    {
+      "path": "./data_seq/TAXI/thurushi_1.npz",
+      "word": "TAXI",
+      "signer": "thurushi",
+      "pred": "TI",
+      "secs": 1.933,
+      "frames": 30,
+      "ms": 2.001
+    },
+    {
+      "path": "./data_seq/TAXI/thurushi_2.npz",
+      "word": "TAXI",
+      "signer": "thurushi",
+      "pred": "TAI",
+      "secs": 2.4,
+      "frames": 37,
+      "ms": 2.489
+    },
+    {
+      "path": "./data_seq/THANKS/thurushi_0.npz",
+      "word": "THANKS",
+      "signer": "thurushi",
+      "pred": "THNDS",
+      "secs": 4.467,
+      "frames": 68,
+      "ms": 4.295
+    },
+    {
+      "path": "./data_seq/THANKS/thurushi_1.npz",
+      "word": "THANKS",
+      "signer": "thurushi",
+      "pred": "THNDT",
+      "secs": 4.933,
+      "frames": 75,
+      "ms": 4.849
+    },
+    {
+      "path": "./data_seq/THANKS/thurushi_2.npz",
+      "word": "THANKS",
+      "signer": "thurushi",
+      "pred": "APHA",
+      "secs": 4.533,
+      "frames": 69,
+      "ms": 4.393
+    },
+    {
+      "path": "./data_seq/VAN/thurushi_0.npz",
+      "word": "VAN",
+      "signer": "thurushi",
+      "pred": "VAN",
+      "secs": 1.867,
+      "frames": 29,
+      "ms": 2.082
+    },
+    {
+      "path": "./data_seq/VAN/thurushi_1.npz",
+      "word": "VAN",
+      "signer": "thurushi",
+      "pred": "VN",
+      "secs": 1.333,
+      "frames": 21,
+      "ms": 1.513
+    },
+    {
+      "path": "./data_seq/VAN/thurushi_2.npz",
+      "word": "VAN",
+      "signer": "thurushi",
+      "pred": "VN",
+      "secs": 1.667,
+      "frames": 26,
+      "ms": 1.768
+    },
+    {
+      "path": "./data_seq/VIDEO/thurushi_0.npz",
+      "word": "VIDEO",
+      "signer": "thurushi",
+      "pred": "VIE",
+      "secs": 2.667,
+      "frames": 41,
+      "ms": 2.722
+    },
+    {
+      "path": "./data_seq/VIDEO/thurushi_1.npz",
+      "word": "VIDEO",
+      "signer": "thurushi",
+      "pred": "VIFEE",
+      "secs": 2.933,
+      "frames": 45,
+      "ms": 3.054
+    },
+    {
+      "path": "./data_seq/VIDEO/thurushi_2.npz",
+      "word": "VIDEO",
+      "signer": "thurushi",
+      "pred": "VIDEO",
+      "secs": 2.933,
+      "frames": 45,
+      "ms": 2.955
+    },
+    {
+      "path": "./data_seq/VOW/thurushi_0.npz",
+      "word": "VOW",
+      "signer": "thurushi",
+      "pred": "VOW",
+      "secs": 1.733,
+      "frames": 27,
+      "ms": 1.841
+    },
+    {
+      "path": "./data_seq/VOW/thurushi_1.npz",
+      "word": "VOW",
+      "signer": "thurushi",
+      "pred": "VOW",
+      "secs": 1.6,
+      "frames": 25,
+      "ms": 1.727
+    },
+    {
+      "path": "./data_seq/VOW/thurushi_2.npz",
+      "word": "VOW",
+      "signer": "thurushi",
+      "pred": "VOW",
+      "secs": 1.667,
+      "frames": 26,
+      "ms": 1.82
+    },
+    {
+      "path": "./data_seq/WALK/thurushi_0.npz",
+      "word": "WALK",
+      "signer": "thurushi",
+      "pred": "WL",
+      "secs": 2.6,
+      "frames": 40,
+      "ms": 2.573
+    },
+    {
+      "path": "./data_seq/WALK/thurushi_1.npz",
+      "word": "WALK",
+      "signer": "thurushi",
+      "pred": "WL",
+      "secs": 2.667,
+      "frames": 41,
+      "ms": 2.749
+    },
+    {
+      "path": "./data_seq/WALK/thurushi_2.npz",
+      "word": "WALK",
+      "signer": "thurushi",
+      "pred": "WALK",
+      "secs": 2.867,
+      "frames": 44,
+      "ms": 2.886
+    },
+    {
+      "path": "./data_seq/WATER/thurushi_0.npz",
+      "word": "WATER",
+      "signer": "thurushi",
+      "pred": "WTER",
+      "secs": 2.6,
+      "frames": 40,
+      "ms": 2.825
+    },
+    {
+      "path": "./data_seq/WATER/thurushi_1.npz",
+      "word": "WATER",
+      "signer": "thurushi",
+      "pred": "WTER",
+      "secs": 3.067,
+      "frames": 47,
+      "ms": 3.525
+    },
+    {
+      "path": "./data_seq/WATER/thurushi_2.npz",
+      "word": "WATER",
+      "signer": "thurushi",
+      "pred": "WTOER",
+      "secs": 2.6,
+      "frames": 40,
+      "ms": 2.628
+    },
+    {
+      "path": "./data_seq/WAVE/thurushi_0.npz",
+      "word": "WAVE",
+      "signer": "thurushi",
+      "pred": "WAVE",
+      "secs": 2.867,
+      "frames": 44,
+      "ms": 2.862
+    },
+    {
+      "path": "./data_seq/WAVE/thurushi_1.npz",
+      "word": "WAVE",
+      "signer": "thurushi",
+      "pred": "WAVE",
+      "secs": 2.467,
+      "frames": 38,
+      "ms": 2.587
+    },
+    {
+      "path": "./data_seq/WAVE/thurushi_2.npz",
+      "word": "WAVE",
+      "signer": "thurushi",
+      "pred": "WEE",
+      "secs": 2.4,
+      "frames": 37,
+      "ms": 2.452
+    },
+    {
+      "path": "./data_seq/WEB/thurushi_0.npz",
+      "word": "WEB",
+      "signer": "thurushi",
+      "pred": "WEB",
+      "secs": 2.133,
+      "frames": 33,
+      "ms": 2.196
+    },
+    {
+      "path": "./data_seq/WEB/thurushi_1.npz",
+      "word": "WEB",
+      "signer": "thurushi",
+      "pred": "WE",
+      "secs": 1.867,
+      "frames": 29,
+      "ms": 1.934
+    },
+    {
+      "path": "./data_seq/WEB/thurushi_2.npz",
+      "word": "WEB",
+      "signer": "thurushi",
+      "pred": "WEB",
+      "secs": 2.2,
+      "frames": 34,
+      "ms": 2.268
+    },
+    {
+      "path": "./data_seq/WEEKEND/thurushi_0.npz",
+      "word": "WEEKEND",
+      "signer": "thurushi",
+      "pred": "WEEND",
+      "secs": 4.333,
+      "frames": 66,
+      "ms": 4.222
+    },
+    {
+      "path": "./data_seq/WEEKEND/thurushi_1.npz",
+      "word": "WEEKEND",
+      "signer": "thurushi",
+      "pred": "WEEND",
+      "secs": 3.933,
+      "frames": 60,
+      "ms": 4.005
+    },
+    {
+      "path": "./data_seq/WEEKEND/thurushi_2.npz",
+      "word": "WEEKEND",
+      "signer": "thurushi",
+      "pred": "WEGEND",
+      "secs": 3.933,
+      "frames": 60,
+      "ms": 3.858
+    },
+    {
+      "path": "./data_seq/YES/thurushi_0.npz",
+      "word": "YES",
+      "signer": "thurushi",
+      "pred": "YES",
+      "secs": 2.867,
+      "frames": 44,
+      "ms": 2.986
+    },
+    {
+      "path": "./data_seq/YES/thurushi_1.npz",
+      "word": "YES",
+      "signer": "thurushi",
+      "pred": "PAES",
+      "secs": 2.133,
+      "frames": 33,
+      "ms": 2.58
+    },
+    {
+      "path": "./data_seq/YES/thurushi_2.npz",
+      "word": "YES",
+      "signer": "thurushi",
+      "pred": "YES",
+      "secs": 2.4,
+      "frames": 37,
+      "ms": 2.523
+    },
+    {
+      "path": "./data_seq/ZERO/thurushi_0.npz",
+      "word": "ZERO",
+      "signer": "thurushi",
+      "pred": "ERO",
+      "secs": 2.333,
+      "frames": 36,
+      "ms": 2.513
+    },
+    {
+      "path": "./data_seq/ZERO/thurushi_1.npz",
+      "word": "ZERO",
+      "signer": "thurushi",
+      "pred": "ZERO",
+      "secs": 2.2,
+      "frames": 34,
+      "ms": 2.26
+    },
+    {
+      "path": "./data_seq/ZERO/thurushi_2.npz",
+      "word": "ZERO",
+      "signer": "thurushi",
+      "pred": "EROE",
+      "secs": 2.467,
+      "frames": 38,
+      "ms": 2.511
+    },
+    {
+      "path": "./data_seq/ZOO/thurushi_0.npz",
+      "word": "ZOO",
+      "signer": "thurushi",
+      "pred": "OO",
+      "secs": 2.333,
+      "frames": 36,
+      "ms": 2.358
+    },
+    {
+      "path": "./data_seq/ZOO/thurushi_1.npz",
+      "word": "ZOO",
+      "signer": "thurushi",
+      "pred": "ZOO",
+      "secs": 1.867,
+      "frames": 29,
+      "ms": 1.963
+    },
+    {
+      "path": "./data_seq/ZOO/thurushi_2.npz",
+      "word": "ZOO",
+      "signer": "thurushi",
+      "pred": "ZOO",
+      "secs": 1.933,
+      "frames": 30,
+      "ms": 2.017
+    }
+  ]
+}

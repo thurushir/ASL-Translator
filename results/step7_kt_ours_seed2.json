@@ -1,0 +1,349 @@
+{
+  "date": "2026-11-14",
+  "config": {
+    "fps": 15,
+    "hidden": 128,
+    "model": "lstm",
+    "layers": 2,
+    "dropout": 0.3,
+    "lr": 0.001,
+    "batch": 16,
+    "max_epochs": 300,
+    "patience": 30,
+    "val_frac": 0.15,
+    "seed": 2,
+    "overfit": 0,
+    "holdout_words": [],
+    "name": "step7_kt_ours_seed2",
+    "speed_aug": true,
+    "speed_min": 0.7,
+    "speed_max": 1.4,
+    "motion": false,
+    "save": false,
+    "pretrain_kaggle": false,
+    "kaggle_test": true,
+    "no_kaggle_train": true,
+    "final": false
+  },
+  "signers": [
+    "kaggle_unseen"
+  ],
+  "scores": {
+    "kaggle_unseen": {
+      "n": 29,
+      "cer": 0.824607329842932,
+      "word_acc": 0.0,
+      "letter_recall": 0.17539267015706805,
+      "n_no_jz": 25,
+      "cer_no_jz": 0.8170731707317073,
+      "word_acc_no_jz": 0.0
+    },
+    "all": {
+      "n": 29,
+      "cer": 0.824607329842932,
+      "word_acc": 0.0,
+      "letter_recall": 0.17539267015706805,
+      "n_no_jz": 25,
+      "cer_no_jz": 0.8170731707317073,
+      "word_acc_no_jz": 0.0
+    }
+  },
+  "test_signers": [
+    "kaggle_10",
+    "kaggle_107",
+    "kaggle_128",
+    "kaggle_136",
+    "kaggle_138",
+    "kaggle_154",
+    "kaggle_161",
+    "kaggle_169",
+    "kaggle_188",
+    "kaggle_216",
+    "kaggle_230",
+    "kaggle_246",
+    "kaggle_25",
+    "kaggle_38",
+    "kaggle_63",
+    "kaggle_68",
+    "kaggle_72",
+    "kaggle_76",
+    "kaggle_81",
+    "kaggle_95"
+  ],
+  "train_signers": [
+    "anna",
+    "saaya",
+    "thurushi"
+  ],
+  "n_train_clips": 495,
+  "train": {
+    "params": 601883,
+    "best_epoch": 108,
+    "epochs_run": 138,
+    "best_val_cer": 0.009433962264150943
+  },
+  "seconds": 574,
+  "predictions": [
+    {
+      "path": "kaggle/1019715464/1977837036",
+      "word": "SUGARLANDTX",
+      "signer": "kaggle_10",
+      "pred": "AZZ",
+      "secs": 3.067,
+      "frames": 47,
+      "ms": 3.169
+    },
+    {
+      "path": "kaggle/1019715464/1977990298",
+      "word": "KIMGALVAN",
+      "signer": "kaggle_138",
+      "pred": "EARVAN",
+      "secs": 2.733,
+      "frames": 42,
+      "ms": 2.996
+    },
+    {
+      "path": "kaggle/1019715464/1978827323",
+      "word": "PATRICKPATRICK",
+      "signer": "kaggle_161",
+      "pred": "AZAIDK",
+      "secs": 2.867,
+      "frames": 44,
+      "ms": 2.945
+    },
+    {
+      "path": "kaggle/1019715464/1978897448",
+      "word": "SHEREEHENSON",
+      "signer": "kaggle_63",
+      "pred": "JZ",
+      "secs": 2.333,
+      "frames": 36,
+      "ms": 2.736
+    },
+    {
+      "path": "kaggle/1019715464/1979075334",
+      "word": "ERICAKRUEGER",
+      "signer": "kaggle_154",
+      "pred": "HOZODH",
+      "secs": 4.6,
+      "frames": 70,
+      "ms": 4.516
+    },
+    {
+      "path": "kaggle/1019715464/1979532409",
+      "word": "MINDITREVINO",
+      "signer": "kaggle_107",
+      "pred": "DTKERAO",
+      "secs": 4.0,
+      "frames": 61,
+      "ms": 4.313
+    },
+    {
+      "path": "kaggle/1019715464/1979554520",
+      "word": "JAYMEPERALTA",
+      "signer": "kaggle_25",
+      "pred": "JUOUZ",
+      "secs": 3.6,
+      "frames": 55,
+      "ms": 3.578
+    },
+    {
+      "path": "kaggle/1019715464/1979853495",
+      "word": "JULIANHAMPTON",
+      "signer": "kaggle_38",
+      "pred": "JYSET",
+      "secs": 4.6,
+      "frames": 70,
+      "ms": 4.622
+    },
+    {
+      "path": "kaggle/1019715464/1980473166",
+      "word": "REPOTRANSAKTION",
+      "signer": "kaggle_76",
+      "pred": "ZZ",
+      "secs": 3.733,
+      "frames": 57,
+      "ms": 3.614
+    },
+    {
+      "path": "kaggle/1019715464/1981250342",
+      "word": "MARISOLFERGUSON",
+      "signer": "kaggle_154",
+      "pred": "HAODAT",
+      "secs": 5.867,
+      "frames": 89,
+      "ms": 5.571
+    },
+    {
+      "path": "kaggle/1019715464/1981522905",
+      "word": "DELBERTCASTRO",
+      "signer": "kaggle_72",
+      "pred": "DEBEEDTR",
+      "secs": 3.2,
+      "frames": 49,
+      "ms": 3.208
+    },
+    {
+      "path": "kaggle/1019715464/1982027973",
+      "word": "SILVIABOONE",
+      "signer": "kaggle_81",
+      "pred": "O",
+      "secs": 1.8,
+      "frames": 28,
+      "ms": 1.895
+    },
+    {
+      "path": "kaggle/1019715464/1985373050",
+      "word": "CLEVELANDRANDOLPH",
+      "signer": "kaggle_76",
+      "pred": "J",
+      "secs": 5.267,
+      "frames": 80,
+      "ms": 5.387
+    },
+    {
+      "path": "kaggle/1019715464/1986878086",
+      "word": "MOHAMMADTRAVIS",
+      "signer": "kaggle_68",
+      "pred": "NI",
+      "secs": 3.8,
+      "frames": 58,
+      "ms": 3.976
+    },
+    {
+      "path": "kaggle/1019715464/1987757919",
+      "word": "DAMIANFERGUSON",
+      "signer": "kaggle_10",
+      "pred": "TOFXO",
+      "secs": 4.933,
+      "frames": 75,
+      "ms": 4.883
+    },
+    {
+      "path": "kaggle/1019715464/1988556738",
+      "word": "DAVINAMURILLO",
+      "signer": "kaggle_154",
+      "pred": "AVANTJULO",
+      "secs": 4.533,
+      "frames": 69,
+      "ms": 4.481
+    },
+    {
+      "path": "kaggle/1019715464/1988906800",
+      "word": "SHELTONMAHONEY",
+      "signer": "kaggle_161",
+      "pred": "TAHOEOY",
+      "secs": 3.267,
+      "frames": 50,
+      "ms": 3.237
+    },
+    {
+      "path": "kaggle/1019715464/1991729653",
+      "word": "LAMARDUARTE",
+      "signer": "kaggle_72",
+      "pred": "LOARRE",
+      "secs": 2.867,
+      "frames": 44,
+      "ms": 2.881
+    },
+    {
+      "path": "kaggle/1019715464/1992233538",
+      "word": "RUDOLPHMCKENZIE",
+      "signer": "kaggle_246",
+      "pred": "QUHZO",
+      "secs": 5.933,
+      "frames": 90,
+      "ms": 5.866
+    },
+    {
+      "path": "kaggle/1019715464/1993788452",
+      "word": "FRANCISCOHARPER",
+      "signer": "kaggle_154",
+      "pred": "HTFAHK",
+      "secs": 5.933,
+      "frames": 90,
+      "ms": 5.782
+    },
+    {
+      "path": "kaggle/1019715464/1996610977",
+      "word": "LOUIEGREEN",
+      "signer": "kaggle_128",
+      "pred": "",
+      "secs": 1.933,
+      "frames": 30,
+      "ms": 2.038
+    },
+    {
+      "path": "kaggle/1019715464/1999347500",
+      "word": "EPADERMOINTMENT",
+      "signer": "kaggle_188",
+      "pred": "TROTET",
+      "secs": 3.2,
+      "frames": 49,
+      "ms": 3.171
+    },
+    {
+      "path": "kaggle/1019715464/1999454477",
+      "word": "BOBBIEHUYNH",
+      "signer": "kaggle_230",
+      "pred": "BOLEU",
+      "secs": 4.0,
+      "frames": 61,
+      "ms": 3.892
+    },
+    {
+      "path": "kaggle/1019715464/2000057143",
+      "word": "MARIAHMITCHELL",
+      "signer": "kaggle_169",
+      "pred": "JL",
+      "secs": 2.133,
+      "frames": 33,
+      "ms": 2.478
+    },
+    {
+      "path": "kaggle/1019715464/2000211595",
+      "word": "GALENJARAMILLO",
+      "signer": "kaggle_136",
+      "pred": "HOL",
+      "secs": 2.2,
+      "frames": 34,
+      "ms": 2.408
+    },
+    {
+      "path": "kaggle/1019715464/2000548677",
+      "word": "LLEVATEDANCESTUDIO",
+      "signer": "kaggle_136",
+      "pred": "IUUO",
+      "secs": 6.333,
+      "frames": 96,
+      "ms": 6.096
+    },
+    {
+      "path": "kaggle/1019715464/2002456355",
+      "word": "MASONFUENTES",
+      "signer": "kaggle_95",
+      "pred": "AEREO",
+      "secs": 2.667,
+      "frames": 41,
+      "ms": 2.96
+    },
+    {
+      "path": "kaggle/1019715464/2007095352",
+      "word": "KYLIECALDWELL",
+      "signer": "kaggle_216",
+      "pred": "ZLZZ",
+      "secs": 3.933,
+      "frames": 60,
+      "ms": 3.852
+    },
+    {
+      "path": "kaggle/1019715464/2007233512",
+      "word": "KENTONEDWARDS",
+      "signer": "kaggle_95",
+      "pred": "DAO",
+      "secs": 4.533,
+      "frames": 69,
+      "ms": 4.44
+    }
+  ]
+}

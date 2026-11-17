@@ -27,6 +27,7 @@ To further evaluate consistency, five-fold cross-validation was performed, resul
 ASL-Translator/
 ├── data/ # Labeled landmark data (by letter)
 ├── data_seq/ # Fingerspelling clips as landmark sequences (temporal work)
+├── data_kaggle/ # Downloaded Kaggle files (train.csv + .parquet; not in git)
 ├── docs/TEMPORAL.md # Notes on the temporal (continuous fingerspelling) work
 ├── hand_utils.py # Helper functions for Mediapipe setup
 ├── features.py # Shared landmark feature extraction (frames and sequences)
@@ -45,11 +46,13 @@ ASL-Translator/
 ├── live_ctc.py # Live word cutting + model prediction (no webcam code)
 ├── decode.py # Beam search, word-list decoding, confidence
 ├── predict_live_ctc.py # Live app for the temporal model (LSTM + CTC)
-├── results/ # All scores (baseline, lstm_ctc*, step5_*, step6_*, live tests)
+├── kaggle_data.py # Converts Kaggle fingerspelling recordings into our clip format (Step 7)
+├── results/ # All scores (baseline, lstm_ctc*, step5_*, step6_*, step7_*, live tests)
 ├── test_dataset.py, test_metrics.py, test_eval_baseline.py # Tests for the above
 ├── test_model_ctc.py, test_train_ctc.py, test_compare_runs.py # Tests for the LSTM code
 ├── test_motion.py, test_evaluate.py # Tests for Step 5
 ├── test_live_ctc.py, test_decode.py, test_predict_live_ctc.py # Tests for the live app and decoding
+├── test_kaggle_data.py # Tests for the Kaggle conversion (fake data, no download needed)
 ├── check_features.py # Verifies feature extraction matches the original
 ├── test_transcript.py # Tests the on-screen text rules
 ├── baseline_results.json # Static model accuracy (reference baseline)
